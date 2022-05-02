@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="환경설정"
+        android:id="@+id/appsetting_navi"/>
+   <!--
+    <item android:title="프로필(임시)"
+        android:id="@+id/profile_navi"/>
+    -->
+
+    <item android:title="캘린더(임시)"
+        android:id="@+id/calaendar_navi"/>
+
+    <item android:title="가이드(임시)"
+        android:id="@+id/guide_navi"/>
+
+</menu>
