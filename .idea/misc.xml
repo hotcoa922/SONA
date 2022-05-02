@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_baseline_48.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_loading.xml" value="0.24547101449275363" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_main.xml" value="0.136" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_app_setting.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_menu.xml" value="0.24365942028985507" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/menu/navi_menu.xml" value="0.27395833333333336" />
