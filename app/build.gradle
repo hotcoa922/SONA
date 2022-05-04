@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 26
 
     defaultConfig {
         applicationId "com.hotcoa.sona"
         minSdk 24
-        targetSdk 31
+        targetSdk 26
         versionCode 1
         versionName "1.0"
 
