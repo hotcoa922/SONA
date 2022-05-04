@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
 
-
+    MainFragment mainmain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });
+
+        mainmain = new MainFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_x, mainmain);
+        transaction.commit();
+
+
     }
 
     //ctrl+o 에서 오버라이드할꺼 검색 ㄱㄴ
@@ -81,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
-
-
-
 
         return super.onOptionsItemSelected(item);
     }
