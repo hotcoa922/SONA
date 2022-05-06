@@ -19,3 +19,10 @@ SONA APP
 작업환경 재설정<p>
 테스팅 환경 구축완료<p>
 <mainactivity-기타 연결 fragment간 툴바연결 테스트> - 구현완료<p>
+위 내용 push완료<p>
+ 
+**[ver 0.00.35] - 2022.05.05 - KTH**<p>
+colors.xml 및 기타 아이콘 세팅<p>
+MainActivity에 편의성 버튼 추가<p>
+기타 최적화 코드 추가<p>
+위 내용 push완료<p>
