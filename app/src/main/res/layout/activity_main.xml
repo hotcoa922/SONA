@@ -18,15 +18,41 @@
             android:id="@+id/toolbar_x"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/testcolor"
+            android:background="@color/toolbar_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="SONA"
+                android:textSize="20sp"
+                android:textColor="@color/main_text_color"
+                tools:layout_editor_absoluteX="149dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <ImageButton
+                android:id="@+id/home_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_home_24"
+                app:showAsAction="always" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+
+
 
         <FrameLayout
             android:id="@+id/fragment_container_x"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/main_background_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:headerLayout="@layout/navi_header"
         app:menu="@menu/navi_menu" />
-
+    <!-- 사이드 메뉴 헤더(app:headerLayout) 추가 -->
 </androidx.drawerlayout.widget.DrawerLayout>
 
 

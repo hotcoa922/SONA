@@ -40,5 +40,4 @@ dependencies {
 
     // Normal
     //implementation 'io.github.ParkSangGwon:tedpermission-normal:x.y.z'  //태현 - 권한요청 쉽게 해주는 라이브러리
-
 }

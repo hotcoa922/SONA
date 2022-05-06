@@ -8,9 +8,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageButton;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     MainFragment mainmain;
 
+    ImageButton move_main_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
         //사이드 메뉴 오픈하기 위한 아이콘 add
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_48);  //아이콘 추가
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_24);  //아이콘 추가
         getSupportActionBar().setDisplayShowTitleEnabled(false);// ActionBar 앱이름 감추기
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setTitle("SONA");
 
         navi = (NavigationView) findViewById(R.id.navi_x);
         appset = new AppSettingFragment();
@@ -76,6 +82,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container_x, mainmain);
         transaction.commit();
 
+        //메인메뉴 이동 버튼 구현
+        move_main_button = findViewById(R.id.home_bt);
+        move_main_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+               Intent intent = new Intent(getApplicationContext(), MainActivity.class); //이게 왜 MainFragment.class가 아닌지 의문
+               startActivity(intent);
+            }
+        });
+
+
 
     }
 
@@ -90,6 +107,18 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        /*
+        if(item.getItemId()==R.id.home_bt){
+            Toast.makeText(this, "홈아이콘 클릭", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+            return true;
+        }
+        */
         return super.onOptionsItemSelected(item);
     }
 
