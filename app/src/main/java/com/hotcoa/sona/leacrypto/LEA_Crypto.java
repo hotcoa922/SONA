@@ -1,6 +1,8 @@
 
 package com.hotcoa.sona.leacrypto;
 
+import static java.lang.System.arraycopy;
+
 import kr.re.nsr.crypto.*;
 import kr.re.nsr.crypto.padding.PKCS5Padding;
 
@@ -17,10 +19,26 @@ import java.security.MessageDigest;
 import java.util.Scanner;
 
 
+import android.content.Context;
+import android.provider.Settings;
 
 public class LEA_Crypto {
-    /*
-    public static byte[] PBKDF(String P) throws Exception {
+    public byte[] toByteArray(String string) {
+        // String to ByteArray
+        byte[] bytes = new byte[string.length()];
+        char[] chars = string.toCharArray();
+
+        for (int i = 0; i != chars.length; i++)
+        {
+            bytes[i] = (byte)chars[i];
+        }
+
+        return bytes;
+    }
+    public String getDeviceId(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+    public byte[] PBKDF(String P) throws Exception {
         // PBKDF 클래스
         byte[] S = new byte[] {0x78, 0x57, (byte)0x8e, 0x5a, 0x5d, 0x63, (byte)0xcb, 0x06};
         int c = 1000;
@@ -32,24 +50,23 @@ public class LEA_Crypto {
 
         byte[] input = new byte[P.length() + S.length];
 
-        System.arraycopy(Utils.toByteArray(P), 0, input, 0, P.length());
+        System.arraycopy(toByteArray(P), 0, input, 0, P.length());
         System.arraycopy(S, 0, input, P.length(), S.length);
 
         md.update(input);
         for (int i = 0; i < c - 1; i++) {
-            byte T[] = md.digest();
+            byte[] T = md.digest();
             md.update(T);
         }
 
-        byte output[] = md.digest();
+        byte[] output = md.digest();
         byte[] result = new byte[16];
 
-        System.arraycopy(output, 0, result, 0, dkLen);
+        arraycopy(output, 0, result, 0, dkLen);
 
         // 16바이트 크기의 bytearray 를 반환한다.
         return result;
     }
-    */
 
     /*
     public static void encode(String fileName, String en_fileName, byte[] keyBytes) throws Exception {
