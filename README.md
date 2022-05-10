@@ -26,3 +26,9 @@ colors.xml 및 기타 아이콘 세팅<p>
 MainActivity에 편의성 버튼 추가<p>
 기타 최적화 코드 추가<p>
 위 내용 push완료<p>
+
+**[ver 0.12.00] - 2022.05.10 - KTH**<p>
+[WriteDiayrFragment] - 일기 작성 및 수정 기능 구현<p>
+[SharedPrefs] - 함수 추가<p>
+권한 일부 추가<p>
+위 내용 push완료<p>
