@@ -5,6 +5,12 @@
     <color name="main_text_color">#2E0C0C</color>
     <color name="sub_background_color">#9494E6	</color>
     <color name="icon_color">#3D3B07</color>
+    <color name="write_paper_color">#EEEFF0</color>
+    <color name="button_dark_color">#000000</color>
+    <color name="button_dark_intext_color">#FFFFFF</color>
+    <color name="button_light_color">#FFFFFF</color>
+    <color name="button_light_intext_color">#000000</color>
+
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

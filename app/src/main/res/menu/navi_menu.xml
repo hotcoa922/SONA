@@ -10,12 +10,12 @@
         android:id="@+id/calcmind_navi"/>
     <item android:title="컨텐츠 추천(기능 막혀있음)"
         android:id="@+id/contentschuchu_navi"/>
-    <item android:title="일기작성(임시_구현해야함_막혀있음)"
+    <item android:title="일기작성(임시_구현해야함_진행도20)"
         android:id="@+id/writediary_navi"/>
-    <item android:title="캘린더(임시_구현해야함)"
+    <item android:title="캘린더(임시_구현해야함_진행도0)"
         android:id="@+id/calaendar_navi"/>
-    <item android:title="가이드(임시_구현해야함)"
+    <item android:title="가이드(임시_구현해야함_진행도30)"
         android:id="@+id/guide_navi"/>
-    <item android:title="환경설정(임시_구현해야함)"
+    <item android:title="환경설정(임시_구현해야함_진행도0)"
         android:id="@+id/appsetting_navi"/>
 </menu>

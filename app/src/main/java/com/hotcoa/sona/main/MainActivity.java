@@ -8,11 +8,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -20,6 +24,7 @@ import com.hotcoa.sona.R;
 import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
+import com.hotcoa.sona.writediary.WriteDiaryFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     AppSettingFragment appset;
     UserGuideFragment guide;
     CalendarFragment calendar;
+    WriteDiaryFragment write;
     NavigationView navi;
 
     DrawerLayout drawerLayout;
@@ -35,10 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton move_main_button;
 
+    String[] permission_list = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //권한 체크
+        checkPermission();
 
         //툴바 생성
         toolbar = (Toolbar) findViewById(R.id.toolbar_x);
@@ -56,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         appset = new AppSettingFragment();
         guide = new UserGuideFragment();
         calendar = new CalendarFragment();
+        write = new WriteDiaryFragment();
 
         drawerLayout = findViewById(R.id.drawlayout_x);
 
@@ -71,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
             }
             if(menuItem.getItemId() == R.id.guide_navi){
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,guide ).commit();
+            }
+            if(menuItem.getItemId() == R.id.writediary_navi){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write ).commit();
             }
             drawerLayout.closeDrawer(GravityCompat.START);  //방향을 지정해 주는 것
 
@@ -120,6 +138,43 @@ public class MainActivity extends AppCompatActivity {
         }
         */
         return super.onOptionsItemSelected(item);
+    }
+
+    public void checkPermission(){
+        //현재 안드로이드 버전이 6.0미만이면 메서드를 종료한다.
+        //안드로이드6.0 (마시멜로) 이후 버전부터 유저 권한설정 필요
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return;
+
+        for(String permission : permission_list){
+            //권한 허용 여부를 확인한다.
+            int chk = checkCallingOrSelfPermission(permission);
+
+            if(chk == PackageManager.PERMISSION_DENIED){
+                //권한 허용을여부를 확인하는 창을 띄운다
+                requestPermissions(permission_list,0);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==0)
+        {
+            for(int i=0; i<grantResults.length; i++)
+            {
+                //허용됬다면
+                if(grantResults[i]==PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(getApplicationContext(),"앱 권한 설정되있음",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    //권한을 하나라도 허용하지 않는다면 앱 종료
+                    Toast.makeText(getApplicationContext(),"앱 권한 설정하세요",Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        }
     }
 
 }
