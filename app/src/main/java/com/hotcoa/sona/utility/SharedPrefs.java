@@ -1,6 +1,6 @@
 package com.hotcoa.sona.utility;
 
-public class SharedPrefs {
 
+public class SharedPrefs {
 
 }
