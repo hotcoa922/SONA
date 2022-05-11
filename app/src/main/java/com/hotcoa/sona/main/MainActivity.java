@@ -28,6 +28,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
+import com.hotcoa.sona.contents.ContentsFragment;
+import com.hotcoa.sona.mindcheck.MindCheckFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
 
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     UserGuideFragment guide;
     CalendarFragment calendar;
     WriteDiaryFragment write;
+    MindCheckFragment mindcheck;
+    ContentsFragment contents;
     NavigationView navi;
 
     DrawerLayout drawerLayout;
@@ -76,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         guide = new UserGuideFragment();
         calendar = new CalendarFragment();
         write = new WriteDiaryFragment();
+        mindcheck = new MindCheckFragment();
+        contents = new ContentsFragment();
 
         drawerLayout = findViewById(R.id.drawlayout_x);
 
@@ -95,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
             if(menuItem.getItemId() == R.id.writediary_navi){
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write ).commit();
             }
+            if(menuItem.getItemId() == R.id.mindcheck_navi){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mindcheck ).commit();
+            }
+            if(menuItem.getItemId() == R.id.contentschuchu_navi){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,contents ).commit();
+            }
+
+
             drawerLayout.closeDrawer(GravityCompat.START);  //방향을 지정해 주는 것
 
             return true;
