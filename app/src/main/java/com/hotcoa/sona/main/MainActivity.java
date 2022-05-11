@@ -9,10 +9,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        setAndroidID();
     }
 
     //ctrl+o 에서 오버라이드할꺼 검색 ㄱㄴ
@@ -177,4 +182,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setAndroidID(){
+        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        SharedPreferences prefs = this.getSharedPreferences("android_id", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putString("android_id", android_id);
+        editor.apply();
+
+        Log.d("휴대폰 id", "Android_ID >>> "+ android_id);
+        Log.d("check prefs", prefs.getString("android_id", ""));
+
+    }
 }
