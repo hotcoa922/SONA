@@ -32,3 +32,7 @@ MainActivity에 편의성 버튼 추가<p>
 [SharedPrefs] - 함수 추가<p>
 권한 일부 추가<p>
 위 내용 push완료<p>
+
+**[ver 0.12.00] - 2022.05.15 - KTH**<p>
+[CalendarFragment] - CosmoCalendar 삽입 완료, 날짜 무효화 미완성<p>
+[MindCheckFragment] - 기본 틀 완성(TabView)<p>
