@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "34915677875",
+    "project_id": "sona-156bb",
+    "storage_bucket": "sona-156bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34915677875:android:d290a1fb68a001ac9622c6",
+        "android_client_info": {
+          "package_name": "com.hotsona.sona"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34915677875-p26l777005k690c4b2lpncgk0tpqmei5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzcakskkhwR4g-uK6LnuvUXRr9pBIBCxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34915677875-p26l777005k690c4b2lpncgk0tpqmei5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
