@@ -17,11 +17,12 @@ public class PermissionSupport {
     private final Activity activity;
 
     private final String[] permissions = {
+            Manifest.permission.MANAGE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.SET_ALARM,
             Manifest.permission.VIBRATE
-
     };
     private List<String> permissionList;
 

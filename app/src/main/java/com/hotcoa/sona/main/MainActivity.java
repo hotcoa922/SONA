@@ -1,6 +1,7 @@
 package com.hotcoa.sona.main;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -32,6 +34,8 @@ import com.hotcoa.sona.contents.ContentsFragment;
 import com.hotcoa.sona.mindcheck.MindCheckFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //권한 체크
-        checkPermission();
+        //checkPermission();
 
         //툴바 생성
         toolbar = (Toolbar) findViewById(R.id.toolbar_x);
@@ -131,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         setAndroidID();
+        getSaveFolder();
     }
 
     //ctrl+o 에서 오버라이드할꺼 검색 ㄱㄴ
@@ -159,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void checkPermission(){
+    /*public void checkPermission(){
         //현재 안드로이드 버전이 6.0미만이면 메서드를 종료한다.
         //안드로이드6.0 (마시멜로) 이후 버전부터 유저 권한설정 필요
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
@@ -194,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-    }
+    }*/
 
     public void setAndroidID(){
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -209,5 +214,23 @@ public class MainActivity extends AppCompatActivity {
         Log.d("휴대폰 id", "Android_ID >>> "+ android_id);
         Log.d("check prefs", prefs.getString("android_id", ""));
 
+    }
+    private File getSaveFolder() {
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
+            Log.d("dirdir", "Mount 됨");
+            Log.d("dirdir", Environment.getExternalStorageDirectory().toString());
+            File f = Environment.getExternalStoragePublicDirectory("/SONA");
+            if (!f.exists()) {
+                if (f.mkdirs()) {
+                    Log.d("dirdir", "true");
+                } else {
+                    Log.d("dirdir", "false");
+                }
+            } else {
+                Log.d("dirdir", "이미 존재함");
+            }
+        }
+        return null;
     }
 }

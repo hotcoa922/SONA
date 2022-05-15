@@ -6,7 +6,7 @@
     <item android:title="프로필(임시)"
         android:id="@+id/profile_navi"/>
     -->
-    <item android:title="감정분석(임시_구현해야함)"
+    <item android:title="감정분석(임시_구현해야함_진행도0)"
         android:id="@+id/mindcheck_navi"/>
     <item android:title="컨텐츠 추천(기능 막혀있음)"
         android:id="@+id/contentschuchu_navi"/>
@@ -16,6 +16,6 @@
         android:id="@+id/calaendar_navi"/>
     <item android:title="가이드(임시_구현해야함_진행도30)"
         android:id="@+id/guide_navi"/>
-    <item android:title="환경설정(임시_구현해야함_진행도0)"
+    <item android:title="환경설정"
         android:id="@+id/appsetting_navi"/>
 </menu>
