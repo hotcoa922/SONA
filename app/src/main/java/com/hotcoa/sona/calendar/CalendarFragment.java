@@ -53,7 +53,10 @@ public class CalendarFragment extends Fragment {
         mName.put("December", 12);
 
 
-        disable(calendarView, cal, cal.get(cal.DAY_OF_MONTH) + 1, cal.getActualMaximum(cal.DAY_OF_MONTH));
+        Set<Long> disabledDaysSet = new HashSet<>();
+        disabledDaysSet.add(System.currentTimeMillis());
+        calendarView.setDisabledDays(disabledDaysSet);
+        //disable(calendarView, cal, cal.get(cal.DAY_OF_MONTH) + 1, cal.getActualMaximum(cal.DAY_OF_MONTH));
         calendarView.setOnMonthChangeListener(new OnMonthChangeListener() {
             @Override
             public void onMonthChanged(Month month) {

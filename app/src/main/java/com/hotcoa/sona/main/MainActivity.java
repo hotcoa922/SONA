@@ -36,9 +36,6 @@ import com.hotcoa.sona.usergide.UserGuideFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 
-import org.conscrypt.Conscrypt;
-
-
 import org.bouncycastle.jcajce.provider.symmetric.OpenSSLPBKDF;
 
 import java.io.File;
@@ -234,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             Log.d("dirdir", "Mount 됨");
             Log.d("dirdir", Environment.getExternalStorageDirectory().toString());
-            File f = Environment.getExternalStoragePublicDirectory("/SONA");
+            File f = Environment.getExternalStoragePublicDirectory("SONA");
             if (!f.exists()) {
                 if (f.mkdirs()) {
                     Log.d("dirdir", "true");

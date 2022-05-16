@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -17,12 +18,12 @@ public class PermissionSupport {
     private final Activity activity;
 
     private final String[] permissions = {
-            Manifest.permission.MANAGE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.SET_ALARM,
-            Manifest.permission.VIBRATE
+            Manifest.permission.VIBRATE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_MEDIA_LOCATION,
+            Manifest.permission.READ_PHONE_STATE
     };
     private List<String> permissionList;
 
@@ -55,8 +56,11 @@ public class PermissionSupport {
     //요청한 권한에 대한 결과값 판단 및 처리
     public boolean permissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         if(requestCode == MULTIPLE_PERMISSIONS && (grantResults.length >0)) {
-            for (int grantResult : grantResults) {
-                if (grantResult == -1) return false;
+            for (int i = 0; i < grantResults.length; ++i) {
+                if (grantResults[i] == -1) {
+                    Log.d("per_log", permissions[i] + ": "+ "denied");
+                    return false;
+                }
             }
         }
         return true;
