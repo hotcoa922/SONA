@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/OneDrive/Documents/MyFiles/3-1/SoftwareProject/SONA_project/app/src/main/res/layout/activity_default_calendar.xml" value="0.18645833333333334" />
+        <entry key="..\:/OneDrive/Documents/MyFiles/3-1/SoftwareProject/SONA_project/app/src/main/res/layout/fragment_user_guide.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.113" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_baseline_24.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_circle_info_solid.xml" value="0.1" />
@@ -26,9 +28,8 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_main.xml" value="0.20471014492753623" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_menu.xml" value="0.24365942028985507" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_mind_check.xml" value="0.19927536231884058" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_user_guide.xml" value="0.19384057971014493" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_write_diary.xml" value="0.1" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_write_diary.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/menu/navi_menu.xml" value="0.27395833333333336" />
       </map>
     </option>

@@ -35,6 +35,12 @@ import com.hotcoa.sona.mindcheck.MindCheckFragment;
 import com.hotcoa.sona.profile.ProfileFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
+import com.hotcoa.sona.leacrypto.LEA_Crypto;
+
+import org.conscrypt.Conscrypt;
+
+
+import org.bouncycastle.jcajce.provider.symmetric.OpenSSLPBKDF;
 
 import java.io.File;
 
@@ -214,7 +220,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }*/
-
+    private boolean isExternalStorageWritable() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
     public void setAndroidID(){
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -228,6 +236,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d("휴대폰 id", "Android_ID >>> "+ android_id);
         Log.d("check prefs", prefs.getString("android_id", ""));
 
+        try{
+            Log.d("휴대폰 id PBKDF", " >>>>>>> " + LEA_Crypto.toHexString(LEA_Crypto.PBKDF(prefs.getString("android_id",""))));
+        }
+        catch (Exception e){
+            Log.e("PBKDF ERROR", e.toString());
+        }
     }
     private File getSaveFolder() {
         String state = Environment.getExternalStorageState();
