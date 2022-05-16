@@ -24,7 +24,7 @@ public class UserGuideFragment extends Fragment {
 
     ImageView iv1;
     ImageView iv2;
-    //ImageView iv3;
+    ImageView iv3;
 
 
     @Override
@@ -51,7 +51,7 @@ public class UserGuideFragment extends Fragment {
 
         iv1 = rootView.findViewById(R.id.image1);
         iv2 = rootView.findViewById(R.id.image2);
-        // iv3 = rootView.findViewById(R.id.image3);
+        iv3 = rootView.findViewById(R.id.image3);
 
         return rootView;
     }
