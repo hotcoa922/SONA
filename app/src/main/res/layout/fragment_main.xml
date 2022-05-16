@@ -10,11 +10,10 @@
 
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:background="@drawable/diary_button"
+        android:id="@+id/diary_bt"
+        android:layout_width="205dp"
+        android:layout_height="262dp"
+        android:background="@drawable/diary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
