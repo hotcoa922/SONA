@@ -4,18 +4,23 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.leacrypto.LEA_Crypto;
+import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 
 import java.io.BufferedReader;
@@ -38,6 +45,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
+import java.util.prefs.Preferences;
 
 public class WriteDiaryFragment extends Fragment {
 
@@ -58,6 +68,7 @@ public class WriteDiaryFragment extends Fragment {
         writetxt = (EditText)rootView.findViewById(R.id.writeit_et);
 
         datetv.setText(getTime());
+        SharedPreferences prefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
 
         savebt.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,11 +86,30 @@ public class WriteDiaryFragment extends Fragment {
                 }
 
                  */
-                saveData = writetxt.getText().toString();
-                saveFile(getNowTime24(), saveData);
-                Log.d("","\n"+"[일기 내용 확인 : "+saveData + "]");
-                Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
+                try{
+                    Log.d("----------------------------", "");
+                    Log.d("WriteDiary_휴대폰 id", "Android_ID >>> " + prefs.getString("android_id",""));
+                    Log.d("WriteDiary_휴대폰 id PBKDF", " >>>>>>> "
+                            + LEA_Crypto.toHexString(LEA_Crypto.PBKDF(prefs.getString("android_id",""))));
+                    Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
+                    Log.d("WriteDiary_ByteArray",
+                            LEA_Crypto.toHexString(
+                                    LEA_Crypto.toByteArray(
+                                            writetxt.getText().toString())));
 
+                    saveData =
+                            LEA_Crypto.encode(
+                            LEA_Crypto.toByteArray(writetxt.getText().toString()),
+                            LEA_Crypto.PBKDF(prefs.getString("android_id","")));
+                    saveFile(getNowTime24(), saveData);
+                    Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
+                    Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
+                    Log.d("----------------------------", "");
+                }
+                catch (Exception e){
+                    Log.e("WriteDiary_PBKDF ERROR", e.toString());
+                    Log.d("----------------------------", "");
+                }
             }
         });
 

@@ -2,12 +2,16 @@ package com.hotcoa.sona.leacrypto;
 
 import static java.lang.System.arraycopy;
 
-import kr.re.nsr.crypto.*;
 import kr.re.nsr.crypto.padding.PKCS5Padding;
+import kr.re.nsr.crypto.symm.LEA;
+
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
@@ -19,6 +23,7 @@ import java.util.Scanner;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.util.Log;
 
 public class LEA_Crypto {
     public static byte[] toByteArray(String string) {
@@ -76,18 +81,16 @@ public class LEA_Crypto {
         // 16바이트 크기의 bytearray 를 반환한다.
         return result;
     }
-
-    /*
-    public static void encode(String fileName, String en_fileName, byte[] keyBytes) throws Exception {
-         LEA
-        // 객체 생성
+    public static String encode(byte[] plain, byte[] keyBytes) throws Exception {
+        /*
+        // LEA 객체 생성
         BlockCipherMode cipher = new LEA.CBC();
         // 암호화
         cipher.init(Mode.ENCRYPT, key, iv);
         cipher.setPadding(new PKCS5Padding(16));
         ct1 = cipher.update(pt1);
         ct2 = cipher.doFinal(pt2);
-
+        */
 
         // 암호화 클래스
         Security.addProvider(new BouncyCastleProvider());
@@ -98,8 +101,8 @@ public class LEA_Crypto {
         int read = BUF_SIZE;
 
         // 파일스트림 생성
-        FileInputStream fis = new FileInputStream(fileName);
-        FileOutputStream fos = new FileOutputStream(en_fileName);
+        ByteArrayInputStream fis = new ByteArrayInputStream(plain);
+        ByteArrayOutputStream fos = new ByteArrayOutputStream(BUF_SIZE);
 
         // 초기 벡터 정의
         byte[] ivBytes = new byte[] {
@@ -111,45 +114,30 @@ public class LEA_Crypto {
         IvParameterSpec iv = new IvParameterSpec(ivBytes);
 
         // key 및 iv 헤더에 저장
-        fos.write(keyBytes);
         fos.write(ivBytes);
 
         // AES/CBC/PKCS7Padding 인스턴스 정의
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding", "BC");
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
 
         // 암호화 모드 초기화
         cipher.init(Cipher.ENCRYPT_MODE, key, iv);
 
-        // 진행현황 표시를 위해 변수 생성 및 fileSize 저장
-        int cur = 0, percent = 1;
-        int dash = 0;
-        long fileSize = Files.size(Paths.get(fileName)) / 1024;
 
         // 파일 암호화
-        System.out.println("File Encoding Start!");
+        Log.d("encoding","File Encoding Start!");
         while((read = fis.read(buffer, 0, BUF_SIZE)) == BUF_SIZE){
             fos.write(cipher.update(buffer, 0, read));
-            if((fileSize / 20) * percent < cur) {
-                dash = 0;
-                while(dash < percent) {
-                    System.out.print("-");
-                    dash++;
-                }
-                System.out.print(percent * 5 + "%\r");
-                percent++;
-            }
-            cur++;
         }
         // 파일 마지막 부분 처리
         fos.write(cipher.doFinal(buffer, 0, read));
-        System.out.println("File Encoding Done!");
-        System.out.println("-----------------------------------------------");
+        Log.d("encoding","File Encoding Done!");
+        Log.d("encoding","-----------------------------------------------");
 
         // 파일 스트림 종료
         fis.close();
-        fos.close();
+        return toHexString(fos.toByteArray());
     }
-    */
+
 
     /*
     public static void decode(String fileName, String en_fileName, byte[] de_keyBytes) throws Exception{
