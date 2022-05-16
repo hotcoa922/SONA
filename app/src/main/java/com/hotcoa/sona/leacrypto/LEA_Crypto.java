@@ -1,11 +1,9 @@
-
 package com.hotcoa.sona.leacrypto;
 
 import static java.lang.System.arraycopy;
 
 import kr.re.nsr.crypto.*;
 import kr.re.nsr.crypto.padding.PKCS5Padding;
-
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -23,7 +21,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 public class LEA_Crypto {
-    public byte[] toByteArray(String string) {
+    public static byte[] toByteArray(String string) {
         // String to ByteArray
         byte[] bytes = new byte[string.length()];
         char[] chars = string.toCharArray();
@@ -35,10 +33,21 @@ public class LEA_Crypto {
 
         return bytes;
     }
-    public String getDeviceId(Context context) {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    public static String toHexString(byte[] input) {
+        String hexString = "";
+        int length = input.length;
+
+        for(int i = 0; i < length; i++) {
+            if(i != length - 1) {
+                hexString += String.format("%02X:", input[i]);
+            } else {
+                hexString += String.format("%02X", input[i]);
+            }
+        }
+
+        return hexString;
     }
-    public byte[] PBKDF(String P) throws Exception {
+    public static byte[] PBKDF(String P) throws Exception {
         // PBKDF 클래스
         byte[] S = new byte[] {0x78, 0x57, (byte)0x8e, 0x5a, 0x5d, 0x63, (byte)0xcb, 0x06};
         int c = 1000;
@@ -46,7 +55,7 @@ public class LEA_Crypto {
 
         Security.addProvider(new BouncyCastleProvider());
 
-        MessageDigest md = MessageDigest.getInstance("SHA1", "BC");
+        MessageDigest md = MessageDigest.getInstance("SHA1");
 
         byte[] input = new byte[P.length() + S.length];
 
