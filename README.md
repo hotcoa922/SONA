@@ -36,3 +36,7 @@ MainActivity에 편의성 버튼 추가<p>
 **[ver 0.12.00] - 2022.05.15 - KTH**<p>
 [CalendarFragment] - CosmoCalendar 삽입 완료, 날짜 무효화 미완성<p>
 [MindCheckFragment] - 기본 틀 완성(TabView)<p>
+
+**[ver 0.12.00] - 2022.05.16 - KTH**<p>
+[LoadingActivity] & [PermissionSuppoort] permission check Log 추가 완료
+[PermissionSupport] 내부 저장소 접근 권한 설정 및 허용 완료
