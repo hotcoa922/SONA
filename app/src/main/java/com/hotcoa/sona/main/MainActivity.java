@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     WriteDiaryFragment write;
     MindCheckFragment mindcheck;
     ContentsFragment contents;
+    ProfileFragment profile;
     NavigationView navi;
 
     DrawerLayout drawerLayout;
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         write = new WriteDiaryFragment();
         mindcheck = new MindCheckFragment();
         contents = new ContentsFragment();
+        profile = new ProfileFragment();
 
         drawerLayout = findViewById(R.id.drawlayout_x);
 

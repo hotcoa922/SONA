@@ -19,10 +19,6 @@ public class ContentsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_contents, container, false);
 
 
-
-
-
-
         return rootView;
     }
 }
