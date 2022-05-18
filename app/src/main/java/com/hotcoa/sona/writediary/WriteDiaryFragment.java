@@ -88,9 +88,9 @@ public class WriteDiaryFragment extends Fragment {
                 }
 
                  */
-                String android_id = prefs.getString("android_id","");
                 try{
-                    byte[] pbkdf_id = LEA_Crypto.PBKDF(prefs.getString("android_id",""));
+                    String android_id = prefs.getString("android_id","");
+                    byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
 
                     Log.d("WriteDiary", "----------------------------");
                     //Log.d("WriteDiary_휴대폰 id", "Android_ID >>> " + android_id);

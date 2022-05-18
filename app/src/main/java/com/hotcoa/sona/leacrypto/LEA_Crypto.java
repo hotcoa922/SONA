@@ -2,32 +2,18 @@ package com.hotcoa.sona.leacrypto;
 
 import static java.lang.System.arraycopy;
 
+import kr.re.nsr.crypto.BlockCipher;
+import kr.re.nsr.crypto.BlockCipherMode;
 import kr.re.nsr.crypto.padding.PKCS5Padding;
 import kr.re.nsr.crypto.symm.LEA;
 import kr.re.nsr.crypto.util.Hex;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.Security;
 import java.security.MessageDigest;
-import java.util.Base64;
-import java.util.Scanner;
 
-
-import android.content.Context;
-import android.provider.Settings;
-import android.util.Log;
 
 public class LEA_Crypto {
     public static String toString(byte[] input) {
@@ -88,93 +74,36 @@ public class LEA_Crypto {
         // 16바이트 크기의 bytearray 를 반환한다.
         return result;
     }
-    public static String encode(String plain, byte[] keyBytes) throws Exception {
-        /*
-        // LEA 객체 생성
-        BlockCipherMode cipher = new LEA.CBC();
-        // 암호화
-        cipher.init(Mode.ENCRYPT, key, iv);
-        cipher.setPadding(new PKCS5Padding(16));
-        ct1 = cipher.update(pt1);
-        ct2 = cipher.doFinal(pt2);
-        */
-
-        // 암호화 클래스
-        Security.addProvider(new BouncyCastleProvider());
-
+    public static String encode(String plain, byte[] keyBytes){
         // 초기 벡터 정의
         byte[] ivBytes = new byte[] {
                 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00,
                 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00};
 
-        // main에서 입력받은 password로 key 생성, ivBytes로 iv 생성
-        SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
-        IvParameterSpec iv = new IvParameterSpec(ivBytes);
+        BlockCipherMode cipher = new LEA.CBC();
 
-        // AES/CBC/PKCS7Padding 인스턴스 정의
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        // 암호화
+        cipher.init(BlockCipher.Mode.ENCRYPT, keyBytes, ivBytes);
+        cipher.setPadding(new PKCS5Padding(16));
 
-        // 암호화 모드 초기화
-        cipher.init(Cipher.ENCRYPT_MODE, key, iv);
-
-        // 일기 내용 암호화
         byte[] encrypted = cipher.doFinal(plain.getBytes(StandardCharsets.UTF_8));
         return Hex.toHexString(encrypted);
     }
 
-    public static String decode(String encrypted, byte[] keyBytes) throws Exception{
-        /*
-        LEA
-        // 객체 생성
-        BlockCipherMode cipher = new LEA.CBC();
-
-
-        // 복호화
-        cipher.init(Mode.DECRYPT, key, iv);
-        cipher.setPadding(new PKCS5Padding(16));
-        pt1 = cipher.update(ct1);
-        pt2 = cipher.doFinal(ct2);
-        */
-
-        // 복호화 클래스
-        Security.addProvider(new BouncyCastleProvider());
-
+    public static String decode(String encrypted, byte[] keyBytes){
         // 초기 벡터 정의
         byte[] ivBytes = new byte[] {
                 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00,
                 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00};
 
-        // key 생성, iv 생성
-        SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
-        IvParameterSpec iv = new IvParameterSpec(ivBytes);
+        BlockCipherMode cipher = new LEA.CBC();
 
-        // AES/CBC/PKCS7Padding 인스턴스 정의
-        Cipher cipher =  Cipher.getInstance("AES/CBC/PKCS5Padding");
-
-        // 복호화 모드 초기화
-        cipher.init(Cipher.DECRYPT_MODE, key, iv);
+        // 복호화
+        cipher.init(BlockCipher.Mode.DECRYPT, keyBytes, ivBytes);
+        cipher.setPadding(new PKCS5Padding(16));
 
         // 일기 내용 복호화
         byte[] encBytes = Hex.decodeHexString(encrypted);
-        return new String(cipher.doFinal(encBytes), "UTF-8");
+        return new String(cipher.doFinal(encBytes), StandardCharsets.UTF_8);
     }
-
-    /*
-    public static void main(String[] args) throws Exception{
-        Scanner input = new Scanner(System.in);
-
-        // encode password 입력 및 암호화
-        System.out.print("Enter Encode Password : ");
-        String enP = input.next();
-        encode("SecurityProgramming_PDF.zip", "encrypted.enc", PBKDF(enP));
-
-        // decode password 입력 및 복호화
-        System.out.print("Enter Decode Password : ");
-        String deP = input.next();
-        decode("decrypted.zip", "encrypted.enc", PBKDF(deP));
-
-        input.close();
-    }
-     */
 }
-
