@@ -93,8 +93,6 @@ public class WriteDiaryFragment extends Fragment {
                     byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
 
                     Log.d("WriteDiary", "----------------------------");
-                    //Log.d("WriteDiary_휴대폰 id", "Android_ID >>> " + android_id);
-                    //Log.d("WriteDiary_휴대폰 id PBKDF", " >>>>>>> " + pbkdf_id);
                     Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
                     Log.d("WriteDiary_ByteArray", LEA_Crypto.toHexString(LEA_Crypto.toByteArray(writetxt.getText().toString())));
 
@@ -104,7 +102,7 @@ public class WriteDiaryFragment extends Fragment {
                     Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
                     Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
 
-                    Log.d("WriteDiary_복호화 내용", LEA_Crypto.decode(saveData, pbkdf_id));
+                    //Log.d("WriteDiary_복호화 내용", LEA_Crypto.decode(saveData, pbkdf_id));
                     Log.d("WriteDiary", "----------------------------");
 
                 }
