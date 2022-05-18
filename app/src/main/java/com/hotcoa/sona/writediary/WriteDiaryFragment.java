@@ -271,7 +271,7 @@ public class WriteDiaryFragment extends Fragment {
         ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName+".txt");
         values.put(MediaStore.MediaColumns.MIME_TYPE, "plain/text");
-        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH, "SONA/text");
         ContentResolver contentResolver = getActivity().getContentResolver();
         Uri item = contentResolver.insert(MediaStore.Files.getContentUri("external"), values);
 
