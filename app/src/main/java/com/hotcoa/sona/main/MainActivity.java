@@ -53,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
     WriteDiaryFragment write;
     MindCheckFragment mindcheck;
     ContentsFragment contents;
-    ProfileFragment profile;
     NavigationView navi;
-
 
     DrawerLayout drawerLayout;
 
@@ -88,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getActionBar().setTitle("SONA");
 
-        mainFragment = new MainFragment();
-        writeDiaryFragment = new WriteDiaryFragment();
-
         navi = (NavigationView) findViewById(R.id.navi_x);
         appset = new AppSettingFragment();
         guide = new UserGuideFragment();
@@ -98,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         write = new WriteDiaryFragment();
         mindcheck = new MindCheckFragment();
         contents = new ContentsFragment();
-        profile = new ProfileFragment();
 
         drawerLayout = findViewById(R.id.drawlayout_x);
 
@@ -239,29 +233,6 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e){
             Log.e("PBKDF ERROR", e.toString());
         }
-    }
-    private File getSaveFolder() {
-        String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            Log.d("dirdir", "Mount 됨");
-            Log.d("dirdir", Environment.getExternalStorageDirectory().toString());
-            /*File f = Environment.getExternalStoragePublicDirectory("SONA");
-            File f = new File("/storage/emulated/self/primary/SONA");
-            try{
-                if (!f.exists()) {
-                    if (f.mkdirs()) {
-                        Log.d("dirdir", "true");
-                    } else {
-                        Log.d("dirdir", "false");
-                    }
-                } else {
-                    Log.d("dirdir", "이미 존재함");
-                }
-            }catch(Exception e) {
-                e.printStackTrace();
-            }*/
-        }
-        return null;
     }
 
     public void onChangeFragmentMainFragToWriteFrag(int index){

@@ -26,8 +26,8 @@ import java.util.List;
 public class LoadingActivity extends AppCompatActivity {
 
     private PermissionSupport permission;
-    private boolean permission_flag = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,7 @@ public class LoadingActivity extends AppCompatActivity {
     }
     
     //권한 확인
+    @RequiresApi(api = Build.VERSION_CODES.R)
     public void checkPermission() {
         permission = new PermissionSupport(this, this);
         if(!permission.checkPermission()) {
@@ -59,8 +60,7 @@ public class LoadingActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        boolean flag = permission.permissionResult(requestCode, permissions, grantResults);
-        if (!flag) Log.d("per_log", "denied");
+        if (!permission.permissionResult(requestCode, permissions, grantResults)) Log.d("per_log", "denied");
         else Log.d("per_log", "accepted");
         startLoading();
     }
