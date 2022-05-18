@@ -1,5 +1,7 @@
 package com.hotcoa.sona.writediary;
 
+import static com.hotcoa.sona.leacrypto.LEA_Crypto.decode;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -86,25 +88,24 @@ public class WriteDiaryFragment extends Fragment {
                 }
 
                  */
+                String android_id = prefs.getString("android_id","");
                 try{
-                    Log.d("----------------------------", "");
-                    Log.d("WriteDiary_휴대폰 id", "Android_ID >>> " + prefs.getString("android_id",""));
-                    Log.d("WriteDiary_휴대폰 id PBKDF", " >>>>>>> "
-                            + LEA_Crypto.toHexString(LEA_Crypto.PBKDF(prefs.getString("android_id",""))));
-                    Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
-                    Log.d("WriteDiary_ByteArray",
-                            LEA_Crypto.toHexString(
-                                    LEA_Crypto.toByteArray(
-                                            writetxt.getText().toString())));
+                    byte[] pbkdf_id = LEA_Crypto.PBKDF(prefs.getString("android_id",""));
 
-                    saveData =
-                            LEA_Crypto.encode(
-                            LEA_Crypto.toByteArray(writetxt.getText().toString()),
-                            LEA_Crypto.PBKDF(prefs.getString("android_id","")));
+                    Log.d("----------------------------", "");
+                    Log.d("WriteDiary_휴대폰 id", "Android_ID >>> " + android_id);
+                    Log.d("WriteDiary_휴대폰 id PBKDF", " >>>>>>> " + pbkdf_id);
+                    Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
+                    Log.d("WriteDiary_ByteArray", LEA_Crypto.toHexString(LEA_Crypto.toByteArray(writetxt.getText().toString())));
+
+                    saveData = LEA_Crypto.encode(writetxt.getText().toString(), pbkdf_id);
                     saveFile(getNowTime24(), saveData);
+
                     Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
                     Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
                     Log.d("----------------------------", "");
+
+                    Log.d("Diary", LEA_Crypto.decode(saveData, pbkdf_id));
                 }
                 catch (Exception e){
                     Log.e("WriteDiary_PBKDF ERROR", e.toString());
