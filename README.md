@@ -40,3 +40,6 @@ MainActivity에 편의성 버튼 추가<p>
 **[ver 0.12.00] - 2022.05.16 - KTH**<p>
 [LoadingActivity] & [PermissionSuppoort] permission check Log 추가 완료<p>
 [PermissionSupport] 내부 저장소 접근 권한 설정 및 허용 완료<p>
+
+**[ver 0.12.00] - 2022.05.17 - KTH**<p>
+[PermissionSupport] warining 모두 제거 & 필요없는 코드 삭제 및 정리 
