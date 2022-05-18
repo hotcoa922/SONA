@@ -27,11 +27,13 @@ import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.contents.ContentsFragment;
 import com.hotcoa.sona.mindcheck.MindCheckFragment;
+import com.hotcoa.sona.profile.ProfileFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
@@ -42,6 +44,9 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
+    MainFragment mainFragment;
+    WriteDiaryFragment writeDiaryFragment;
+
     Toolbar toolbar;
     AppSettingFragment appset;
     UserGuideFragment guide;
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     WriteDiaryFragment write;
     MindCheckFragment mindcheck;
     ContentsFragment contents;
+    ProfileFragment profile;
     NavigationView navi;
 
     DrawerLayout drawerLayout;
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         write = new WriteDiaryFragment();
         mindcheck = new MindCheckFragment();
         contents = new ContentsFragment();
+        profile = new ProfileFragment();
 
         drawerLayout = findViewById(R.id.drawlayout_x);
 
@@ -113,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
             if(menuItem.getItemId() == R.id.contentschuchu_navi){
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,contents ).commit();
             }
+            if(menuItem.getItemId() == R.id.profile_navi){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profile ).commit();
+            }
+
 
 
             drawerLayout.closeDrawer(GravityCompat.START);  //방향을 지정해 주는 것
@@ -134,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                startActivity(intent);
             }
         });
+
 
         setAndroidID();
     }
@@ -223,4 +235,14 @@ public class MainActivity extends AppCompatActivity {
             Log.e("PBKDF ERROR", e.toString());
         }
     }
+
+    public void onChangeFragmentMainFragToWriteFrag(int index){
+        if(index == 0){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainFragment).commit();
+        }else if(index ==1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,writeDiaryFragment).commit();
+        }
+    }
+
+
 }

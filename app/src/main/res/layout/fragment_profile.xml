@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/username_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username_tx"
+        app:layout_constraintBottom_toTopOf="@+id/diaryname_tx"
+        app:layout_constraintEnd_toStartOf="@+id/username_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile_guideline1" />
+
+    <TextView
+        android:id="@+id/diaryname_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="diaryname_tx"
+        app:layout_constraintBottom_toTopOf="@+id/diaryfont_tx"
+        app:layout_constraintEnd_toStartOf="@+id/diaryname_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_tx" />
+
+    <TextView
+        android:id="@+id/diaryfont_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="diaryfont_tx"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diaryname_tx" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/diary"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="65dp"
+        android:layout_height="17dp"
+        android:text="사진 변경"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button" />
+
+    <EditText
+        android:id="@+id/username_et"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:font="@font/font1"
+        android:gravity="top"
+        android:hint="내용을 입력하세요."
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/username_tx"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/username_tx"
+        app:layout_constraintTop_toTopOf="@+id/username_tx"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/diaryname_et"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:font="@font/font1"
+        android:gravity="top"
+        android:hint="내용을 입력하세요."
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diaryname_tx"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/diaryname_tx"
+        app:layout_constraintTop_toTopOf="@+id/diaryname_tx" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <Button
+        android:id="@+id/profilesave_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile_guideline2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

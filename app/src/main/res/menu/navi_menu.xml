@@ -18,4 +18,6 @@
         android:id="@+id/guide_navi"/>
     <item android:title="환경설정"
         android:id="@+id/appsetting_navi"/>
+    <item android:title="프로필 설정"
+        android:id="@+id/profile_navi"/>
 </menu>
