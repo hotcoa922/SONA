@@ -44,7 +44,7 @@ public class PermissionSupport {
     }
 
     private void checkFilePermission() {
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && !isFileGranted(context)){
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && !isFileGranted()){
             // [안드로이드 R 버전 이상 파일 접근 권한 필요]
             Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
             Uri uri = Uri.fromParts("package", context.getPackageName(), null);
@@ -54,15 +54,12 @@ public class PermissionSupport {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
-    private boolean isFileGranted(Context mContext) {
+    private boolean isFileGranted() {
         boolean granted = false; // 권한 부여 상태값 저장
         try {
             // [파일 접근 권한이 허용 된 경우]
             if (Environment.isExternalStorageManager()){
                 granted = true;
-            }
-            else {
-                granted = false;
             }
         }
         catch (Throwable throwable) {
@@ -88,14 +85,14 @@ public class PermissionSupport {
     //배열로 선언한 권한에 대해 사용자에게 허용 요청
     public void requestPermission(){
         checkFilePermission();
-        ActivityCompat.requestPermissions(activity, (String[]) permissionList.toArray(new String[permissionList.size()]), MULTIPLE_PERMISSIONS);
+        ActivityCompat.requestPermissions(activity, (String[]) permissionList.toArray(new String[0]), MULTIPLE_PERMISSIONS);
     }
 
     //요청한 권한에 대한 결과값 판단 및 처리
     @RequiresApi(api = Build.VERSION_CODES.R)
     public boolean permissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         if(requestCode == MULTIPLE_PERMISSIONS && (grantResults.length >0)) {
-            if(isFileGranted(context)) grantResults[0] = PackageManager.PERMISSION_GRANTED;
+            if(isFileGranted()) grantResults[0] = PackageManager.PERMISSION_GRANTED;
             for (int i = 0; i < grantResults.length; ++i) {
                 if (grantResults[i] == -1) {
                     Log.d("per_log", permissions[i] + ": " + "denied");
