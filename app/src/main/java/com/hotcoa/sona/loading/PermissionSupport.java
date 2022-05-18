@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class PermissionSupport {
     private final Context context;
     private final Activity activity;
@@ -42,7 +43,7 @@ public class PermissionSupport {
         this.context = _context;
     }
 
-    public void checkFilePermission() {
+    private void checkFilePermission() {
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) && !isFileGranted(context)){
             // [안드로이드 R 버전 이상 파일 접근 권한 필요]
             Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
@@ -53,21 +54,20 @@ public class PermissionSupport {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
-    public boolean isFileGranted(Context mContext) {
+    private boolean isFileGranted(Context mContext) {
         boolean granted = false; // 권한 부여 상태값 저장
         try {
             // [파일 접근 권한이 허용 된 경우]
-            if (Environment.isExternalStorageManager() == true){
+            if (Environment.isExternalStorageManager()){
                 granted = true;
             }
             else {
                 granted = false;
             }
         }
-        catch (Throwable why) {
-            //why.printStackTrace();
+        catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
-        // [결과 반환 실시]
         return granted;
     }
 
@@ -102,36 +102,39 @@ public class PermissionSupport {
                     return false;
                 }
             }
-            getSaveFolder();
+            makeSaveFolder();
         }
         return true;
     }
 
-    private void getSaveFolder() {
+    private void makeSaveFolder() {
         String state = Environment.getExternalStorageState();
+        String directoryName = "SONA";
         if (state.equals(Environment.MEDIA_MOUNTED)) {
-            Log.d("dirdir", "Mount 됨");
+            Log.d("dirdir", "Mount Complete");
             Log.d("dirdir", Environment.getExternalStorageDirectory().toString());
 
             String root = Environment.getExternalStorageDirectory().getAbsolutePath();
             Log.d("dirdir", "root: " + root);
-            String directoryName = "SONA";
-            File f = new File(root+"/"+directoryName);
-            //File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"SONA");
-            try{
-                if (!f.exists()) {
-                    if (f.mkdir()) {
-                        Log.d("dirdir", "true");
-                    } else {
-                        Log.d("dirdir", "false");
-                    }
-                } else {
-                    Log.d("dirdir", "이미 존재함");
-                }
-            }catch(Exception e) {
-                e.printStackTrace();
-            }
+            File sona = new File(root + "/" + directoryName);
+            File txt = new File(root + "/" + directoryName + "/text");
+            File img = new File(root + "/" + directoryName + "/image");
+            makeFolder(sona);
+            makeFolder(txt);
+            makeFolder(img);
         }
     }
-
+    private void makeFolder(File file) {
+        try{
+            if(!file.exists()) {
+                if(file.mkdir()) {
+                    Log.d("dirdir", "success");
+                }
+                else Log.d("dirdir", "fail");
+            }
+            else Log.d("dirdir", "already presented");
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
