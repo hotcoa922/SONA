@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
@@ -148,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         setAndroidID();
-        //getSaveFolder();
     }
 
     //ctrl+o 에서 오버라이드할꺼 검색 ㄱㄴ
