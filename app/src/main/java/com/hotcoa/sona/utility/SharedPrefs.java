@@ -3,6 +3,9 @@ package com.hotcoa.sona.utility;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SharedPrefs {
 
     //========== [사용 설명] ==========

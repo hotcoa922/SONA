@@ -17,6 +17,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.main.MainActivity;
 
 import java.io.File;
@@ -44,7 +45,7 @@ public class LoadingActivity extends AppCompatActivity {
             finish();
         }, 1000);
     }
-    
+
     //권한 확인
     @RequiresApi(api = Build.VERSION_CODES.R)
     public void checkPermission() {

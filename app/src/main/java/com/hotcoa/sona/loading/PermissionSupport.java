@@ -85,7 +85,7 @@ public class PermissionSupport {
     //배열로 선언한 권한에 대해 사용자에게 허용 요청
     public void requestPermission(){
         checkFilePermission();
-        ActivityCompat.requestPermissions(activity, (String[]) permissionList.toArray(new String[0]), MULTIPLE_PERMISSIONS);
+        ActivityCompat.requestPermissions(activity, permissionList.toArray(new String[0]), MULTIPLE_PERMISSIONS);
     }
 
     //요청한 권한에 대한 결과값 판단 및 처리
