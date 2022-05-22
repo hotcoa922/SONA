@@ -47,3 +47,10 @@ MainActivity에 편의성 버튼 추가<p>
  
 **[ver 0.12.00] - 2022.05.18 - KTH**<p>
 [CalendarFragment] 캘린더 동작 과정 구현 완료<p>
+
+**[ver 0.12.00] - 2022.05.18 - KTH**<p>
+[CalendarFragment]
+- 일기 쓰기 기능 전환 구현 완료<p>
+- ContentsFragment 전환 구현 완료<p>
+- 캘린더 공유 버튼 클릭 시 화면 캡쳐 & SONA/image directory 저장 구현 완료<p>
+ 
