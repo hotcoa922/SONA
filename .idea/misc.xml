@@ -9,11 +9,12 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_circle_info_solid.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_home_24.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_launcher_background.xml" value="0.113" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_share_nodes_solid.xml" value="0.17" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_default_calendar.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_loading.xml" value="0.2734375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_main.xml" value="0.2234375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_app_setting.xml" value="0.4173913181932306" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_calendar.xml" value="0.37777777777777777" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_calendar.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_user_guide.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/common_button.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/diary_button.xml" value="0.29010416666666666" />
@@ -35,7 +36,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

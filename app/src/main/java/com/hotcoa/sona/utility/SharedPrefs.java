@@ -17,7 +17,7 @@ public class SharedPrefs {
     /** [Int 데이터 저장]
      S_Preference.setInt(getApplication(), "Key_Age", 28); //특정 데이터 저장한다
      S_Preference.getInt(getApplication(), "Key_Age"); //저장된 특정 데이터 불러온다
-     */
+    */
 
     /** [Boolean 데이터 저장]
      S_Preference.setBoolean(getApplication(), "Key_Sex", true); //특정 데이터 저장한다
@@ -36,7 +36,7 @@ public class SharedPrefs {
     public static final String PREFERENCES_NAME = "rebuild_preference";
     private static final String DEFAULT_VALUE_STRING = "";
     private static final boolean DEFAULT_VALUE_BOOLEAN = false;
-    private static final int DEFAULT_VALUE_INT = -1;
+    private static final int DEFAULT_VALUE_INT = 1;
     private static final long DEFAULT_VALUE_LONG = -1L;
     private static final float DEFAULT_VALUE_FLOAT = -1F;
 
@@ -67,6 +67,15 @@ public class SharedPrefs {
         return value;
     }
 
+    public static void setInt(Context context, String key, int value) {
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
 
-
+    public static int getInt(Context context, String key) {
+        SharedPreferences prefs = getPreferences(context);
+        return prefs.getInt(key, DEFAULT_VALUE_INT);
+    }
 }
