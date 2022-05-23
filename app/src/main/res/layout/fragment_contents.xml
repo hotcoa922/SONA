@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".contents.ContentsFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="컨텐츠 추천" />
+        android:text="컨텐츠 추천"
+        tools:layout_editor_absoluteX="180dp"
+        tools:layout_editor_absoluteY="-36dp" />
+
+    <Button
+        android:id="@+id/ShowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Show"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <WebView
+        android:id="@+id/ContentsWebView"
+        android:layout_width="53dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ShowButton"
+        app:layout_constraintEnd_toEndOf="@+id/ShowButton"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="@+id/ShowButton"
+        app:layout_constraintTop_toTopOf="@+id/ShowButton"
+        app:layout_constraintVertical_bias="0.607" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
