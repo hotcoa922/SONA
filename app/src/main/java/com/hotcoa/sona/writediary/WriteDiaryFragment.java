@@ -45,8 +45,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.prefs.Preferences;
@@ -120,9 +124,9 @@ public class WriteDiaryFragment extends Fragment {
     private String getTime() {
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
-        String getTime = dateFormat.format(date);
-        return getTime;
+        SharedPreferences prefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+        String temp = prefs.getString("curDate", date.toString());
+        return temp;
     }
 
     /* 비상비상 이거 sdk30, 안드 11이후 안됨...

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.applikeysolutions.cosmocalendar.model.Day;
 import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.contents.ContentsFragment;
@@ -32,6 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -160,8 +162,21 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             if(calendarView.getSelectedDates().size() <= 0) {
                 alertDialog();
             }
-            else getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, writeDiaryFragment).commit();
+            else {
+                daySave();
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, writeDiaryFragment).commit();
+            }
         });
+    }
+
+    private void daySave() {
+        List<Day> day = calendarView.getSelectedDays();
+        String date = String.valueOf(day.get(0).getCalendar().get(Calendar.YEAR)) + "년 " + String.valueOf(day.get(0).getCalendar().get(Calendar.MONTH) + 1) + "월 " + String.valueOf(day.get(0).getDayNumber()) + "일";
+        Log.d("calendar_log", "Selected Days : " + date);
+        SharedPreferences prefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("curDate", date);
+        editor.apply();
     }
 
     private void onMonthChange(String curMonth) {
@@ -170,7 +185,8 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             String[] m = tmp.split(" ");
 
             if(!curMonth.equals(mName.get(m[0]))) {
-                if(Integer.parseInt(curMonth) < Integer.parseInt(Objects.requireNonNull(mName.get(m[0]))))
+                if(Integer.parseInt(curMonth) < Integer.parseInt(Objects.requireNonNull(mName.get(m[0])))
+                && m[1].equals(String.valueOf(calendar.get(calendar.YEAR))))
                     calendarView.goToPreviousMonth();
                 calendarView.setNextMonthIconRes(resId);
                 Log.d("calendar_log", "different");
