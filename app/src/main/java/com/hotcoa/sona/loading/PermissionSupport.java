@@ -116,9 +116,11 @@ public class PermissionSupport {
             File sona = new File(root + "/" + directoryName);
             File txt = new File(root + "/" + directoryName + "/text");
             File img = new File(root + "/" + directoryName + "/image");
+            File screenshot = new File(root + "/" + directoryName + "/screenshot");
             makeFolder(sona);
             makeFolder(txt);
             makeFolder(img);
+            makeFolder(screenshot);
         }
     }
     private void makeFolder(File file) {

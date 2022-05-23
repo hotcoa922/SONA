@@ -1,5 +1,6 @@
 package com.hotcoa.sona.calendar;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +8,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Environment;
 import android.util.Log;
@@ -25,7 +25,6 @@ import com.hotcoa.sona.writediary.WriteDiaryFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -33,19 +32,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 
 public class CalendarFragment extends Fragment implements OnDaySelectedListener{
 
-    private static com.applikeysolutions.cosmocalendar.view.CalendarView calendarView;
+    private com.applikeysolutions.cosmocalendar.view.CalendarView calendarView;
     private static final long dayMilliSec = 86400000L;
     private static final long curTime = System.currentTimeMillis();
     private static Set<Long> disabledDaysSet;
     private final Calendar calendar = Calendar.getInstance();
     private int resId;
-    private final static HashMap<String, String> mName = new HashMap<String, String>();
+    private final static HashMap<String, String> mName = new HashMap<>();
+    @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat df = new SimpleDateFormat("MM");
     private final Date curDate = new Date();
     private WriteDiaryFragment writeDiaryFragment;
@@ -81,7 +81,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             temp[i] = nextTime;
             nextTime += dayMilliSec;
         }
-        disabledDaysSet = new HashSet<Long>(Arrays.asList(temp));
+        disabledDaysSet = new HashSet<>(Arrays.asList(temp));
         Log.d("calendar_log", term + " disabled");
     }
 
@@ -96,10 +96,10 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
 
         SharedPrefs.setInt(rootView.getContext(), "screenshotCounter", 1);
         writeDiaryFragment = new WriteDiaryFragment();
-
+        contentsFragment = new ContentsFragment();
 
         String curMonth = df.format(curDate);
-        calendarView = (com.applikeysolutions.cosmocalendar.view.CalendarView) rootView.findViewById(R.id.cosmo_calendar);
+        calendarView = rootView.findViewById(R.id.cosmo_calendar);
         resId = calendarView.getNextMonthIconRes();
         calendarView.setNextMonthIconRes(R.color.white);
         setDisabledDays(calendarView);
@@ -110,7 +110,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         Button button_share = rootView.findViewById(R.id.button_share);
         onWriteClick(button_writeDiary);
         onContentsClick(button_contents);
-        onShareClick(button_share, rootView);
+        onShareClick(button_share);
         return rootView;
     }
 
@@ -123,7 +123,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         editor.putInt("screenshotCounter", counter + 1);
         editor.apply();
         String filename = "screenshot"+"_"+counter+".png";
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SONA/image";
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SONA/screenshot";
         File f = new File(path, filename);
         if(f.createNewFile()) {
             Log.d("calendar_log", "make file success");
@@ -136,42 +136,31 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         view.setDrawingCacheEnabled(false);
     }
 
-    private void onShareClick(Button shareButton, View rootView) {
-        shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    screenshot(calendarView);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+    private void onShareClick(Button shareButton) {
+        shareButton.setOnClickListener(view -> {
+            try {
+                screenshot(calendarView);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
 
     private void onContentsClick(Button contentsButton) {
-        contentsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(calendarView.getSelectedDates().size() <= 0) {
-                    alertDialog();
-                    return;
-                }
-                else getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, contentsFragment).commit();
+        contentsButton.setOnClickListener(view -> {
+            if(calendarView.getSelectedDates().size() <= 0) {
+                alertDialog();
             }
+            else getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, contentsFragment).commit();
         });
     }
 
     private void onWriteClick(Button writeButton) {
-        writeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(calendarView.getSelectedDates().size() <= 0) {
-                    alertDialog();
-                    return;
-                }
-                else getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, writeDiaryFragment).commit();
+        writeButton.setOnClickListener(view -> {
+            if(calendarView.getSelectedDates().size() <= 0) {
+                alertDialog();
             }
+            else getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, writeDiaryFragment).commit();
         });
     }
 
@@ -181,9 +170,8 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             String[] m = tmp.split(" ");
 
             if(!curMonth.equals(mName.get(m[0]))) {
-                if(Integer.parseInt(curMonth) < Integer.parseInt(mName.get(m[0]))) {
+                if(Integer.parseInt(curMonth) < Integer.parseInt(Objects.requireNonNull(mName.get(m[0]))))
                     calendarView.goToPreviousMonth();
-                }
                 calendarView.setNextMonthIconRes(resId);
                 Log.d("calendar_log", "different");
             }
@@ -196,7 +184,6 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
 
     @Override
     public void onDaySelected() {
-        List<Calendar> day = calendarView.getSelectedDates();
         Log.d("calendar_log", "Selected Dates : " + calendarView.getSelectedDates().size());
         if (calendarView.getSelectedDates().size() <= 0) {
             return;

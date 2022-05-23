@@ -40,10 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:text="추천 콘텐츠"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/button_write"
         app:layout_constraintEnd_toStartOf="@+id/button_share"
         app:layout_constraintStart_toEndOf="@+id/button_write"
-        app:layout_constraintTop_toBottomOf="@+id/cosmo_calendar" />
+        app:layout_constraintTop_toTopOf="@+id/button_write" />
 
     <Button
         android:id="@+id/button_share"
@@ -52,11 +52,11 @@
         android:layout_marginStart="56dp"
         android:layout_marginEnd="16dp"
         android:text="공유하기"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/button_contents"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.84"
         app:layout_constraintStart_toEndOf="@+id/button_contents"
-        app:layout_constraintTop_toBottomOf="@+id/cosmo_calendar" />
+        app:layout_constraintTop_toTopOf="@+id/button_contents" />
 
     <Button
         android:id="@+id/button_write"
