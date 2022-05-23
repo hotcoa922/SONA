@@ -18,9 +18,11 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_calendar.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SONA/app/src/main/res/layout/fragment_user_guide.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/common_button.xml" value="0.29010416666666666" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/common_rect_button_dark.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/diary_button.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_baseline_24.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_baseline_48.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/ic_home_24.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/drawable/write_paper_background.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_loading.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SONA/app/src/main/res/layout/activity_main.xml" value="0.2" />
@@ -37,7 +39,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

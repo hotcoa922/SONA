@@ -48,7 +48,6 @@ public class MainFragment extends Fragment {
                 //getFragmentManager().beginTransaction().replace(R.layout.fragment_write_diary, writeDiaryFragment);
                 //getFragmentManager().beginTransaction().addToBackStack(null);
                 //getFragmentManager().beginTransaction().commit();
-
                 mainActivity.onChangeFragmentMainFragToWriteFrag(1);
 
             }

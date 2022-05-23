@@ -1,4 +1,4 @@
-package com.hotcoa.sona.checkdiary;
+package com.hotcoa.sona.writediary;
 
 import android.os.Bundle;
 
@@ -10,17 +10,16 @@ import android.view.ViewGroup;
 
 import com.hotcoa.sona.R;
 
-
-public class CheckDiaryFrament extends Fragment {
+public class HashTagFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_check_diary_frament, container, false);
-
-
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_hash_tag, container, false);
 
 
 
         return rootView;
+
     }
 }
