@@ -44,9 +44,6 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    MainFragment mainFragment;
-    WriteDiaryFragment writeDiaryFragment;
-
     Toolbar toolbar;
     AppSettingFragment appset;
     UserGuideFragment guide;
@@ -237,10 +234,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onChangeFragmentMainFragToWriteFrag(int index){
-        if(index == 0){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainFragment).commit();
-        }else if(index ==1){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,writeDiaryFragment).commit();
+        try {
+            if(index == 0){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();
+            }else if(index == 1){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
         }
     }
 
