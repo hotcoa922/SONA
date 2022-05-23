@@ -74,7 +74,9 @@ public class WriteDiaryFragment extends Fragment {
         writetxt = (EditText)rootView.findViewById(R.id.writeit_et);
 
         datetv.setText(getTime());
-        SharedPreferences prefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
+        SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
+        SharedPreferences datePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+
 
         savebt.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -93,7 +95,7 @@ public class WriteDiaryFragment extends Fragment {
 
                  */
                 try{
-                    String android_id = prefs.getString("android_id","");
+                    String android_id = idPrefs.getString("android_id","");
                     byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
 
                     Log.d("WriteDiary", "----------------------------");
@@ -101,7 +103,9 @@ public class WriteDiaryFragment extends Fragment {
                     Log.d("WriteDiary_ByteArray", LEA_Crypto.toHexString(LEA_Crypto.toByteArray(writetxt.getText().toString())));
 
                     saveData = LEA_Crypto.encode(writetxt.getText().toString(), pbkdf_id);
-                    saveFile(getNowTime24(), saveData);
+                    String date = datePrefs.getString("curDate", "");
+                    Log.d("WriteDiary", "date : " + date);
+                    saveFile(date, saveData);
 
                     Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
                     Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
@@ -243,6 +247,7 @@ public class WriteDiaryFragment extends Fragment {
     //MediaStore 이용
     //TODO [MediaStore 파일 저장 실시]
     private void saveFile(String fileName, String fileData) {
+        /*
         String deleteCheck = SharedPrefs.getString(getActivity(), "saveScopeContentTxt");
         if(deleteCheck != null && deleteCheck.length() > 0){ //TODO 이전에 저장된 파일이 있을 경우 지운다
             try {
@@ -263,6 +268,7 @@ public class WriteDiaryFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        */
         Log.d("---","---");
         Log.d("//===========//","================================================");
         Log.d("","\n"+"[A_ScopeTxt > saveFile() 메소드 : MediaStore 파일 저장 실시]");
