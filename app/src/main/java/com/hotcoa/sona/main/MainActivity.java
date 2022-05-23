@@ -238,9 +238,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onChangeFragmentMainFragToWriteFrag(int index){
         if(index == 0){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, mainmain).commit();
         }else if(index ==1){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,writeDiaryFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, write).commit();
         }
     }
 
