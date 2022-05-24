@@ -76,7 +76,7 @@ public class WriteDiaryFragment extends Fragment {
         datetv.setText(getTime());
         SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
         SharedPreferences datePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
-
+        SharedPreferences saveDatePrefs = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
 
         savebt.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -107,6 +107,11 @@ public class WriteDiaryFragment extends Fragment {
                     Log.d("WriteDiary", "date : " + date);
                     saveFile(date, saveData);
 
+                    //저장한 일기 날짜 확인을 위해 추가
+                    SharedPreferences.Editor editor = saveDatePrefs.edit();
+                    editor.putString("saveDate", date);
+                    editor.apply();
+
                     Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
                     Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
 
@@ -128,8 +133,9 @@ public class WriteDiaryFragment extends Fragment {
     private String getTime() {
         long now = System.currentTimeMillis();
         Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
         SharedPreferences prefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
-        String temp = prefs.getString("curDate", date.toString());
+        String temp = prefs.getString("curDate", dateFormat.format(date));
         return temp;
     }
 
