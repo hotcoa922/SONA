@@ -1,5 +1,7 @@
 package com.hotcoa.sona.profile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,6 +27,10 @@ public class ProfileFragment extends Fragment {
 
     Button edit;
 
+    SharedPreferences sPf;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -41,14 +47,21 @@ public class ProfileFragment extends Fragment {
 
 
 
+        sPf = getActivity().getSharedPreferences("profile_info",Context.MODE_PRIVATE);
 
+        //이미지 추후 구현
+        nickName.setText(sPf.getString("nickName","")); //첫번째 값은 저장해둔 값 불러오기, 두번째 값은 값이 없으면 보여줄 값
+        diaryName.setText(sPf.getString("diaryName",""));
+        birthYear.setText(sPf.getString("birthYear",""));
+        birthMonth.setText(sPf.getString("birthMonth",""));
+        birthDay.setText(sPf.getString("birthDay",""));
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
-
-
-
-
+            }
+        });
 
         return rootView;
     }
