@@ -109,10 +109,10 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         if(!saveDaysPrefs.getStringSet("saveDays", new HashSet<>()).isEmpty()) {
             Log.d("calendar_log", "null");
 
-            Set<String> temp = saveDaysPrefs.getStringSet("saveDays", null);
+            Set<String> temp = saveDaysPrefs.getStringSet("saveDays", new HashSet<>());
             sDate.addAll(temp);
         }
-        sDate.add(saveDatePrefs.getString("saveDate", ""));
+        sDate.add(saveDatePrefs.getString("saveDate", "1999년 12월 17일"));
 
         SharedPrefs.setInt(rootView.getContext(), "screenshotCounter", 1);
         writeDiaryFragment = new WriteDiaryFragment();
@@ -139,8 +139,8 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         }
         ConnectedDays connectedDays = new ConnectedDays(days, R.color.red, R.color.teal_200, R.color.purple_500);
         calendarView.addConnectedDays(connectedDays);
-        calendarView.setConnectedDayIconRes(R.drawable.ic_baseline_stars_24);   // Drawable
-        calendarView.setConnectedDayIconPosition(ConnectedDayIconPosition.TOP);// TOP & BOTTOM
+        calendarView.setConnectedDayIconRes(R.drawable.ic_circle_solid);   // Drawable
+        calendarView.setConnectedDayIconPosition(ConnectedDayIconPosition.BOTTOM);// TOP & BOTTOM
         calendarView.update();
         for (String s : sDate) {
             Log.d("calendar_log", s);
@@ -229,7 +229,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             String tmp = month.getMonthName();
             String[] m = tmp.split(" ");
 
-            if(!curMonth.equals(mName.get(m[0]))) {
+            /*if(!curMonth.equals(mName.get(m[0]))) {
                 if(Integer.parseInt(curMonth) < Integer.parseInt(Objects.requireNonNull(mName.get(m[0])))
                 && m[1].equals(String.valueOf(calendar.get(Calendar.YEAR))))
                     calendarView.goToPreviousMonth();
@@ -239,7 +239,9 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             else {
                 calendarView.setNextMonthIconRes(R.color.white);
                 Log.d("calendar_log", "same(disable button)");
-            }
+            }*/
+            calendarView.setNextMonthIconRes(R.color.white);
+            Log.d("calendar_log", "same(disable button)");
         });
     }
 
