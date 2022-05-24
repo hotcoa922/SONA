@@ -140,8 +140,8 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         }
         ConnectedDays connectedDays = new ConnectedDays(days, R.color.red, R.color.teal_200, R.color.purple_500);
         calendarView.addConnectedDays(connectedDays);
-        calendarView.setConnectedDayIconRes(R.drawable.ic_circle_solid);   // Drawable
-        calendarView.setConnectedDayIconPosition(ConnectedDayIconPosition.BOTTOM);// TOP & BOTTOM
+        calendarView.setConnectedDayIconRes(R.drawable.ic_baseline_stars_24);   // Drawable
+        calendarView.setConnectedDayIconPosition(ConnectedDayIconPosition.TOP);// TOP & BOTTOM
         calendarView.update();
         for (String s : sDate) {
             Log.d("calendar_log", s);
@@ -152,7 +152,6 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
                 }
             }));*/
         }
-
         Button button_writeDiary = rootView.findViewById(R.id.button_write);
         Button button_contents = rootView.findViewById(R.id.button_contents);
         Button button_share = rootView.findViewById(R.id.button_share);
@@ -241,7 +240,10 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
                 calendarView.setNextMonthIconRes(R.color.white);
                 Log.d("calendar_log", "same(disable button)");
             }*/
-            calendarView.setNextMonthIconRes(R.color.white);
+            if(!curMonth.equals(mName.get(m[0]))) {
+                calendarView.setNextMonthIconRes(resId);
+            }
+            else calendarView.setNextMonthIconRes(R.color.white);
             Log.d("calendar_log", "same(disable button)");
         });
     }
