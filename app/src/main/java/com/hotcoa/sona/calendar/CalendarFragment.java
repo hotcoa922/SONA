@@ -106,7 +106,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         SharedPreferences saveDaysPrefs = getActivity().getSharedPreferences("saveDays", Context.MODE_PRIVATE);
         SharedPreferences.Editor saveDaysEditor = saveDaysPrefs.edit();
 
-        if(!saveDaysPrefs.getStringSet("saveDays", null).isEmpty()) {
+        if(!saveDaysPrefs.getStringSet("saveDays", new HashSet<>()).isEmpty()) {
             Log.d("calendar_log", "null");
 
             Set<String> temp = saveDaysPrefs.getStringSet("saveDays", null);
