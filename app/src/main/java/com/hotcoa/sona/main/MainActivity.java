@@ -234,14 +234,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onChangeFragmentMainFragToWriteFrag(int index){
-        try {
-            if(index == 0){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();
-            }else if(index == 1){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
-            }
-        }catch(Exception e) {
-            e.printStackTrace();
+        if(index == 0){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();
+        }else if(index ==1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
         }
     }
 
