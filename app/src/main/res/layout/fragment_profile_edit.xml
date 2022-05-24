@@ -24,36 +24,35 @@
         android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:text="년"
-        app:layout_constraintBottom_toBottomOf="@+id/cng_birth_year_tv"
-        app:layout_constraintEnd_toStartOf="@+id/cng_birth_month_tv"
-        app:layout_constraintStart_toEndOf="@+id/cng_birth_year_tv"
-        app:layout_constraintTop_toTopOf="@+id/cng_birth_year_tv" />
+        app:layout_constraintBottom_toBottomOf="@+id/cng_birth_year_et"
+        app:layout_constraintEnd_toStartOf="@+id/cng_birth_month_et"
+        app:layout_constraintStart_toEndOf="@+id/cng_birth_year_et"
+        app:layout_constraintTop_toTopOf="@+id/cng_birth_year_et" />
 
     <TextView
         android:id="@+id/cng_username_tx3"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:text="월"
-        app:layout_constraintBottom_toBottomOf="@+id/cng_birth_month_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/cng_birth_month_et"
         app:layout_constraintEnd_toStartOf="@+id/cng_birth_day_et"
-        app:layout_constraintStart_toEndOf="@+id/cng_birth_month_tv"
-        app:layout_constraintTop_toTopOf="@+id/cng_birth_month_tv" />
+        app:layout_constraintStart_toEndOf="@+id/cng_birth_month_et"
+        app:layout_constraintTop_toTopOf="@+id/cng_birth_month_et" />
 
     <TextView
-        android:id="@+id/cng_username_tx4"
+        android:id="@+id/cng_day_tx"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:text="월"
+        android:text="일"
         app:layout_constraintBottom_toBottomOf="@+id/cng_birth_day_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cng_birth_day_et"
         app:layout_constraintTop_toTopOf="@+id/cng_birth_day_et" />
 
     <EditText
-        android:id="@+id/cng_birth_year_tv"
+        android:id="@+id/cng_birth_year_et"
         android:layout_width="50dp"
         android:layout_height="0dp"
-        android:font="@font/font1"
         android:gravity="top"
         android:hint="2022"
         android:textSize="15dp"
@@ -69,7 +68,7 @@
         android:layout_height="wrap_content"
         android:text="생년월일"
         app:layout_constraintBottom_toTopOf="@+id/cng_diaryname_tx"
-        app:layout_constraintEnd_toStartOf="@+id/cng_birth_year_tv"
+        app:layout_constraintEnd_toStartOf="@+id/cng_birth_year_et"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_tx" />
 
@@ -128,7 +127,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/cng_birth_month_tv"
+        android:id="@+id/cng_birth_month_et"
         android:layout_width="40dp"
         android:layout_height="0dp"
         android:gravity="top"
@@ -147,7 +146,7 @@
         android:hint="31"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/cng_username_tx3"
-        app:layout_constraintEnd_toStartOf="@+id/cng_username_tx4"
+        app:layout_constraintEnd_toStartOf="@+id/cng_day_tx"
         app:layout_constraintStart_toEndOf="@+id/cng_username_tx3"
         app:layout_constraintTop_toTopOf="@+id/cng_username_tx3" />
 

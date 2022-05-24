@@ -8,29 +8,46 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <ImageView
+        android:id="@+id/profile_img"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/diary"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
     <TextView
         android:id="@+id/username_tx"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="이름"
-        app:layout_constraintBottom_toTopOf="@+id/cng_birth_tx"
+        app:layout_constraintBottom_toTopOf="@+id/birth_tx"
         app:layout_constraintEnd_toStartOf="@+id/username_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/profile_guideline1" />
 
     <TextView
-        android:id="@+id/dafs_tx"
+        android:id="@+id/year_tx"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:text="년"
-        app:layout_constraintBottom_toBottomOf="@+id/cng_birth_year_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/birth_year_tv"
         app:layout_constraintEnd_toStartOf="@+id/birth_month_tv"
-        app:layout_constraintStart_toEndOf="@+id/cng_birth_year_tv"
-        app:layout_constraintTop_toTopOf="@+id/cng_birth_year_tv" />
+        app:layout_constraintStart_toEndOf="@+id/birth_year_tv"
+        app:layout_constraintTop_toTopOf="@+id/birth_year_tv" />
 
     <TextView
-        android:id="@+id/cng_username_tx3"
+        android:id="@+id/month_tx"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:text="월"
@@ -40,88 +57,59 @@
         app:layout_constraintTop_toTopOf="@+id/birth_month_tv" />
 
     <TextView
-        android:id="@+id/cng_username_tx4"
+        android:id="@+id/day_tx"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:text="월"
+        android:text="일"
         app:layout_constraintBottom_toBottomOf="@+id/birth_day_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/birth_day_tv"
         app:layout_constraintTop_toTopOf="@+id/birth_day_tv" />
 
     <EditText
-        android:id="@+id/cng_birth_year_tv"
+        android:id="@+id/birth_year_tv"
         android:layout_width="50dp"
         android:layout_height="0dp"
         android:gravity="top"
         android:hint="2022"
         android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cng_birth_tx"
-        app:layout_constraintEnd_toStartOf="@+id/dafs_tx"
-        app:layout_constraintStart_toEndOf="@+id/cng_birth_tx"
-        app:layout_constraintTop_toTopOf="@+id/cng_birth_tx"
+        app:layout_constraintBottom_toBottomOf="@+id/birth_tx"
+        app:layout_constraintEnd_toStartOf="@+id/year_tx"
+        app:layout_constraintStart_toEndOf="@+id/birth_tx"
+        app:layout_constraintTop_toTopOf="@+id/birth_tx"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/cng_birth_tx"
+        android:id="@+id/birth_tx"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="생년월일"
-        app:layout_constraintBottom_toTopOf="@+id/cng_diaryname_tx"
-        app:layout_constraintEnd_toStartOf="@+id/cng_birth_year_tv"
+        app:layout_constraintBottom_toTopOf="@+id/diaryname_tx"
+        app:layout_constraintEnd_toStartOf="@+id/birth_year_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_tx" />
 
     <TextView
-        android:id="@+id/cng_diaryname_tx"
+        android:id="@+id/diaryname_tx"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="다이어리 이름"
-        app:layout_constraintBottom_toTopOf="@+id/cng_diaryfont_tx"
-        app:layout_constraintEnd_toStartOf="@+id/cng_diaryname_et"
+        app:layout_constraintBottom_toTopOf="@+id/diaryfont_tx"
+        app:layout_constraintEnd_toStartOf="@+id/diaryname_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cng_birth_tx" />
+        app:layout_constraintTop_toBottomOf="@+id/birth_tx" />
 
     <TextView
-        android:id="@+id/cng_diaryfont_tx"
+        android:id="@+id/diaryfont_tx"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="diaryfont_tx"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cng_diaryname_tx" />
+        app:layout_constraintTop_toBottomOf="@+id/diaryname_tx" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/diary"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="65dp"
-        android:layout_height="17dp"
-        android:text="사진 변경"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
 
     <TextView
         android:id="@+id/username_tv"
@@ -143,10 +131,10 @@
         android:gravity="top"
         android:hint="12"
         android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dafs_tx"
-        app:layout_constraintEnd_toStartOf="@+id/cng_username_tx3"
-        app:layout_constraintStart_toEndOf="@+id/dafs_tx"
-        app:layout_constraintTop_toTopOf="@+id/dafs_tx" />
+        app:layout_constraintBottom_toBottomOf="@+id/year_tx"
+        app:layout_constraintEnd_toStartOf="@+id/month_tx"
+        app:layout_constraintStart_toEndOf="@+id/year_tx"
+        app:layout_constraintTop_toTopOf="@+id/year_tx" />
 
     <EditText
         android:id="@+id/birth_day_tv"
@@ -155,30 +143,25 @@
         android:gravity="top"
         android:hint="31"
         android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cng_username_tx3"
-        app:layout_constraintEnd_toStartOf="@+id/cng_username_tx4"
-        app:layout_constraintStart_toEndOf="@+id/cng_username_tx3"
-        app:layout_constraintTop_toTopOf="@+id/cng_username_tx3" />
+        app:layout_constraintBottom_toBottomOf="@+id/month_tx"
+        app:layout_constraintEnd_toStartOf="@+id/day_tx"
+        app:layout_constraintStart_toEndOf="@+id/month_tx"
+        app:layout_constraintTop_toTopOf="@+id/month_tx" />
 
     <TextView
-        android:id="@+id/cng_diaryname_et"
+        android:id="@+id/diaryname_tv"
         android:layout_width="150dp"
         android:layout_height="0dp"
         android:font="@font/font1"
         android:gravity="top"
         android:hint="내용을 입력하세요."
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cng_diaryname_tx"
+        app:layout_constraintBottom_toBottomOf="@+id/diaryname_tx"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cng_diaryname_tx"
-        app:layout_constraintTop_toTopOf="@+id/cng_diaryname_tx" />
+        app:layout_constraintStart_toEndOf="@+id/diaryname_tx"
+        app:layout_constraintTop_toTopOf="@+id/diaryname_tx" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_guideline2"
@@ -188,7 +171,7 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <Button
-        android:id="@+id/profilesave_bt"
+        android:id="@+id/profileedit_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="수정하기"
