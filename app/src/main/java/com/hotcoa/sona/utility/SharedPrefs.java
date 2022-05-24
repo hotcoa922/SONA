@@ -78,4 +78,6 @@ public class SharedPrefs {
         SharedPreferences prefs = getPreferences(context);
         return prefs.getInt(key, DEFAULT_VALUE_INT);
     }
+
+
 }

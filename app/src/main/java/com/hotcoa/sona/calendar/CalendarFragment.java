@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.applikeysolutions.cosmocalendar.model.Day;
 import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener;
+
 import com.applikeysolutions.cosmocalendar.settings.appearance.ConnectedDayIconPosition;
 import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
 
@@ -52,7 +53,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
     private final Calendar calendar = Calendar.getInstance();
     private int resId;
     private final static HashMap<String, String> mName = new HashMap<>();
-    private static Set<String> sDate = new HashSet<>();
+    private static Set<String> sDate = new HashSet<>();;
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat df = new SimpleDateFormat("MM");
     private final Date curDate = new Date();
