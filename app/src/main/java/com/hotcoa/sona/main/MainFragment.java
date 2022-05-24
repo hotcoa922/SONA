@@ -42,18 +42,14 @@ public class MainFragment extends Fragment {
         writeDiaryFragment = new WriteDiaryFragment();
 
         diarybt.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 //getFragmentManager().beginTransaction().replace(R.layout.fragment_write_diary, writeDiaryFragment);
                 //getFragmentManager().beginTransaction().addToBackStack(null);
                 //getFragmentManager().beginTransaction().commit();
-                mainActivity.onChangeFragmentMainFragToWriteFrag(1);
-
+                mainActivity.onChangeFragment(MainActivity.Direction.WriteToMain);    //인자값을 넣어도 된다.
             }
         });
-
-
 
 
 

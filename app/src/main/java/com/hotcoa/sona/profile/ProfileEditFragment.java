@@ -49,7 +49,14 @@ public class ProfileEditFragment extends Fragment {
         save = (Button) rootView.findViewById(R.id.profilesave_bt);
 
 
-        sPf = getActivity().getSharedPreferences("profile_info", Context.MODE_PRIVATE);
+        sPf = getActivity().getSharedPreferences("profile_info", Context.MODE_PRIVATE); //이름 동일하게 해야함
+
+        //연하게 보여줌
+        nickName.setHint(sPf.getString("nickName","")); //첫번째 값은 저장해둔 값 불러오기, 두번째 값은 값이 없으면 보여줄 값
+        diaryName.setHint(sPf.getString("diaryName",""));
+        birthYear.setHint(sPf.getString("birthYear",""));
+        birthMonth.setHint(sPf.getString("birthMonth",""));
+        birthDay.setHint(sPf.getString("birthDay",""));
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

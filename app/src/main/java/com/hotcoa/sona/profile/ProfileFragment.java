@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.MainActivity;
 
 public class ProfileFragment extends Fragment {
 
@@ -29,6 +30,18 @@ public class ProfileFragment extends Fragment {
 
     SharedPreferences sPf;
 
+    MainActivity mainActivity;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity)getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mainActivity = null;
+    }
 
 
     @Override
@@ -43,11 +56,11 @@ public class ProfileFragment extends Fragment {
         birthMonth = (TextView) rootView.findViewById(R.id.birth_month_tv);
         birthDay = (TextView) rootView.findViewById(R.id.birth_day_tv);
 
-        edit = (Button) rootView.findViewById(R.id.profilesave_bt);
+        edit = (Button) rootView.findViewById(R.id.profileedit_bt);
 
 
 
-        sPf = getActivity().getSharedPreferences("profile_info",Context.MODE_PRIVATE);
+        sPf = getActivity().getSharedPreferences("profile_info",Context.MODE_PRIVATE);  //PREFS 파일 이름
 
         //이미지 추후 구현
         nickName.setText(sPf.getString("nickName","")); //첫번째 값은 저장해둔 값 불러오기, 두번째 값은 값이 없으면 보여줄 값
@@ -59,7 +72,7 @@ public class ProfileFragment extends Fragment {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mainActivity.onChangeFragment(MainActivity.Direction.ProfileToProfileEdit);
             }
         });
 

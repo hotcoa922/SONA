@@ -33,6 +33,7 @@ import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.contents.ContentsFragment;
 import com.hotcoa.sona.mindcheck.MindCheckFragment;
+import com.hotcoa.sona.profile.ProfileEditFragment;
 import com.hotcoa.sona.profile.ProfileFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
@@ -52,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
     MindCheckFragment mindcheck;
     ContentsFragment contents;
     ProfileFragment profile;
+    ProfileEditFragment profileedit;
     NavigationView navi;
+
 
     DrawerLayout drawerLayout;
 
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+
+    public enum Direction{MainToWrite, WriteToMain, ProfileToProfileEdit};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         mindcheck = new MindCheckFragment();
         contents = new ContentsFragment();
         profile = new ProfileFragment();
+        profileedit = new ProfileEditFragment();
 
         drawerLayout = findViewById(R.id.drawlayout_x);
 
@@ -233,13 +239,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onChangeFragmentMainFragToWriteFrag(int index){
-        if(index == 0){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();
-        }else if(index == 1){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
+    public void onChangeFragment(Direction d){
+
+        switch(d){
+            case MainToWrite:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();    //2번쨰 인자가 목적지
+                break;
+            case WriteToMain:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
+            case ProfileToProfileEdit:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profileedit).commit();
+            default:
+                break;
         }
     }
-
-
 }

@@ -28,6 +28,8 @@ public class HashTagFragment extends Fragment {
 
     SharedPreferences sPf;
 
+    int bt1Stat=0,bt2Stat=0,bt3Stat=0,bt4Stat=0,bt5Stat=0,bt6Stat=0,bt7Stat=0,bt8Stat=0;    //버튼의 상태용(일부로 int형 처리)
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -46,27 +48,31 @@ public class HashTagFragment extends Fragment {
 
         sPf = getActivity().getSharedPreferences("Hashtag_info", Context.MODE_PRIVATE);
 
-        int bt1Stat=0,bt2Stat=0,bt3Stat=0,bt4Stat=0,bt5Stat=0,bt6Stat=0,bt7Stat=0,bt8Stat=0;    //버튼의 상태용(일부로 int형 처리)
+
         int defStatTot=0;  //기본 감정 선택갯수 제한을 위한 것
 
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //버튼 활성화 비활성화 여부, 1은 활성화 0은 비활성
-                /*
                 if(bt1Stat==1) {
                     bt1Stat=0;
-                } else if(bt1Stat==0){
-                    bt1Stat=1;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
                 }
-                */
-
             }
         });
 
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(bt1Stat==1) {
+                    bt1Stat=0;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                }
 
             }
         });
@@ -74,6 +80,12 @@ public class HashTagFragment extends Fragment {
         bt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(bt1Stat==1) {
+                    bt1Stat=0;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                }
 
             }
         });
@@ -81,6 +93,12 @@ public class HashTagFragment extends Fragment {
         bt4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(bt1Stat==1) {
+                    bt1Stat=0;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                }
 
             }
         });
@@ -88,6 +106,12 @@ public class HashTagFragment extends Fragment {
         bt5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(bt1Stat==1) {
+                    bt1Stat=0;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                }
 
             }
         });
@@ -95,6 +119,12 @@ public class HashTagFragment extends Fragment {
         bt6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(bt1Stat==1) {
+                    bt1Stat=0;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                }
 
             }
         });
@@ -102,6 +132,12 @@ public class HashTagFragment extends Fragment {
         bt7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(bt1Stat==1) {
+                    bt1Stat=0;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                }
 
             }
         });
@@ -109,6 +145,12 @@ public class HashTagFragment extends Fragment {
         bt8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(bt1Stat==1) {
+                    bt1Stat=0;
+                } else if(bt1Stat==0) {
+                    bt1Stat = 1;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                }
 
             }
         });

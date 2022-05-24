@@ -99,6 +99,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         Log.d("calendar_log", "Disabled complete");
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
