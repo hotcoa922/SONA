@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
@@ -86,59 +87,45 @@ public class WriteDiaryFragment extends Fragment {
         datetv = (TextView)rootView.findViewById(R.id.today_tv);
         savebt = (Button)rootView.findViewById(R.id.save_bt);
         writetxt = (EditText)rootView.findViewById(R.id.writeit_et);
-        hashtag = (Button)rootView.findViewById(R.id.hashtag_bt);
 
         datetv.setText(getTime());
         SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
         SharedPreferences datePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         SharedPreferences saveDatePrefs = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
 
-        savebt.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
+        CalendarFragment calendarFragment = new CalendarFragment();
 
-                //setSaveText(saveData);
+        savebt.setOnClickListener(view -> {
+            try{
+                String android_id = idPrefs.getString("android_id","");
+                byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
 
-                //SAF활용
-                /*
-                try {
-                    StartRecord();
-                    putString(saveData);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Log.d("WriteDiary", "----------------------------");
+                Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
+                Log.d("WriteDiary_ByteArray", LEA_Crypto.toHexString(LEA_Crypto.toByteArray(writetxt.getText().toString())));
 
-                 */
-                try{
-                    String android_id = idPrefs.getString("android_id","");
-                    byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
+                saveData = LEA_Crypto.encode(writetxt.getText().toString(), pbkdf_id);
+                String date = datePrefs.getString("curDate", "");
+                Log.d("WriteDiary", "date : " + date);
+                saveFile(date, saveData);
 
-                    Log.d("WriteDiary", "----------------------------");
-                    Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
-                    Log.d("WriteDiary_ByteArray", LEA_Crypto.toHexString(LEA_Crypto.toByteArray(writetxt.getText().toString())));
+                //저장한 일기 날짜 확인을 위해 추가
+                SharedPreferences.Editor editor = saveDatePrefs.edit();
+                editor.putString("saveDate", date);
+                editor.apply();
 
-                    saveData = LEA_Crypto.encode(writetxt.getText().toString(), pbkdf_id);
-                    String date = datePrefs.getString("curDate", "");
-                    Log.d("WriteDiary", "date : " + date);
-                    saveFile(date, saveData);
+                Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
+                Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
 
-                    //저장한 일기 날짜 확인을 위해 추가
-                    SharedPreferences.Editor editor = saveDatePrefs.edit();
-                    editor.putString("saveDate", date);
-                    editor.apply();
+                //Log.d("WriteDiary_복호화 내용", LEA_Crypto.decode(saveData, pbkdf_id));
+                Log.d("WriteDiary", "----------------------------");
 
-                    Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
-                    Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
-
-                    //Log.d("WriteDiary_복호화 내용", LEA_Crypto.decode(saveData, pbkdf_id));
-                    Log.d("WriteDiary", "----------------------------");
-
-                }
-                catch (Exception e){
-                    Log.e("WriteDiary_PBKDF ERROR", e.toString());
-                    Log.d("WriteDiary", "----------------------------");
-                }
             }
+            catch (Exception e){
+                Log.e("WriteDiary_PBKDF ERROR", e.toString());
+                Log.d("WriteDiary", "----------------------------");
+            }
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, calendarFragment).commit();
         });
 
         hashtag.setOnClickListener(new View.OnClickListener() {
