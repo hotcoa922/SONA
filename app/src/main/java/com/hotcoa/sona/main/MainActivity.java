@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    public enum Direction{MainToWrite, WriteToMain, ProfileToProfileEdit,ProfileEditToProfile, WriteToHashTag};
+    public enum Direction{MainToWrite, WriteToMain, ProfileToProfileEdit,ProfileEditToProfile, WriteToHashTag, HashTagToWrite};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -258,6 +258,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case WriteToHashTag:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, hash).commit();
+                break;
+            case HashTagToWrite:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, write).commit();
                 break;
             default:
                 break;
