@@ -44,6 +44,8 @@ import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import org.bouncycastle.jcajce.provider.symmetric.OpenSSLPBKDF;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public enum Direction{
-        MainToWrite, WriteToMain,
-        ProfileToProfileEdit,ProfileEditToProfile,
-        WriteToHashTag, HashTagToWrite, WriteToCalendar,
-        CalendarToWrite, CalendarToCheck, CalendarToContents
+        WriteToMain,
+        MainToWrite, CalendarToWrite, CheckToWrite, HashTagToWrite,
+        ProfileToProfileEdit, ProfileEditToProfile,
+        WriteToHashTag,  WriteToCalendar,
+         CalendarToCheck, CalendarToContents
     };
 
     @Override
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         guide = new UserGuideFragment();
         calendar = new CalendarFragment();
         write = new WriteDiaryFragment();
+        check = new CheckDiaryFrament();
         mindcheck = new MindCheckFragment();
         contents = new ContentsFragment();
         profile = new ProfileFragment();
@@ -124,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,guide ).commit();
             }
             if(menuItem.getItemId() == R.id.writediary_navi){
+                set_curDate_Today();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write ).commit();
             }
             if(menuItem.getItemId() == R.id.mindcheck_navi){
@@ -245,6 +250,21 @@ public class MainActivity extends AppCompatActivity {
             Log.e("PBKDF ERROR", e.toString());
         }
     }
+    // [현재 날짜 저장하는 메소드]
+    public String set_curDate_Today() {
+        SharedPreferences prefs = this.getSharedPreferences("curDate", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        long time = System.currentTimeMillis();
+        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy년 MM월 dd일");
+        String nowDayTime = dayTime.format(new Date(time));
+        Log.d("now24", nowDayTime);
+
+        editor.putString("curDate", nowDayTime);
+        editor.apply();
+
+        return nowDayTime;
+    }
 
     public void onChangeFragment(Direction d){
         switch(d){
@@ -254,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
             case WriteToMain:
             case CalendarToWrite:
             case HashTagToWrite:
+            case CheckToWrite:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
                 break;
             case WriteToCalendar:
