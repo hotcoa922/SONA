@@ -1,28 +1,16 @@
 package com.hotcoa.sona.writediary;
 
-import static com.hotcoa.sona.leacrypto.LEA_Crypto.decode;
-
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,29 +20,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.hotcoa.sona.R;
-import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.prefs.Preferences;
 
 public class WriteDiaryFragment extends Fragment {
 
@@ -93,8 +72,6 @@ public class WriteDiaryFragment extends Fragment {
         SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
         SharedPreferences datePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         SharedPreferences saveDatePrefs = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
-
-        CalendarFragment calendarFragment = new CalendarFragment();
 
         savebt.setOnClickListener(view -> {
             try{
@@ -149,142 +126,9 @@ public class WriteDiaryFragment extends Fragment {
         return temp;
     }
 
-    /* 비상비상 이거 sdk30, 안드 11이후 안됨...
-    //텍스트 저장 메소드
-    public void setSaveText(String data){
-        try {
-            saveData = data; //TODO 변수에 값 대입
-            String textFileName = "/Data.txt";
-
-            //TODO 파일 생성
-            File storageDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/SaveStorage"); //TODO 저장 경로
-            //TODO 폴더 생성
-            if(!storageDir.exists()){ //TODO 폴더 없을 경우
-                storageDir.mkdir(); //TODO 폴더 생성
-            }
-
-            long now = System.currentTimeMillis(); //TODO 현재시간 받아오기
-            Date date = new Date(now); //TODO Date 객체 생성
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-            String nowTime = sdf.format(date);
-
-            //BufferedWriter buf = new BufferedWriter(new FileWriter(storageDir+textFileName, true)); //TODO 다중으로 내용적음 (TRUE)
-            BufferedWriter buf = new BufferedWriter(new FileWriter(storageDir+textFileName, false)); //TODO 한개 내용만 표시됨 (FALSE)
-            buf.append("["+nowTime+"]" + "\n["+saveData+"]"); //TODO 날짜 쓰기
-            buf.newLine(); //TODO 개행
-            buf.close();
-
-            saveStorage = String.valueOf(storageDir+textFileName); //TODO 경로 저장 /storage 시작
-            //saveStorage = String.valueOf(storageDir.toURI()+textFileName); //TODO 경로 저장 file:/ 시작
-            SharedPrefs.setString(getActivity(), "saveStorage", String.valueOf(saveStorage)); //TODO 프리퍼런스에 경로 저장한다
-            SharedPrefs.setString(getActivity(), "saveStorage", String.valueOf(saveStorage)); //TODO 프리퍼런스에 경로 저장한다
-
-            Log.d("---","---");
-            Log.w("//===========//","================================================");
-            Log.d("","\n"+"[A_TextFile > 저장한 텍스트 파일 확인 실시]");
-            Log.d("","\n"+"[경로 : "+String.valueOf(saveStorage)+"]");
-            Log.d("","\n"+"[제목 : "+String.valueOf(nowTime)+"]");
-            Log.d("","\n"+"[내용 : "+String.valueOf(saveData)+"]");
-            Log.w("//===========//","================================================");
-            Log.d("---","---");
-
-            Toast.makeText(getActivity(),"텍스트 파일이 저장되었습니다",Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e){
-            Toast.makeText(getActivity(),"텍스트 파일이 저장실패",Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-
-
-    }
-    */
-
-    //SAF 구현 -> 취소, 이유는 이미지 까지 하고 적합한 코드를 찾았으므로 mediastore 이용
-    /*
-    private int WRITE_REQUEST_CODE = 43;
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void StartRecord(){
-        try {
-            long now = System.currentTimeMillis();
-            Date date = new Date(now);
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfNow
-                    = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String formatDate = sdfNow.format(date);
-
-            String fileName = formatDate+".txt";
-
-            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("text/plain" );
-            intent.putExtra(Intent.EXTRA_TITLE,fileName);
-
-            startActivityForResult(intent, WRITE_REQUEST_CODE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private ParcelFileDescriptor pfd;
-    private FileOutputStream fileOutputStream;
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        if (requestCode == WRITE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Uri uri = data.getData();
-            addText(uri);
-        }
-    }
-
-    public void addText(Uri uri){
-        try {
-            pfd = this.getActivity().getContentResolver().openFileDescriptor(uri, "w"); //프래그먼트라 getActivity 붙여줌
-            fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void putString(String st) throws IOException {
-        if(fileOutputStream!=null) fileOutputStream.write(st.getBytes());
-    }
-
-    public void FinishRecord() throws IOException {
-        Toast.makeText(getActivity(), "저장되었습니다.", Toast.LENGTH_LONG).show();
-        fileOutputStream.close();
-        pfd.close();
-
-    }
-     */
-
     //MediaStore 이용
     //TODO [MediaStore 파일 저장 실시]
     private void saveFile(String fileName, String fileData) {
-        /*
-        String deleteCheck = SharedPrefs.getString(getActivity(), "saveScopeContentTxt");
-        if(deleteCheck != null && deleteCheck.length() > 0){ //TODO 이전에 저장된 파일이 있을 경우 지운다
-            try {
-                ContentResolver contentResolver = getActivity().getContentResolver();
-                contentResolver.delete(
-                        Uri.parse(SharedPrefs.getString(getActivity(), "saveScopeContentTxt")),
-                        null,
-                        null);
-                Log.d("---","---");
-                Log.d("//===========//","================================================");
-                Log.d("","\n"+"[A_ScopeTxt > saveFile() 메소드 : 이전에 저장된 파일 삭제 실시]");
-                Log.d("","\n"+"[콘텐츠 파일 경로 : "+String.valueOf(deleteCheck)+"]");
-                Log.d("","\n"+"[절대 파일 경로 : "+SharedPrefs.getString(getActivity(), "saveScopeAbsoluteTxt")+"]");
-                Log.d("//===========//","================================================");
-                Log.d("---","---");
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        */
         Log.d("---","---");
         Log.d("//===========//","================================================");
         Log.d("","\n"+"[A_ScopeTxt > saveFile() 메소드 : MediaStore 파일 저장 실시]");
@@ -351,7 +195,6 @@ public class WriteDiaryFragment extends Fragment {
         }
     }
 
-
     //TODO [MediaStore 파일 불러오기 실시]
     private void readFile(String path) {
         Log.d("---","---");
@@ -406,7 +249,6 @@ public class WriteDiaryFragment extends Fragment {
         }
     }
 
-
     //TODO [현재 시간 알아오는 메소드]
     public static String getNowTime24() {
         long time = System.currentTimeMillis();
@@ -415,8 +257,5 @@ public class WriteDiaryFragment extends Fragment {
         String str = dayTime.format(new Date(time));
         return "TX"+str; //TODO [TX는 text 의미]
     }
-
-
-
 }
 
