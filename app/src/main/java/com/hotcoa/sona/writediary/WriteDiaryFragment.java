@@ -126,7 +126,7 @@ public class WriteDiaryFragment extends Fragment {
                 Log.e("WriteDiary_PBKDF ERROR", e.toString());
                 Log.d("WriteDiary", "----------------------------");
             }
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, calendarFragment).commit();
+            mainActivity.onChangeFragment(MainActivity.Direction.WriteToCalendar);
         });
 
         hashtag.setOnClickListener(new View.OnClickListener() {

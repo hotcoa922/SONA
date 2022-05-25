@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     public enum Direction{
         MainToWrite, WriteToMain,
         ProfileToProfileEdit,ProfileEditToProfile,
-        WriteToHashTag, HashTagToWrite,
+        WriteToHashTag, HashTagToWrite, WriteToCalendar,
         CalendarToWrite, CalendarToCheck, CalendarToContents
     };
 
@@ -255,6 +255,9 @@ public class MainActivity extends AppCompatActivity {
             case CalendarToWrite:
             case HashTagToWrite:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
+                break;
+            case WriteToCalendar:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, calendar).commit();
                 break;
             case ProfileToProfileEdit:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profileedit).commit();

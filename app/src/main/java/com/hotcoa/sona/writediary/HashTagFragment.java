@@ -219,7 +219,7 @@ public class HashTagFragment extends Fragment {
                 if(totCustBtStat>3){
                     Toast.makeText(getActivity(), "사용자 정의 해쉬태그는 최대 3개까지 선택 가능합니다!", Toast.LENGTH_SHORT).show();
                 }
-                if(totCustBtStat<3 && totDfBtStat<3){
+                if(totCustBtStat<=3 && totDfBtStat<=3){
                     mainActivity.onChangeFragment(MainActivity.Direction.HashTagToWrite);
                 }
             }
