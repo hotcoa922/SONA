@@ -243,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onChangeFragment(Direction d){
-
         switch(d){
             case MainToWrite:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();    //2번쨰 인자가 목적지
@@ -259,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case WriteToHashTag:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, hash).commit();
+                break;
             default:
                 break;
         }

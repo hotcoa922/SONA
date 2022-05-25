@@ -87,6 +87,7 @@ public class WriteDiaryFragment extends Fragment {
         datetv = (TextView)rootView.findViewById(R.id.today_tv);
         savebt = (Button)rootView.findViewById(R.id.save_bt);
         writetxt = (EditText)rootView.findViewById(R.id.writeit_et);
+        hashtag = (Button)rootView.findViewById(R.id.hashtag_bt);
 
         datetv.setText(getTime());
         SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
