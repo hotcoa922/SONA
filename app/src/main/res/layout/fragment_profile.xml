@@ -56,7 +56,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font1"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
         android:text="이름"
         app:layout_constraintBottom_toTopOf="@+id/birth_tx"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
@@ -68,7 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font1"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
         android:text="생년월일"
         app:layout_constraintBottom_toTopOf="@+id/diaryname_tx"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
@@ -80,7 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font1"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
         android:text="다이어리\n  이름"
         app:layout_constraintBottom_toTopOf="@+id/diaryfont_tx"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
@@ -104,7 +107,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:fontFamily="@font/font1"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
         android:hint="김소나"
         app:layout_constraintBottom_toBottomOf="@+id/username_tx"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +121,8 @@
         android:layout_height="wrap_content"
         android:hint="소나 다이어리"
         android:fontFamily="@font/font1"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/diaryname_tx"
         app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +172,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font1"
-            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
             android:hint="2022" />
 
         <TextView
@@ -175,7 +181,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font1"
-            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
             android:text="년" />
     </LinearLayout>
 
@@ -194,7 +201,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font1"
-            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
             android:hint="12" />
 
         <TextView
@@ -202,7 +210,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font1"
-            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
             android:text="월" />
     </LinearLayout>
 
@@ -221,15 +230,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="top"
-            android:hint="31"
-            android:textSize="15dp" />
+            android:fontFamily="@font/font1"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:hint="31" />
 
         <TextView
             android:id="@+id/day_tx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font1"
-            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
             android:text="일" />
     </LinearLayout>
 
