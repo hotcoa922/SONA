@@ -1,7 +1,6 @@
 package com.hotcoa.sona.main;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,8 +12,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
@@ -23,15 +20,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
-import com.hotcoa.sona.checkdiary.CheckDiaryFrament;
+import com.hotcoa.sona.checkdiary.CheckDiaryFragment;
 import com.hotcoa.sona.contents.ContentsFragment;
 import com.hotcoa.sona.mindcheck.MindCheckFragment;
 import com.hotcoa.sona.profile.ProfileEditFragment;
@@ -41,9 +36,6 @@ import com.hotcoa.sona.writediary.HashTagFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 
-import org.bouncycastle.jcajce.provider.symmetric.OpenSSLPBKDF;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -54,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     UserGuideFragment guide;
     CalendarFragment calendar;
     WriteDiaryFragment write;
-    CheckDiaryFrament check;
+    CheckDiaryFragment check;
     MindCheckFragment mindcheck;
     ContentsFragment contents;
     ProfileFragment profile;
@@ -106,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         guide = new UserGuideFragment();
         calendar = new CalendarFragment();
         write = new WriteDiaryFragment();
-        check = new CheckDiaryFrament();
+        check = new CheckDiaryFragment();
         mindcheck = new MindCheckFragment();
         contents = new ContentsFragment();
         profile = new ProfileFragment();

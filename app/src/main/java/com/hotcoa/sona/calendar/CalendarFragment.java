@@ -24,10 +24,8 @@ import com.applikeysolutions.cosmocalendar.settings.appearance.ConnectedDayIconP
 import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
 
 import com.hotcoa.sona.R;
-import com.hotcoa.sona.contents.ContentsFragment;
 import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
-import com.hotcoa.sona.writediary.WriteDiaryFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,7 +38,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -58,8 +55,6 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat df = new SimpleDateFormat("MM");
     private final Date curDate = new Date();
-    private WriteDiaryFragment writeDiaryFragment;
-    private ContentsFragment contentsFragment;
 
     MainActivity mainActivity;
     @Override
@@ -113,7 +108,6 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         Log.d("calendar_log", "Disabled complete");
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
@@ -131,8 +125,6 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         sDate.add(saveDatePrefs.getString("saveDate", "1999년 12월 17일"));
 
         SharedPrefs.setInt(rootView.getContext(), "screenshotCounter", 1);
-        writeDiaryFragment = new WriteDiaryFragment();
-        contentsFragment = new ContentsFragment();
 
         String curMonth = df.format(curDate);
         calendarView = rootView.findViewById(R.id.cosmo_calendar);
@@ -170,9 +162,12 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         Button button_writeDiary = rootView.findViewById(R.id.button_write);
         Button button_contents = rootView.findViewById(R.id.button_contents);
         Button button_share = rootView.findViewById(R.id.button_share);
+        Button button_checkDairy = rootView.findViewById(R.id.button_check);
+
         onWriteClick(button_writeDiary);
         onContentsClick(button_contents);
         onShareClick(button_share);
+        onCheckClick(button_checkDairy);
         return rootView;
     }
 
@@ -228,6 +223,19 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             }
         });
     }
+
+        private void onCheckClick(Button checkButton) {
+            checkButton.setOnClickListener(view -> {
+                if(calendarView.getSelectedDates().size() <= 0) {
+                    alertDialog();
+                }
+                else {
+                    daySave();
+                    mainActivity.onChangeFragment(MainActivity.Direction.CalendarToCheck);
+                }
+            });
+        }
+
 
     private void daySave() {
         List<Day> day = calendarView.getSelectedDays();
