@@ -25,6 +25,7 @@ import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.Connect
 
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.contents.ContentsFragment;
+import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
 
@@ -59,6 +60,19 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
     private final Date curDate = new Date();
     private WriteDiaryFragment writeDiaryFragment;
     private ContentsFragment contentsFragment;
+
+    MainActivity mainActivity;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity)getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mainActivity = null;
+    }
 
     public CalendarFragment() {
         disabledTimeSetting();
@@ -199,7 +213,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             if(calendarView.getSelectedDates().size() <= 0) {
                 alertDialog();
             }
-            else getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, contentsFragment).commit();
+            else mainActivity.onChangeFragment(MainActivity.Direction.CalendarToContents);
         });
     }
 
@@ -210,7 +224,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             }
             else {
                 daySave();
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_x, writeDiaryFragment).commit();
+                mainActivity.onChangeFragment(MainActivity.Direction.CalendarToWrite);
             }
         });
     }

@@ -31,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
+import com.hotcoa.sona.checkdiary.CheckDiaryFrament;
 import com.hotcoa.sona.contents.ContentsFragment;
 import com.hotcoa.sona.mindcheck.MindCheckFragment;
 import com.hotcoa.sona.profile.ProfileEditFragment;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     UserGuideFragment guide;
     CalendarFragment calendar;
     WriteDiaryFragment write;
+    CheckDiaryFrament check;
     MindCheckFragment mindcheck;
     ContentsFragment contents;
     ProfileFragment profile;
@@ -70,7 +72,12 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    public enum Direction{MainToWrite, WriteToMain, ProfileToProfileEdit,ProfileEditToProfile, WriteToHashTag, HashTagToWrite};
+    public enum Direction{
+        MainToWrite, WriteToMain,
+        ProfileToProfileEdit,ProfileEditToProfile,
+        WriteToHashTag, HashTagToWrite,
+        CalendarToWrite, CalendarToCheck, CalendarToContents
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
 
         //네비창 열면 연 다음 눌렀을 때 처리하는 것
         navi.setNavigationItemSelectedListener(menuItem->{
-
             if(menuItem.getItemId() == R.id.appsetting_navi){
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, appset).commit();
             }
@@ -129,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
             if(menuItem.getItemId() == R.id.profile_navi){
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profile ).commit();
             }
-
-
 
             drawerLayout.closeDrawer(GravityCompat.START);  //방향을 지정해 주는 것
 
@@ -248,6 +252,8 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();    //2번쨰 인자가 목적지
                 break;
             case WriteToMain:
+            case CalendarToWrite:
+            case HashTagToWrite:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
                 break;
             case ProfileToProfileEdit:
@@ -259,9 +265,13 @@ public class MainActivity extends AppCompatActivity {
             case WriteToHashTag:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, hash).commit();
                 break;
-            case HashTagToWrite:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, write).commit();
+            case CalendarToCheck:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, check).commit();
                 break;
+            case CalendarToContents:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, contents).commit();
+                break;
+
             default:
                 break;
         }
