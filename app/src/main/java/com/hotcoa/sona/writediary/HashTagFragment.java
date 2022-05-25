@@ -91,6 +91,7 @@ public class HashTagFragment extends Fragment {
                 save.setEnabled(true);
             }
         }, 1000);
+        //.
 
 
         bt1.setOnClickListener(new View.OnClickListener() {
