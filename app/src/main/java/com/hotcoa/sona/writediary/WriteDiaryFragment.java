@@ -60,10 +60,24 @@ public class WriteDiaryFragment extends Fragment {
     TextView datetv;
     Button savebt;
     EditText writetxt;
+    Button hashtag;
 
     //얘네도 일단 지워...
     String saveData = ""; //저장된 파일 내용
     //String saveStorage = ""; //저장된 파일 경로
+
+    MainActivity mainActivity;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity)getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mainActivity = null;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +86,7 @@ public class WriteDiaryFragment extends Fragment {
         datetv = (TextView)rootView.findViewById(R.id.today_tv);
         savebt = (Button)rootView.findViewById(R.id.save_bt);
         writetxt = (EditText)rootView.findViewById(R.id.writeit_et);
+        hashtag = (Button)rootView.findViewById(R.id.hashtag_bt);
 
         datetv.setText(getTime());
         SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
@@ -123,6 +138,13 @@ public class WriteDiaryFragment extends Fragment {
                     Log.e("WriteDiary_PBKDF ERROR", e.toString());
                     Log.d("WriteDiary", "----------------------------");
                 }
+            }
+        });
+
+        hashtag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.onChangeFragment(MainActivity.Direction.WriteToHashTag);
             }
         });
 

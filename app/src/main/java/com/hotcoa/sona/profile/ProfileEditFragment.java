@@ -2,6 +2,7 @@ package com.hotcoa.sona.profile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hotcoa.sona.R;
-
+import com.hotcoa.sona.main.MainActivity;
 
 
 public class ProfileEditFragment extends Fragment {
@@ -33,6 +34,19 @@ public class ProfileEditFragment extends Fragment {
 
     SharedPreferences sPf;
 
+    MainActivity mainActivity;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity)getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mainActivity = null;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +59,12 @@ public class ProfileEditFragment extends Fragment {
         birthYear = (EditText) rootView.findViewById(R.id.cng_birth_year_et);
         birthMonth = (EditText) rootView.findViewById(R.id.cng_birth_month_et);
         birthDay = (EditText) rootView.findViewById(R.id.cng_birth_day_et);
+
+        nickName.setTypeface(Typeface.DEFAULT);
+        diaryName.setTypeface(Typeface.DEFAULT);
+        birthYear.setTypeface(Typeface.DEFAULT);
+        birthMonth.setTypeface(Typeface.DEFAULT);
+        birthDay.setTypeface(Typeface.DEFAULT);
 
         save = (Button) rootView.findViewById(R.id.profilesave_bt);
 
@@ -69,6 +89,8 @@ public class ProfileEditFragment extends Fragment {
                 editor.putString("birthDay",birthDay.getText().toString());
                 editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
                 Toast.makeText(getActivity(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                mainActivity.onChangeFragment(MainActivity.Direction.ProfileEditToProfile);
+
             }
         });
 

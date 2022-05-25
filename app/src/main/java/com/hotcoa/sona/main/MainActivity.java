@@ -36,6 +36,7 @@ import com.hotcoa.sona.mindcheck.MindCheckFragment;
 import com.hotcoa.sona.profile.ProfileEditFragment;
 import com.hotcoa.sona.profile.ProfileFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
+import com.hotcoa.sona.writediary.HashTagFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     ProfileFragment profile;
     ProfileEditFragment profileedit;
     NavigationView navi;
+    HashTagFragment hash;
 
 
     DrawerLayout drawerLayout;
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    public enum Direction{MainToWrite, WriteToMain, ProfileToProfileEdit};
+    public enum Direction{MainToWrite, WriteToMain, ProfileToProfileEdit,ProfileEditToProfile, WriteToHashTag};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         contents = new ContentsFragment();
         profile = new ProfileFragment();
         profileedit = new ProfileEditFragment();
+        hash = new HashTagFragment();
 
         drawerLayout = findViewById(R.id.drawlayout_x);
 
@@ -247,8 +250,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case WriteToMain:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
+                break;
             case ProfileToProfileEdit:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profileedit).commit();
+                break;
+            case ProfileEditToProfile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profile).commit();
+                break;
+            case WriteToHashTag:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, hash).commit();
             default:
                 break;
         }
