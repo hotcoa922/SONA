@@ -52,8 +52,7 @@ public class HashTagFragment extends Fragment {
     int bt7Stat=0;
     int bt8Stat=0;    //버튼의 상태용(일부로 int형 처리)
 
-    int totDfBtStat=bt1Stat+bt2Stat+bt3Stat+bt8Stat+bt5Stat+bt6Stat+bt7Stat+bt8Stat;  //총합 3이하
-    int totCustBtStat=0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +69,8 @@ public class HashTagFragment extends Fragment {
         bt6 = (Button) rootView.findViewById(R.id.df_hstag_bt6);
         bt7 = (Button) rootView.findViewById(R.id.df_hstag_bt7);
         bt8 = (Button) rootView.findViewById(R.id.df_hstag_bt8);
+
+        save = (Button)rootView.findViewById(R.id.hashtag_save_bt) ;
 
         sPf = getActivity().getSharedPreferences("Hashtag_info", Context.MODE_PRIVATE);
 
@@ -100,6 +101,7 @@ public class HashTagFragment extends Fragment {
                 //버튼 활성화 비활성화 여부, 1은 활성화 0은 비활성
                 if(bt1Stat==1) {
                     bt1Stat=0;
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt1Stat==0) {
                     bt1Stat = 1;
                     bt1.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -112,6 +114,7 @@ public class HashTagFragment extends Fragment {
             public void onClick(View view) {
                 if(bt2Stat==1) {
                     bt2Stat=0;
+                    bt2.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt2Stat==0) {
                     bt2Stat = 1;
                     bt2.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -125,6 +128,7 @@ public class HashTagFragment extends Fragment {
             public void onClick(View view) {
                 if(bt3Stat==1) {
                     bt3Stat=0;
+                    bt3.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt3Stat==0) {
                     bt3Stat = 1;
                     bt3.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -138,6 +142,7 @@ public class HashTagFragment extends Fragment {
             public void onClick(View view) {
                 if(bt4Stat==1) {
                     bt4Stat=0;
+                    bt4.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt4Stat==0) {
                     bt4Stat = 1;
                     bt4.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -151,6 +156,7 @@ public class HashTagFragment extends Fragment {
             public void onClick(View view) {
                 if(bt5Stat==1) {
                     bt5Stat=0;
+                    bt5.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt5Stat==0) {
                     bt5Stat = 1;
                     bt5.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -164,6 +170,7 @@ public class HashTagFragment extends Fragment {
             public void onClick(View view) {
                 if(bt6Stat==1) {
                     bt6Stat=0;
+                    bt6.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt6Stat==0) {
                     bt6Stat = 1;
                     bt6.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -177,6 +184,7 @@ public class HashTagFragment extends Fragment {
             public void onClick(View view) {
                 if(bt7Stat==1) {
                     bt7Stat=0;
+                    bt7.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt7Stat==0) {
                     bt7Stat = 1;
                     bt7.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -190,6 +198,7 @@ public class HashTagFragment extends Fragment {
             public void onClick(View view) {
                 if(bt8Stat==1) {
                     bt8Stat=0;
+                    bt8.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt8Stat==0) {
                     bt8Stat = 1;
                     bt8.setBackgroundColor(requireContext().getColor(R.color.red));
@@ -201,8 +210,11 @@ public class HashTagFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int totDfBtStat=bt1Stat+bt2Stat+bt3Stat+bt4Stat+bt5Stat+bt6Stat+bt7Stat+bt8Stat;  //총합 3이하
+                int totCustBtStat=0;
+
                 if(totDfBtStat>3){
-                    Toast.makeText(getActivity(), "기본 해쉬태그는 최대 3개까지 선택 가능합니다!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "기본 해쉬태그는 최대 3개까지 선택 가능합니다! 현재 "+totDfBtStat+"개 선택", Toast.LENGTH_SHORT).show();
                 }
                 if(totCustBtStat>3){
                     Toast.makeText(getActivity(), "사용자 정의 해쉬태그는 최대 3개까지 선택 가능합니다!", Toast.LENGTH_SHORT).show();
