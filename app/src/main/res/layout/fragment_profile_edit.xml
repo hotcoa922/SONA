@@ -69,8 +69,10 @@
         android:id="@+id/cng_diaryfont_tx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="푸시알림"
         android:fontFamily="@font/font1"
-        android:text="diaryfont_tx"
+        android:textStyle="bold"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,8 +103,6 @@
         android:id="@+id/cng_username_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:gravity="center"
         android:fontFamily="@font/font1"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -116,8 +116,6 @@
         android:id="@+id/cng_diaryname_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:gravity="top"
         android:textStyle="bold"
         android:textSize="30sp"
         android:fontFamily="@font/font1"
@@ -196,8 +194,6 @@
             android:id="@+id/cng_birth_year_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:gravity="top"
             android:hint="2022"
             android:fontFamily="@font/font1"
             android:textStyle="bold"
@@ -227,12 +223,10 @@
             android:id="@+id/cng_birth_month_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="top"
             android:fontFamily="@font/font1"
             android:textStyle="bold"
             android:textSize="30sp"
-            android:hint="12"
-            android:background="@null" />
+            android:hint="12" />
 
         <TextView
             android:id="@+id/cng_username_tx3"
@@ -258,12 +252,10 @@
             android:id="@+id/cng_birth_day_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="top"
             android:hint="31"
             android:fontFamily="@font/font1"
             android:textStyle="bold"
-            android:textSize="30sp"
-            android:background="@null" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/cng_day_tx"
