@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public enum Direction{
-        WriteToMain,
+        WriteToMain, CalendarToMain, CheckToMain,
         MainToWrite, CalendarToWrite, CheckToWrite, HashTagToWrite,
         ProfileToProfileEdit, ProfileEditToProfile,
         WriteToHashTag,  WriteToCalendar,
@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
             if(menuItem.getItemId() == R.id.writediary_navi){
                 set_curDate_Today();
+                pathSave();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write ).commit();
             }
             if(menuItem.getItemId() == R.id.mindcheck_navi){
@@ -257,13 +258,25 @@ public class MainActivity extends AppCompatActivity {
 
         return nowDayTime;
     }
+    private void pathSave() {
+        SharedPreferences pathPrefs = this.getSharedPreferences("curDateTxtPath", Context.MODE_PRIVATE);
+        SharedPreferences datePrefs = this.getSharedPreferences("curDate", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = pathPrefs.edit();
+        String curDate = datePrefs.getString("curDate","");
+        String diary_path = "/storage/emulated/0/SONA/text/" + curDate + ".txt";
+        editor.putString("curDateTxtPath", diary_path);
+        editor.apply();
+    }
 
     public void onChangeFragment(Direction d){
         switch(d){
-            case MainToWrite:
+            case WriteToMain:
+            case CalendarToMain:
+            case CheckToMain:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();    //2번쨰 인자가 목적지
                 break;
-            case WriteToMain:
+            case MainToWrite:
             case CalendarToWrite:
             case HashTagToWrite:
             case CheckToWrite:

@@ -223,12 +223,11 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
                 }
                 else {
                     daySave();
+                    pathSave();
                     mainActivity.onChangeFragment(MainActivity.Direction.CalendarToCheck);
                 }
             });
         }
-
-
     private void daySave() {
         List<Day> day = calendarView.getSelectedDays();
         String date = day.get(0).getCalendar().get(Calendar.YEAR) + "년 " + (day.get(0).getCalendar().get(Calendar.MONTH) + 1) + "월 " + day.get(0).getDayNumber() + "일";

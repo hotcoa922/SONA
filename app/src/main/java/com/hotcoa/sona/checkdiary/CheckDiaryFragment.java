@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.applikeysolutions.cosmocalendar.model.Day;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.MainActivity;
@@ -26,8 +27,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 
 public class CheckDiaryFragment extends Fragment {
     MainActivity mainActivity;
@@ -56,7 +58,7 @@ public class CheckDiaryFragment extends Fragment {
         datetv.setText(getTime());
         String diary_path = "/storage/emulated/0/SONA/text/" + getTime() + ".txt";
         String saveData = readFile(diary_path);
-        Log.d("showtv 경로",diary_path);
+        Log.d("showtv 경로", diary_path);
         Log.d("showtv 내용", readFile(diary_path));
 
         SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
@@ -72,8 +74,6 @@ public class CheckDiaryFragment extends Fragment {
             e.printStackTrace();
             Log.d("checkDiary", e.toString());
         }
-
-
         onEditClick(editbt);
         onDeleteClick(deletebt);
         return rootView;
@@ -81,6 +81,7 @@ public class CheckDiaryFragment extends Fragment {
 
     private void onEditClick(Button editButton) {
         editButton.setOnClickListener(view -> {
+            pathSave();
             mainActivity.onChangeFragment(MainActivity.Direction.CheckToWrite);
         });
     }
@@ -96,6 +97,16 @@ public class CheckDiaryFragment extends Fragment {
         shareButton.setOnClickListener(view -> {
             // 일기 내용 공유
         });
+    }
+    private void pathSave() {
+        SharedPreferences pathPrefs = getActivity().getSharedPreferences("curDateTxtPath", Context.MODE_PRIVATE);
+        SharedPreferences datePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = pathPrefs.edit();
+        String curDate = datePrefs.getString("curDate","");
+        String diary_path = "/storage/emulated/0/SONA/text/" + curDate + ".txt";
+        editor.putString("curDateTxtPath", diary_path);
+        editor.apply();
     }
     private String getTime() {
         long now = System.currentTimeMillis();

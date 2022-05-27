@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,16 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WriteDiaryFragment extends Fragment {
-
-    TextView datetv;
-    Button savebt;
-    EditText writetxt;
-    Button hashtag;
-
-    //얘네도 일단 지워...
-    String saveData = ""; //저장된 파일 내용
-    //String saveStorage = ""; //저장된 파일 경로
-
     MainActivity mainActivity;
     @Override
     public void onAttach(Context context) {
@@ -63,12 +55,10 @@ public class WriteDiaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_write_diary, container, false);
 
-        datetv      = rootView.findViewById(R.id.today_tv);
-        savebt      = rootView.findViewById(R.id.save_bt);
-        writetxt    = rootView.findViewById(R.id.writeit_et);
-        hashtag     = rootView.findViewById(R.id.hashtag_bt);
-
-        datetv.setText(getTime());
+        TextView datetv      = rootView.findViewById(R.id.today_tv);
+        Button savebt      = rootView.findViewById(R.id.save_bt);
+        EditText writetxt    = rootView.findViewById(R.id.writeit_et);
+        Button hashtag     = rootView.findViewById(R.id.hashtag_bt);
 
         SharedPreferences idPrefs           = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
         SharedPreferences datePrefs         = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
@@ -83,7 +73,7 @@ public class WriteDiaryFragment extends Fragment {
         String curDateTxt = readFile(curDateTxtPath);
         Log.d("writeDiary", "curDateTxt : " + curDateTxt);
 
-        String decrypted = "";
+        String decrypted = "1";
         try {
             String android_id = idPrefs.getString("android_id", "");
             byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
@@ -102,7 +92,11 @@ public class WriteDiaryFragment extends Fragment {
                 Log.d("writeDiary", e.toString());
             }
         }
-        writetxt.setText(decrypted);
+        datetv.setText(getTime());
+        writetxt.setText(null);
+        String finalDecrypted = decrypted;
+        writetxt.setText(finalDecrypted);
+        Log.d("writeDiary","curDate_diarytxt : " + decrypted);
 
         savebt.setOnClickListener(view -> {
             try{
@@ -113,7 +107,7 @@ public class WriteDiaryFragment extends Fragment {
                 Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
                 Log.d("WriteDiary_ByteArray", LEA_Crypto.toHexString(LEA_Crypto.toByteArray(writetxt.getText().toString())));
 
-                saveData = LEA_Crypto.encode(writetxt.getText().toString(), pbkdf_id);
+                String saveData = LEA_Crypto.encode(writetxt.getText().toString(), pbkdf_id);
                 String date = datePrefs.getString("curDate", "");
                 Log.d("WriteDiary", "date : " + date);
                 saveFile(date, saveData);
@@ -133,10 +127,6 @@ public class WriteDiaryFragment extends Fragment {
                 Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
 
                 //Log.d("WriteDiary_복호화 내용", LEA_Crypto.decode(saveData, pbkdf_id));
-                Log.d("WriteDiary", "----------------------------");
-
-                writetxt.setText(null); //일기 남아 있는거 제거 코드~
-
             }
             catch (Exception e){
                 Log.e("WriteDiary_PBKDF ERROR", e.toString());
@@ -284,15 +274,6 @@ public class WriteDiaryFragment extends Fragment {
             e.printStackTrace();
         }
         return "";
-    }
-
-    //TODO [현재 시간 알아오는 메소드]
-    public static String getNowTime24() {
-        long time = System.currentTimeMillis();
-        //SimpleDateFormat dayTime = new SimpleDateFormat("hh:mm:ss");
-        SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMdd");
-        String str = dayTime.format(new Date(time));
-        return "TX"+str; //TODO [TX는 text 의미]
     }
 }
 
