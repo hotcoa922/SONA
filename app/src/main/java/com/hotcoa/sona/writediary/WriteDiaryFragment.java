@@ -63,16 +63,16 @@ public class WriteDiaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_write_diary, container, false);
 
-        datetv = (TextView)rootView.findViewById(R.id.today_tv);
-        savebt = (Button)rootView.findViewById(R.id.save_bt);
-        writetxt = (EditText)rootView.findViewById(R.id.writeit_et);
-        hashtag = (Button)rootView.findViewById(R.id.hashtag_bt);
+        datetv      = rootView.findViewById(R.id.today_tv);
+        savebt      = rootView.findViewById(R.id.save_bt);
+        writetxt    = rootView.findViewById(R.id.writeit_et);
+        hashtag     = rootView.findViewById(R.id.hashtag_bt);
 
         datetv.setText(getTime());
-        SharedPreferences idPrefs = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
-        SharedPreferences datePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
-        SharedPreferences saveDatePrefs = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
-        SharedPreferences diaryCountPrefs = getActivity().getSharedPreferences("diaryCounter", Context.MODE_PRIVATE);
+        SharedPreferences idPrefs           = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
+        SharedPreferences datePrefs         = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+        SharedPreferences saveDatePrefs     = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
+        SharedPreferences diaryCountPrefs   = getActivity().getSharedPreferences("diaryCounter", Context.MODE_PRIVATE);
 
         savebt.setOnClickListener(view -> {
             try{
@@ -111,6 +111,7 @@ public class WriteDiaryFragment extends Fragment {
                 Log.d("WriteDiary", "----------------------------");
             }
             mainActivity.onChangeFragment(MainActivity.Direction.WriteToCalendar);
+            writetxt.setText(null);
         });
 
         hashtag.setOnClickListener(new View.OnClickListener() {
