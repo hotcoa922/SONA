@@ -63,15 +63,14 @@ public class CheckDiaryFragment extends Fragment {
         String android_id = idPrefs.getString("android_id","");
         try {
             byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
-            Log.d("checkDiary", "pbkdf_id = " + pbkdf_id.toString());
+            Log.d("checkDiary", pbkdf_id.toString());
 
             String decrypted = LEA_Crypto.decode(saveData, pbkdf_id);
             Log.d("checkDiary", decrypted);
-
             showtv.setText(decrypted);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("lea error", e.toString());
+            Log.d("checkDiary", e.toString());
         }
 
 

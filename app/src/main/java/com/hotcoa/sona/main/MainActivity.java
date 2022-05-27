@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
 
         long time = System.currentTimeMillis();
-        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy년 MM월 dd일");
+        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy년 M월 dd일");
         String nowDayTime = dayTime.format(new Date(time));
         Log.d("now24", nowDayTime);
 

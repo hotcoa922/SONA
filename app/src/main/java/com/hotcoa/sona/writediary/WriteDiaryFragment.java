@@ -69,10 +69,30 @@ public class WriteDiaryFragment extends Fragment {
         hashtag     = rootView.findViewById(R.id.hashtag_bt);
 
         datetv.setText(getTime());
+
         SharedPreferences idPrefs           = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
         SharedPreferences datePrefs         = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         SharedPreferences saveDatePrefs     = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
         SharedPreferences diaryCountPrefs   = getActivity().getSharedPreferences("diaryCounter", Context.MODE_PRIVATE);
+        SharedPreferences pathPrefs         = getActivity().getSharedPreferences("curDateTxtPath", Context.MODE_PRIVATE);
+
+        String curDateTxtPath = pathPrefs.getString("curDateTxtPath", "");
+        Log.d("writeDiary", curDateTxtPath);
+
+        String curDateTxt = readFile(curDateTxtPath);
+        Log.d("writeDiary", curDateTxt);
+
+        try {
+            String android_id = idPrefs.getString("android_id", "");
+            byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
+            String decrypted = LEA_Crypto.decode(curDateTxt, pbkdf_id);
+
+
+            writetxt.setText(decrypted);
+        }
+        catch(Exception e){
+            Log.d("writeDiary", e.toString());
+        }
 
         savebt.setOnClickListener(view -> {
             try{
@@ -204,7 +224,7 @@ public class WriteDiaryFragment extends Fragment {
     }
 
     //TODO [MediaStore 파일 불러오기 실시]
-    private void readFile(String path) {
+    private String readFile(String path) {
         Log.d("---","---");
         Log.d("//===========//","================================================");
         Log.d("","\n"+"[A_ScopeTxt > readFile() 메소드 : MediaStore 파일 불러오기 실시]");
@@ -227,7 +247,7 @@ public class WriteDiaryFragment extends Fragment {
             Log.d("","\n"+"[원인 : "+String.valueOf("Cursor 객체 null")+"]");
             Log.e("//===========//","================================================");
             Log.d("---","---");
-            return;
+            return "";
         }
 
         //TODO [텍스트 파일 불러오기 실시]
@@ -238,23 +258,19 @@ public class WriteDiaryFragment extends Fragment {
             while((line=buf.readLine())!=null){
                 Log.d("---","---");
                 Log.w("//===========//","================================================");
-                Log.d("","\n"+"[A_ScopeTxt > readFile() 메소드 : MediaStore 파일 불러오기 성공]");
-                Log.d("","\n"+"[절대 파일 경로 : "+String.valueOf(absoluteUrl)+"]");
-                Log.d("","\n"+"[절대 파일 내용 : "+String.valueOf(line)+"]");
+                Log.d("showtv_내용","\n"+"[A_ScopeTxt > readFile() 메소드 : MediaStore 파일 불러오기 성공]");
+                Log.d("showtv_경로","\n"+"[절대 파일 경로 : "+String.valueOf(absoluteUrl)+"]");
+                Log.d("showtv_내용","\n"+"[절대 파일 내용 : "+String.valueOf(line)+"]");
                 Log.w("//===========//","================================================");
                 Log.d("---","---");
-
-                //TODO [UI 동작]
-                //save_content_edit.setText("");
-                //save_content_edit.append(line);
-                //save_content_edit.append("\n");
+                return String.valueOf(line);
             }
-            buf.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "";
     }
 
     //TODO [현재 시간 알아오는 메소드]

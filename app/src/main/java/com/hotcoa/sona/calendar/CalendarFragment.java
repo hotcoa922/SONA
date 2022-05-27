@@ -210,6 +210,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             }
             else {
                 daySave();
+                pathSave();
                 mainActivity.onChangeFragment(MainActivity.Direction.CalendarToWrite);
             }
         });
@@ -235,6 +236,16 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         SharedPreferences prefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("curDate", date);
+        editor.apply();
+    }
+    private void pathSave() {
+        SharedPreferences pathPrefs = getActivity().getSharedPreferences("curDateTxtPath", Context.MODE_PRIVATE);
+        SharedPreferences datePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = pathPrefs.edit();
+        String curDate = datePrefs.getString("curDate","");
+        String diary_path = "/storage/emulated/0/SONA/text/" + curDate + ".txt";
+        editor.putString("curDateTxtPath", diary_path);
         editor.apply();
     }
 
