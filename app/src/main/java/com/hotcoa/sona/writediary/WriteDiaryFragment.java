@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -81,17 +82,6 @@ public class WriteDiaryFragment extends Fragment {
             decrypted = LEA_Crypto.decode(curDateTxt, pbkdf_id);
         }
         catch(Exception e){
-            // Navi 바에서 오늘의 일기 작성 메뉴 동작 시 예외 처리
-            try{
-                String today_diary_path = "/storage/emulated/0/SONA/text/" + getTime() + ".txt";
-                curDateTxt = readFile(today_diary_path);
-                String android_id = idPrefs.getString("android_id", "");
-                byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
-                decrypted = LEA_Crypto.decode(curDateTxt, pbkdf_id);
-            }
-            catch(Exception f){
-                Log.d("writeDiary", e.toString());
-            }
         }
         datetv.setText(getTime());
         writetxt.setText(null);
@@ -104,13 +94,8 @@ public class WriteDiaryFragment extends Fragment {
                 String android_id = idPrefs.getString("android_id","");
                 byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
 
-                Log.d("WriteDiary", "----------------------------");
-                Log.d("WriteDiary_원본 내용", writetxt.getText().toString());
-                Log.d("WriteDiary_ByteArray", LEA_Crypto.toHexString(LEA_Crypto.toByteArray(writetxt.getText().toString())));
-
                 String saveData = LEA_Crypto.encode(writetxt.getText().toString(), pbkdf_id);
                 String date = datePrefs.getString("curDate", "");
-                Log.d("WriteDiary", "date : " + date);
                 saveFile(date, saveData);
 
                 //저장한 일기 날짜 확인을 위해 추가
@@ -124,26 +109,19 @@ public class WriteDiaryFragment extends Fragment {
                 countEditor.putInt("diaryCounter", cnt + 1);
                 countEditor.apply();
 
-                Log.d("WriteDiary_saveData","\n"+"[일기 내용 확인 : " + saveData + "]");
                 Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
-
-                //Log.d("WriteDiary_복호화 내용", LEA_Crypto.decode(saveData, pbkdf_id));
             }
             catch (Exception e){
-                Log.e("WriteDiary_PBKDF ERROR", e.toString());
-                Log.d("WriteDiary", "----------------------------");
             }
             mainActivity.onChangeFragment(MainActivity.Direction.WriteToCalendar);
             writetxt.setText(null);
         });
-
         hashtag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mainActivity.onChangeFragment(MainActivity.Direction.WriteToHashTag);
             }
         });
-
 
         return rootView;
     }
@@ -157,7 +135,8 @@ public class WriteDiaryFragment extends Fragment {
         Log.d("writeDiary", "curDate : " + temp);
         return temp;
     }
-    private boolean inFileExist(String path, String fileName) {
+    private boolean inFileExist(String folderName, String fileName) {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + folderName;
         File directory = new File(path);
         File[] files = directory.listFiles();
         boolean exist = false;
@@ -168,83 +147,45 @@ public class WriteDiaryFragment extends Fragment {
         }
         return exist;
     }
-    //MediaStore 이용
-    //TODO [MediaStore 파일 저장 실시]
     private void saveFile(String fileName, String fileData) {
-        Log.d("---","---");
-        Log.d("//===========//","================================================");
-        Log.d("","\n"+"[A_ScopeTxt > saveFile() 메소드 : MediaStore 파일 저장 실시]");
-        Log.d("","\n"+"[파일 이름 : "+String.valueOf(fileName)+"]");
-        Log.d("","\n"+"[파일 데이터 : "+String.valueOf(fileData)+"]");
-        Log.d("//===========//","================================================");
-        Log.d("---","---");
-
-        //TODO [저장하려는 파일 타입, 이름 지정]
+        String deleteCheck = SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName);
+        if(deleteCheck != null && deleteCheck.length() > 0){
+            try {
+                ContentResolver contentResolver = getActivity().getContentResolver();
+                contentResolver.delete(Uri.parse(SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName)),null,null);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName+".txt");
         values.put(MediaStore.MediaColumns.MIME_TYPE, "plain/text");
         values.put(MediaStore.MediaColumns.RELATIVE_PATH, "SONA/text");
         ContentResolver contentResolver = getActivity().getContentResolver();
         Uri item = contentResolver.insert(MediaStore.Files.getContentUri("external"), values);
-
         try {
-            //TODO [쓰기 모드 지정]
             ParcelFileDescriptor pdf = contentResolver.openFileDescriptor(item, "w", null);
-
             if (pdf == null) {
-                Log.d("---","---");
-                Log.e("//===========//","================================================");
                 Log.d("","\n"+"[A_ScopeTxt > saveFile() 메소드 : MediaStore 파일 저장 실패]");
                 Log.d("","\n"+"[원인 : "+String.valueOf("ParcelFileDescriptor 객체 null")+"]");
-                Log.e("//===========//","================================================");
-                Log.d("---","---");
             } else {
-                //TODO [텍스트 파일 쓰기 실시]
                 byte[] strToByte = fileData.getBytes();
                 FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
                 fos.write(strToByte);
                 fos.close();
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     values.clear();
                     values.put(MediaStore.Images.Media.IS_PENDING, 0);
                     contentResolver.update(item, values, null, null);
                 }
-
-                //TODO [경로 저장 실시]
-                //[콘텐츠 : 텍스트 경로 저장] - 안드 보안정책땜에 이거 있음
-                SharedPrefs.setString(getActivity(), "saveScopeContentTxt", String.valueOf(item));
-
-                //[절대 : 텍스트 경로 저장]
-                Cursor c = getActivity().getContentResolver().query(Uri.parse(String.valueOf(item)), null,null,null,null);
-                c.moveToNext();
-                @SuppressLint("Range") String absolutePath = c.getString(c.getColumnIndex(MediaStore.MediaColumns.DATA));
-                SharedPrefs.setString(getActivity(), "saveScopeAbsoluteTxt", absolutePath);
-
-                Log.d("---","---");
-                Log.w("//===========//","================================================");
-                Log.d("","\n"+"[A_ScopeTxt > saveFile() 메소드 : MediaStore 파일 저장 성공]");
-                Log.d("","\n"+"[콘텐츠 파일 경로 : "+SharedPrefs.getString(getActivity(), "saveScopeContentTxt")+"]");
-                Log.d("","\n"+"[절대 파일 경로 : "+SharedPrefs.getString(getActivity(), "saveScopeAbsoluteTxt")+"]");
-                Log.w("//===========//","================================================");
-                Log.d("---","---");
-
-                //TODO [다시 텍스트 파일 불러오기 실시]
-                readFile(SharedPrefs.getString(getActivity(), "saveScopeAbsoluteTxt"));
+                SharedPrefs.setString(getActivity(), "ScopeContent_" + fileName, String.valueOf(item));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    //TODO [MediaStore 파일 불러오기 실시]
     private String readFile(String path) {
-        Log.d("---","---");
-        Log.d("//===========//","================================================");
-        Log.d("","\n"+"[A_ScopeTxt > readFile() 메소드 : MediaStore 파일 불러오기 실시]");
-        Log.d("","\n"+"[절대 파일 경로 : "+String.valueOf(path)+"]");
-        Log.d("//===========//","================================================");
-        Log.d("---","---");
         Uri externalUri = MediaStore.Files.getContentUri("external");
         String[] projection = new String[]{
                 MediaStore.Images.Media._ID,
@@ -255,28 +196,13 @@ public class WriteDiaryFragment extends Fragment {
         Cursor cursor = getActivity().getContentResolver().query(externalUri, projection, null, null, null);
 
         if (cursor == null || !cursor.moveToFirst()) {
-            Log.d("---","---");
-            Log.e("//===========//","================================================");
-            Log.d("","\n"+"[A_ScopeTxt > readFile() 메소드 : MediaStore 파일 불러오기 실패]");
-            Log.d("","\n"+"[원인 : "+String.valueOf("Cursor 객체 null")+"]");
-            Log.e("//===========//","================================================");
-            Log.d("---","---");
             return "";
         }
-
-        //TODO [텍스트 파일 불러오기 실시]
         String absoluteUrl = path;
-        String line = ""; //TODO [한줄씩 읽기]
+        String line = "";
         try {
             BufferedReader buf = new BufferedReader(new FileReader(absoluteUrl));
             while((line=buf.readLine())!=null){
-                Log.d("---","---");
-                Log.w("//===========//","================================================");
-                Log.d("showtv_내용","\n"+"[A_ScopeTxt > readFile() 메소드 : MediaStore 파일 불러오기 성공]");
-                Log.d("showtv_경로","\n"+"[절대 파일 경로 : "+String.valueOf(absoluteUrl)+"]");
-                Log.d("showtv_내용","\n"+"[절대 파일 내용 : "+String.valueOf(line)+"]");
-                Log.w("//===========//","================================================");
-                Log.d("---","---");
                 return String.valueOf(line);
             }
         } catch (FileNotFoundException e) {
