@@ -158,15 +158,6 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
         calendarView.setConnectedDayIconRes(R.drawable.ic_baseline_stars_24);   // Drawable
         calendarView.setConnectedDayIconPosition(ConnectedDayIconPosition.TOP);// TOP & BOTTOM
         calendarView.update();
-        for (String s : sDate) {
-            Log.d("calendar_log", s);
-            /*calendarView.setSelectionManager(new SingleSelectionManager(new OnDaySelectedListener() {
-                @Override
-                public void onDaySelected() {
-                    Log.d("calendar_log", "현재 selected: " + calendarView.getSelectedDays().get(0));
-                }
-            }));*/
-        }
         Button button_writeDiary = rootView.findViewById(R.id.button_write);
         Button button_contents = rootView.findViewById(R.id.button_contents);
         Button button_share = rootView.findViewById(R.id.button_share);

@@ -2,21 +2,41 @@ package com.hotcoa.sona.writediary;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.main.MainActivity;
 
 public class HashTagFragment extends Fragment {
 
+    private int dx = 100;//초기 x
+    private int dy = 100;//초기 y
+    private Canvas canvas;
+    private double userPropensity;//사용자 성향 변수
+    private SharedPreferences psPrefs;//사용자 성향 변수를 저장하는 SharedPreference 객체
+    SharedPreferences diaryCountPrefs;//일기 저장 개수를 세는 Counter
+
+    private final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    
     Button save;
 
     Button bt1;
@@ -28,11 +48,16 @@ public class HashTagFragment extends Fragment {
     Button bt7;
     Button bt8;
 
+    SeekBar seekBar1;
+    SeekBar seekBar2;
+
+    ImageView imgView;
+
     SharedPreferences sPf;
 
     MainActivity mainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity)getActivity();
     }
@@ -53,11 +78,130 @@ public class HashTagFragment extends Fragment {
     int bt8Stat=0;    //버튼의 상태용(일부로 int형 처리)
 
 
+    private void drawImgView(Bitmap bitmap, Paint myPaint) {
+        canvas = new Canvas(bitmap);
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        myPaint.setStrokeWidth(1f);
+        myPaint.setColor(Color.BLACK);
+        canvas.drawLine(0, 100, 200, 100, myPaint);
+        canvas.drawLine(0, 0, 200, 200, myPaint);
+        canvas.drawLine(100, 0, 100, 200, myPaint);
+        canvas.drawLine(0, 200, 200, 0, myPaint);
+    }
+
+    //FireBase - Class
+    public class HashtagInfo {
+        public int category;
+        public int x;
+        public int y;
+        public HashtagInfo(int c, int x, int y) {
+            this.category = c;
+            this.x = x;
+            this.y = y;
+        }
+        public int getX() { return this.x; }
+        public int getY() { return this.y; }
+        public void setX(int x) { this.x = x; }
+        public void setY(int y) { this.y = y; }
+    }
+
+    //Hashtag 값이 어디 속해 있는지 판단하는 함수
+    private int calcCategory(int x, int y) {
+        int ret = 10;
+        if(x > 100 && y < 100) {
+            //우측 상단
+            if(y < (200 - x)) {
+                //0번인 경우
+                ret = 0;
+            }
+            else if(y > (200 - x)) {
+                //1번인 경우
+                ret = 1;
+            }
+            else {
+                //경계 상에 있는 경우
+                ret = 10;
+            }
+        }
+        else if(x > 100 && y > 100) {
+            //우측 하단
+            if(y < x) {
+                //2번인 경우
+                ret = 2;
+            }
+            else if(y > x) {
+                //3번인 경우
+                ret = 3;
+            }
+            else {
+                //경계 상에 있는 경우
+                ret = 10;
+            }
+        }
+        else if(x < 100 && y > 100) {
+            //좌측 하단
+            if(y > (200 - x)) {
+                //4번인 경우
+                ret = 4;
+            }
+            else if(y < (200 - x)) {
+                //5번인 경우
+                ret = 5;
+            }
+            else {
+                //경계 상에 있는 경우
+                ret = 10;
+            }
+        }
+        else if(x < 100 && y < 100) {
+            //좌측 상단
+            if(y < x) {
+                //6번인 경우
+                ret = 6;
+            }
+            else if(y > x) {
+                //7번인 경우
+                ret = 7;
+            }
+            else {
+                //경계 상에 있는 경우
+                ret = 10;
+            }
+        }
+        else {
+            //원점인 경우 - 기본값으로 설정해줘야 함
+            ret = 11;
+        }
+        return ret;
+    }
+
+    //FireBase에 좌표 저장을 위한 Function
+    private void writeNewCoordinate(String cnt, int x, int y) {//일기 저장 개수, x좌표, y좌표
+        //일기 저장 개수를 이용하여 데이터 베이스 저장시 새로운 범주를 형성하기 위함 - 자세한 동작은 직접 FireBase 참조 바람
+        HashtagInfo hashtagInfo = new HashtagInfo(calcCategory(x, y), x, y); //Category (0 ~ 7), x, y는 원점 좌표 (100, 100)을 기준으로 한 값
+        database.child("HashtagInfo").child(cnt).setValue(hashtagInfo)
+                .addOnSuccessListener(unused -> {
+                    //Success Case
+                    Log.d("firebase_log", "Success");
+                })
+                .addOnFailureListener(e -> {
+                    //Failure Case
+                    Log.d("firebase_log", "Fail");
+                    Log.d("firebase_log", e.getMessage());
+                });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_hash_tag, container, false);
+
+        //사용자 성향 변수를 위한 SharedPreference
+        psPrefs = getActivity().getSharedPreferences("userPropensity", Context.MODE_PRIVATE);
+        SharedPreferences.Editor psEditor = psPrefs.edit();
+
+        //일기 저장 개수 확인을 위한 SharedPreference
+        diaryCountPrefs = getActivity().getSharedPreferences("diaryCounter", Context.MODE_PRIVATE);
 
         save = (Button) rootView.findViewById(R.id.hashtag_save_bt);
 
@@ -70,158 +214,180 @@ public class HashTagFragment extends Fragment {
         bt7 = (Button) rootView.findViewById(R.id.df_hstag_bt7);
         bt8 = (Button) rootView.findViewById(R.id.df_hstag_bt8);
 
+        seekBar1 = (SeekBar) rootView.findViewById(R.id.seekBar1);
+        seekBar2 = (SeekBar) rootView.findViewById(R.id.seekBar2);
+
+        //좌표 표시할 imageview 생성 - canvas
+        imgView = rootView.findViewById(R.id.imageView);
+        Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
+        Paint myPaint = new Paint();
+        imgView.setImageBitmap(bitmap);
+        drawImgView(bitmap, myPaint);
+
+        //첫번째 seekbar - x축
+        seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //SeekBar 터치 종료 시
+                drawImgView(bitmap, myPaint);
+                Log.d("seekbar_log", "seekbar 1 현재 값: " + ((seekBar.getProgress() - 10) / 10.0));
+                dx = 100 + (int) (seekBar.getProgress() - 10) * 10;
+                Log.d("seekbar_log", "좌표 평면 x값: " + dx);
+                myPaint.setColor(Color.RED);
+                myPaint.setAntiAlias(true);
+                canvas.drawCircle(dx, dy, 4, myPaint);
+            }
+        });
+
+        //2번째 seekbar - y축
+        seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //SeekBar 터치 종료 시
+                drawImgView(bitmap, myPaint);
+                Log.d("seekbar_log", "seekbar 2 현재 값: " + ((seekBar.getProgress() - 10) / 10.0));
+                dy = 100 - (int) (seekBar.getProgress() - 10) * 10;
+                Log.d("seekbar_log", "좌표 평면 y값: " + dy);
+                myPaint.setColor(Color.RED);
+                myPaint.setAntiAlias(true);
+                canvas.drawCircle(dx, dy, 4, myPaint);
+            }
+        });
+
+
+
         save = (Button)rootView.findViewById(R.id.hashtag_save_bt) ;
 
         sPf = getActivity().getSharedPreferences("Hashtag_info", Context.MODE_PRIVATE);
 
-
         int defStatTot=0;  //기본 감정 선택갯수 제한을 위한 것
 
         //버튼 활성화 지연
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                bt1.setEnabled(true);
-                bt2.setEnabled(true);
-                bt3.setEnabled(true);
-                bt4.setEnabled(true);
-                bt5.setEnabled(true);
-                bt6.setEnabled(true);
-                bt7.setEnabled(true);
-                bt8.setEnabled(true);
-                save.setEnabled(true);
-            }
+        new android.os.Handler().postDelayed(() -> {
+            bt1.setEnabled(true);
+            bt2.setEnabled(true);
+            bt3.setEnabled(true);
+            bt4.setEnabled(true);
+            bt5.setEnabled(true);
+            bt6.setEnabled(true);
+            bt7.setEnabled(true);
+            bt8.setEnabled(true);
+            save.setEnabled(true);
         }, 1000);
         //.
 
 
-        bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //버튼 활성화 비활성화 여부, 1은 활성화 0은 비활성
-                if(bt1Stat==1) {
-                    bt1Stat=0;
-                    bt1.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt1Stat==0) {
-                    bt1Stat = 1;
-                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
+        bt1.setOnClickListener(view -> {
+            //버튼 활성화 비활성화 여부, 1은 활성화 0은 비활성
+            if(bt1Stat==1) {
+                bt1Stat=0;
+                bt1.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt1Stat==0) {
+                bt1Stat = 1;
+                bt1.setBackgroundColor(requireContext().getColor(R.color.red));
             }
         });
 
-        bt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bt2Stat==1) {
-                    bt2Stat=0;
-                    bt2.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt2Stat==0) {
-                    bt2Stat = 1;
-                    bt2.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
-
+        bt2.setOnClickListener(view -> {
+            if(bt2Stat==1) {
+                bt2Stat=0;
+                bt2.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt2Stat==0) {
+                bt2Stat = 1;
+                bt2.setBackgroundColor(requireContext().getColor(R.color.red));
             }
+
         });
 
-        bt3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bt3Stat==1) {
-                    bt3Stat=0;
-                    bt3.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt3Stat==0) {
-                    bt3Stat = 1;
-                    bt3.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
-
+        bt3.setOnClickListener(view -> {
+            if(bt3Stat==1) {
+                bt3Stat=0;
+                bt3.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt3Stat==0) {
+                bt3Stat = 1;
+                bt3.setBackgroundColor(requireContext().getColor(R.color.red));
             }
+
         });
 
-        bt4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bt4Stat==1) {
-                    bt4Stat=0;
-                    bt4.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt4Stat==0) {
-                    bt4Stat = 1;
-                    bt4.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
-
+        bt4.setOnClickListener(view -> {
+            if(bt4Stat==1) {
+                bt4Stat=0;
+                bt4.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt4Stat==0) {
+                bt4Stat = 1;
+                bt4.setBackgroundColor(requireContext().getColor(R.color.red));
             }
+
         });
 
-        bt5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bt5Stat==1) {
-                    bt5Stat=0;
-                    bt5.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt5Stat==0) {
-                    bt5Stat = 1;
-                    bt5.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
-
+        bt5.setOnClickListener(view -> {
+            if(bt5Stat==1) {
+                bt5Stat=0;
+                bt5.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt5Stat==0) {
+                bt5Stat = 1;
+                bt5.setBackgroundColor(requireContext().getColor(R.color.red));
             }
+
         });
 
-        bt6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bt6Stat==1) {
-                    bt6Stat=0;
-                    bt6.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt6Stat==0) {
-                    bt6Stat = 1;
-                    bt6.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
-
+        bt6.setOnClickListener(view -> {
+            if(bt6Stat==1) {
+                bt6Stat=0;
+                bt6.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt6Stat==0) {
+                bt6Stat = 1;
+                bt6.setBackgroundColor(requireContext().getColor(R.color.red));
             }
+
         });
 
-        bt7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bt7Stat==1) {
-                    bt7Stat=0;
-                    bt7.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt7Stat==0) {
-                    bt7Stat = 1;
-                    bt7.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
-
+        bt7.setOnClickListener(view -> {
+            if(bt7Stat==1) {
+                bt7Stat=0;
+                bt7.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt7Stat==0) {
+                bt7Stat = 1;
+                bt7.setBackgroundColor(requireContext().getColor(R.color.red));
             }
+
         });
 
-        bt8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bt8Stat==1) {
-                    bt8Stat=0;
-                    bt8.setBackgroundColor(requireContext().getColor(R.color.black));
-                } else if(bt8Stat==0) {
-                    bt8Stat = 1;
-                    bt8.setBackgroundColor(requireContext().getColor(R.color.red));
-                }
-
+        bt8.setOnClickListener(view -> {
+            if(bt8Stat==1) {
+                bt8Stat=0;
+                bt8.setBackgroundColor(requireContext().getColor(R.color.black));
+            } else if(bt8Stat==0) {
+                bt8Stat = 1;
+                bt8.setBackgroundColor(requireContext().getColor(R.color.red));
             }
+
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int totDfBtStat=bt1Stat+bt2Stat+bt3Stat+bt4Stat+bt5Stat+bt6Stat+bt7Stat+bt8Stat;  //총합 3이하
-                int totCustBtStat=0;
+        save.setOnClickListener(view -> {
+            int totDfBtStat=bt1Stat+bt2Stat+bt3Stat+bt4Stat+bt5Stat+bt6Stat+bt7Stat+bt8Stat;  //총합 3이하
+            int totCustBtStat=0;
 
-                if(totDfBtStat>3){
-                    Toast.makeText(getActivity(), "기본 해쉬태그는 최대 3개까지 선택 가능합니다! 현재 "+totDfBtStat+"개 선택", Toast.LENGTH_SHORT).show();
-                }
-                if(totCustBtStat>3){
-                    Toast.makeText(getActivity(), "사용자 정의 해쉬태그는 최대 3개까지 선택 가능합니다!", Toast.LENGTH_SHORT).show();
-                }
-                if(totCustBtStat<3 && totDfBtStat<3){
-                    mainActivity.onChangeFragment(MainActivity.Direction.HashTagToWrite);
-                }
+            if(totDfBtStat>3){
+                Toast.makeText(getActivity(), "기본 해쉬태그는 최대 3개까지 선택 가능합니다! 현재 "+totDfBtStat+"개 선택", Toast.LENGTH_SHORT).show();
+            }
+            if(totCustBtStat>3){
+                Toast.makeText(getActivity(), "사용자 정의 해쉬태그는 최대 3개까지 선택 가능합니다!", Toast.LENGTH_SHORT).show();
+            }
+            if(totCustBtStat<3 && totDfBtStat<3){
+                mainActivity.onChangeFragment(MainActivity.Direction.HashTagToWrite);
+                //Firebase에 좌표값 저장
+                int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
+                writeNewCoordinate(String.valueOf(cnt + 1), dx, dy);
             }
         });
         return rootView;
