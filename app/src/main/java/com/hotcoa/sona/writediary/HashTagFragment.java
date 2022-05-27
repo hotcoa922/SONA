@@ -318,7 +318,7 @@ public class HashTagFragment extends Fragment {
                     bt1.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt1Stat==0) {
                     bt1Stat = 1;
-                    bt1.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt1.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
             }
         });
@@ -331,7 +331,7 @@ public class HashTagFragment extends Fragment {
                     bt2.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt2Stat==0) {
                     bt2Stat = 1;
-                    bt2.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt2.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
 
             }
@@ -345,7 +345,7 @@ public class HashTagFragment extends Fragment {
                     bt3.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt3Stat==0) {
                     bt3Stat = 1;
-                    bt3.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt3.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
 
             }
@@ -359,7 +359,7 @@ public class HashTagFragment extends Fragment {
                     bt4.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt4Stat==0) {
                     bt4Stat = 1;
-                    bt4.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt4.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
 
             }
@@ -373,7 +373,7 @@ public class HashTagFragment extends Fragment {
                     bt5.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt5Stat==0) {
                     bt5Stat = 1;
-                    bt5.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt5.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
 
             }
@@ -387,7 +387,7 @@ public class HashTagFragment extends Fragment {
                     bt6.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt6Stat==0) {
                     bt6Stat = 1;
-                    bt6.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt6.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
 
             }
@@ -401,7 +401,7 @@ public class HashTagFragment extends Fragment {
                     bt7.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt7Stat==0) {
                     bt7Stat = 1;
-                    bt7.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt7.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
 
             }
@@ -415,12 +415,12 @@ public class HashTagFragment extends Fragment {
                     bt8.setBackgroundColor(requireContext().getColor(R.color.black));
                 } else if(bt8Stat==0) {
                     bt8Stat = 1;
-                    bt8.setBackgroundColor(requireContext().getColor(R.color.red));
+                    bt8.setBackgroundColor(requireContext().getColor(R.color.button_select));
                 }
 
             }
         });
-
+    //
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

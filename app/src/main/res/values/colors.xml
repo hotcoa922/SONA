@@ -10,6 +10,7 @@
     <color name="button_dark_intext_color">#FFFFFF</color>
     <color name="button_light_color">#FFFFFF</color>
     <color name="button_light_intext_color">#000000</color>
+    <color name="button_select">#03DAC5</color>
 
 
     <color name="purple_200">#FFBB86FC</color>

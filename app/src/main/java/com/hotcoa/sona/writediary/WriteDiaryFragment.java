@@ -125,6 +125,8 @@ public class WriteDiaryFragment extends Fragment {
                 //Log.d("WriteDiary_복호화 내용", LEA_Crypto.decode(saveData, pbkdf_id));
                 Log.d("WriteDiary", "----------------------------");
 
+                writetxt.setText(null); //일기 남아 있는거 제거 코드~
+
             }
             catch (Exception e){
                 Log.e("WriteDiary_PBKDF ERROR", e.toString());
