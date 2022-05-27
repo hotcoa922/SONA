@@ -2,10 +2,13 @@ package com.hotcoa.sona.profile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,12 +61,12 @@ public class ProfileFragment extends Fragment {
 
         edit = (Button) rootView.findViewById(R.id.profileedit_bt);
 
-
-
         sPf = getActivity().getSharedPreferences("profile_info",Context.MODE_PRIVATE);  //PREFS 파일 이름
 
-        //이미지 추후 구현
-        nickName.setText(sPf.getString("nickName","")); //첫번째 값은 저장해둔 값 불러오기, 두번째 값은 값이 없으면 보여줄 값
+        //이미지
+        String image = sPf.getString("profileImg", "");
+        Bitmap bitmap = StringToBitMap(image);
+
         diaryName.setText(sPf.getString("diaryName",""));
         birthYear.setText(sPf.getString("birthYear",""));
         birthMonth.setText(sPf.getString("birthMonth",""));
@@ -77,6 +80,18 @@ public class ProfileFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private Bitmap StringToBitMap(String encodedString) {
+        try{
+            byte [] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 
 }

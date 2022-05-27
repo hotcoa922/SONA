@@ -92,9 +92,12 @@
 
     <TextView
         android:id="@+id/diaryfont_tx"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:text="diaryfont_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font1"
+        android:text="푸시알림"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
         app:layout_constraintEnd_toStartOf="@+id/view2"
         app:layout_constraintStart_toStartOf="parent"

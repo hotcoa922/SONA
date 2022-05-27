@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.20" />
 
     <TextView
         android:id="@+id/textView8"
@@ -52,9 +52,9 @@
 
     <Button
         android:id="@+id/df_hstag_bt1"
-        android:layout_width="65dp"
-        android:layout_height="28dp"
-        android:text="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aslkdfjal;ksjdf"
         app:layout_constraintBottom_toTopOf="@+id/df_hstag_bt5"
         app:layout_constraintEnd_toStartOf="@+id/df_hstag_bt2"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_guideline4"
@@ -278,5 +278,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/cs_hstag_bt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="602dp" />
+
+    <Button
+        android:id="@+id/cs_hstag_bt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="608dp" />
+
+    <Button
+        android:id="@+id/cs_hstag_bt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="268dp"
+        tools:layout_editor_absoluteY="602dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,14 +7,67 @@
     tools:context=".contents.ContentsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:id="@+id/textView9"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+    <View
+        android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="컨텐츠 추천"
-        tools:layout_editor_absoluteX="180dp"
-        tools:layout_editor_absoluteY="-36dp" />
+        android:layout_height="1dp"
+        android:background="@color/button_dark_color"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/button_dark_color"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/button_dark_color"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/profile_guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
 
     <Button
         android:id="@+id/ShowButton"
@@ -37,6 +90,56 @@
         app:layout_constraintStart_toStartOf="@+id/ShowButton"
         app:layout_constraintTop_toTopOf="@+id/ShowButton"
         app:layout_constraintVertical_bias="0.607" />
+
+    <TextView
+        android:id="@+id/ment1_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[오늘의 추천명언]"
+        app:layout_constraintBottom_toTopOf="@+id/contents_wisesaying_tx"
+        app:layout_constraintEnd_toStartOf="@+id/profile_guideline5"
+        app:layout_constraintStart_toStartOf="@+id/profile_guideline4"
+        app:layout_constraintTop_toTopOf="@+id/profile_guideline1" />
+
+    <TextView
+        android:id="@+id/ment2_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[오늘의 노래추천]"
+        app:layout_constraintBottom_toTopOf="@+id/contents_sing_tx"
+        app:layout_constraintEnd_toStartOf="@+id/profile_guideline5"
+        app:layout_constraintStart_toStartOf="@+id/profile_guideline4"
+        app:layout_constraintTop_toTopOf="@+id/profile_guideline2" />
+
+    <TextView
+        android:id="@+id/contents_wisesaying_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로딩중입니다"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
+        app:layout_constraintEnd_toEndOf="@+id/ment1_tv"
+        app:layout_constraintStart_toStartOf="@+id/ment1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/ment1_tv" />
+
+    <TextView
+        android:id="@+id/contents_sing_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로딩중입니다"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/ment2_tv"
+        app:layout_constraintStart_toStartOf="@+id/ment2_tv"
+        app:layout_constraintTop_toBottomOf="@+id/ment2_tv" />
+
+    <TextView
+        android:id="@+id/contents_announce_ment_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
+        app:layout_constraintEnd_toStartOf="@+id/profile_guideline5"
+        app:layout_constraintStart_toStartOf="@+id/profile_guideline4"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,6 @@ import java.util.Map;
 
 public class ContentsFragment extends Fragment {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_contents, container, false);
@@ -72,16 +71,16 @@ public class ContentsFragment extends Fragment {
                         Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
-            showbt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(TAG, "url : " + url);
-                    ContentsWebView.loadUrl(url.toString());
-                    Toast.makeText(getActivity(), "콘텐츠!", Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "----------------------------");
+        showbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "url : " + url);
+                ContentsWebView.loadUrl(url.toString());
+                Toast.makeText(getActivity(), "콘텐츠!", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "----------------------------");
 
-                }
-            });
+            }
+        });
         return rootView;
     }
 }
