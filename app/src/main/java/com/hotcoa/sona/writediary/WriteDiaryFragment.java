@@ -73,7 +73,7 @@ public class WriteDiaryFragment extends Fragment {
         String curDateTxt = readFile(curDateTxtPath);
         Log.d("writeDiary", "curDateTxt : " + curDateTxt);
 
-        String decrypted = "1";
+        String decrypted = "";
         try {
             String android_id = idPrefs.getString("android_id", "");
             byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
@@ -134,6 +134,7 @@ public class WriteDiaryFragment extends Fragment {
             }
             mainActivity.onChangeFragment(MainActivity.Direction.WriteToCalendar);
             writetxt.setText(null);
+            onDestroy();
         });
 
         hashtag.setOnClickListener(new View.OnClickListener() {
@@ -142,8 +143,6 @@ public class WriteDiaryFragment extends Fragment {
                 mainActivity.onChangeFragment(MainActivity.Direction.WriteToHashTag);
             }
         });
-
-
         return rootView;
     }
 
