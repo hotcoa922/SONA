@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class HashTagFragment extends Fragment {
 
     private int dx = 100;//초기 x
     private int dy = 100;//초기 y
+    private String hashtagName;//새로운 hashtagName
     private Canvas canvas;
     private double userPropensity;//사용자 성향 변수
     private SharedPreferences psPrefs;//사용자 성향 변수를 저장하는 SharedPreference 객체
@@ -46,6 +48,10 @@ public class HashTagFragment extends Fragment {
     Button bt6;
     Button bt7;
     Button bt8;
+
+    Button addHashtagNameBtn;
+
+    EditText newHashtag;
 
     SeekBar seekBar1;
     SeekBar seekBar2;
@@ -174,10 +180,10 @@ public class HashTagFragment extends Fragment {
     }
 
     //FireBase에 좌표 저장을 위한 Function
-    private void writeNewCoordinate(String cnt, int x, int y) {//일기 저장 개수, x좌표, y좌표
+    private void writeNewCoordinate(String name, int x, int y) {//일기 저장 개수, x좌표, y좌표
         //일기 저장 개수를 이용하여 데이터 베이스 저장시 새로운 범주를 형성하기 위함 - 자세한 동작은 직접 FireBase 참조 바람
         HashtagInfo hashtagInfo = new HashtagInfo(calcCategory(x, y), x, y); //Category (0 ~ 7), x, y는 원점 좌표 (100, 100)을 기준으로 한 값
-        database.child("HashtagInfo").child(cnt).setValue(hashtagInfo)
+        database.child("HashtagInfo").child(name).setValue(hashtagInfo)
                 .addOnSuccessListener(unused -> {
                     //Success Case
                     Log.d("firebase_log", "Success");
@@ -212,6 +218,8 @@ public class HashTagFragment extends Fragment {
         bt7 = (Button) rootView.findViewById(R.id.df_hstag_bt7);
         bt8 = (Button) rootView.findViewById(R.id.df_hstag_bt8);
 
+        addHashtagNameBtn = (Button) rootView.findViewById(R.id.addHashtagNameButton);
+        newHashtag = (EditText) rootView.findViewById(R.id.newHashtagName);
         seekBar1 = (SeekBar) rootView.findViewById(R.id.seekBar1);
         seekBar2 = (SeekBar) rootView.findViewById(R.id.seekBar2);
 
@@ -257,6 +265,21 @@ public class HashTagFragment extends Fragment {
                 myPaint.setColor(Color.RED);
                 myPaint.setAntiAlias(true);
                 canvas.drawCircle(dx, dy, 4, myPaint);
+            }
+        });
+
+        //새로운 hashtag 이름(String)입력하고 추가하기 눌렀을 때 event 처리
+        addHashtagNameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String temp = newHashtag.getText().toString();
+                if(temp.length() <= 0) {
+                    Toast.makeText(rootView.getContext(), "Hashtag 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    hashtagName = temp;
+                    Toast.makeText(rootView.getContext(), "Hashtag 이름 설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -413,8 +436,13 @@ public class HashTagFragment extends Fragment {
                 if(totCustBtStat<3 && totDfBtStat<3){
                     mainActivity.onChangeFragment(MainActivity.Direction.HashTagToWrite);
                     //Firebase에 좌표값 저장
-                    int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
-                    writeNewCoordinate(String.valueOf(cnt + 1), dx, dy);
+                    if(newHashtag.getText().toString().length() <= 0) {
+                        Toast.makeText(rootView.getContext(), "Hashtag 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
+                        writeNewCoordinate(hashtagName, dx, dy);
+                    }
                 }
             }
         });

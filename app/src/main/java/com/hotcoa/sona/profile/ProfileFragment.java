@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
 
         profileImg = (ImageView) rootView.findViewById(R.id.profile_img);
 
-        nickName = (TextView) rootView.findViewById(R.id.username_tv);
+        nickName = (TextView) rootView.findViewById(R.id.newHashtagName);
         diaryName = (TextView) rootView.findViewById(R.id.diaryname_tv);
         birthYear = (TextView) rootView.findViewById(R.id.birth_year_tv);
         birthMonth = (TextView) rootView.findViewById(R.id.birth_month_tv);

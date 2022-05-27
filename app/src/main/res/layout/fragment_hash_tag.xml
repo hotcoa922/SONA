@@ -131,25 +131,25 @@
         app:layout_constraintTop_toTopOf="@+id/df_hstag_bt7" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/addHashtagNameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="추가하기"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/username_tv"
+        app:layout_constraintEnd_toStartOf="@+id/newHashtagName"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/username_tv"
+        android:id="@+id/newHashtagName"
         android:layout_width="150dp"
         android:layout_height="0dp"
         android:gravity="top"
         android:hint="내용을 입력하세요."
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="@+id/addHashtagNameButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3" />
+        app:layout_constraintStart_toEndOf="@+id/addHashtagNameButton"
+        app:layout_constraintTop_toTopOf="@+id/addHashtagNameButton" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_guideline3"
@@ -168,7 +168,7 @@
     <Button
         android:id="@+id/hashtag_save_bt"
         android:layout_width="101dp"
-        android:layout_height="27dp"
+        android:layout_height="wrap_content"
         android:text="선택완료"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
