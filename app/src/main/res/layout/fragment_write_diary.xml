@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +10,7 @@
         android:id="@+id/today_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/font1"
         android:text="오늘 날짜 출력 예정"
         android:textSize="25dp"
@@ -29,83 +28,81 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/write_paper_background"
+        android:font="@font/font1"
         android:gravity="top"
         android:hint="내용을 입력하세요."
-        android:font="@font/font1"
         android:padding="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/today_tv" />
 
-    <Button
-        android:id="@+id/hashtag_bt"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="60dp"
-        android:background="@drawable/common_rect_button_dark"
-        android:text="#"
-        android:textColor="@color/button_dark_intext_color"
-        app:layout_constraintBottom_toTopOf="@+id/plus_bt"
-        app:layout_constraintEnd_toStartOf="@+id/hashtag_tv"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/hashtag_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="태그 추가하기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toEndOf="@+id/hashtag_bt"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <Button
         android:id="@+id/plus_bt"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/common_rect_button_dark"
         android:text="+"
         android:textColor="@color/button_dark_intext_color"
-        app:layout_constraintEnd_toStartOf="@+id/imageplus_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hashtag_bt"
-        app:layout_constraintBottom_toTopOf="@id/save_bt"/>
+        app:layout_constraintTop_toBottomOf="@+id/hashtag_bt" />
 
-    <TextView
-        android:id="@+id/hashtag_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:text="태그 추가하기"
-        app:layout_constraintBottom_toBottomOf="@+id/hashtag_bt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/hashtag_bt"
-        app:layout_constraintTop_toTopOf="@+id/hashtag_bt"
-        app:layout_constraintVertical_bias="0.50" />
+    <Button
+        android:id="@+id/hashtag_bt"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/common_rect_button_dark"
+        android:text="#"
+        android:textColor="@color/button_dark_intext_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <TextView
         android:id="@+id/imageplus_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
+        android:layout_marginTop="32dp"
         android:text="사진 추가하기"
-        app:layout_constraintBottom_toBottomOf="@+id/plus_bt"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toEndOf="@+id/plus_bt"
-        app:layout_constraintTop_toTopOf="@+id/plus_bt" />
+        app:layout_constraintTop_toBottomOf="@+id/hashtag_tv" />
 
     <Button
         android:id="@+id/save_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/common_rect_button_dark"
         android:text="SAVE"
         android:textColor="@color/button_dark_intext_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plus_bt" />
+        app:layout_constraintTop_toBottomOf="@+id/plus_bt"
+        app:layout_constraintVertical_bias="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="550dp" />
+        app:layout_constraintGuide_end="200dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
