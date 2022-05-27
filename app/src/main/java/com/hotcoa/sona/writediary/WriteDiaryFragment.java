@@ -30,6 +30,7 @@ import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -134,7 +135,6 @@ public class WriteDiaryFragment extends Fragment {
             }
             mainActivity.onChangeFragment(MainActivity.Direction.WriteToCalendar);
             writetxt.setText(null);
-            onDestroy();
         });
 
         hashtag.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +143,8 @@ public class WriteDiaryFragment extends Fragment {
                 mainActivity.onChangeFragment(MainActivity.Direction.WriteToHashTag);
             }
         });
+
+
         return rootView;
     }
 
@@ -155,7 +157,17 @@ public class WriteDiaryFragment extends Fragment {
         Log.d("writeDiary", "curDate : " + temp);
         return temp;
     }
-
+    private boolean inFileExist(String path, String fileName) {
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        boolean exist = false;
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].getName().equals(fileName + ".txt")) {
+                exist = true;
+            }
+        }
+        return exist;
+    }
     //MediaStore 이용
     //TODO [MediaStore 파일 저장 실시]
     private void saveFile(String fileName, String fileData) {
