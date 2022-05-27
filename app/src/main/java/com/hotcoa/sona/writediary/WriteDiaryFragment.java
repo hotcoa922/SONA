@@ -74,10 +74,10 @@ public class WriteDiaryFragment extends Fragment {
         SharedPreferences datePrefs         = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         SharedPreferences saveDatePrefs     = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
         SharedPreferences diaryCountPrefs   = getActivity().getSharedPreferences("diaryCounter", Context.MODE_PRIVATE);
-        SharedPreferences pathPrefs         = getActivity().getSharedPreferences("curDateTxtPath", Context.MODE_PRIVATE);
 
         // 일기 파일 존재할 시 EditText에 일기 내용 입력하기
-        String curDateTxtPath = pathPrefs.getString("curDateTxtPath", "");
+        String curDate = datePrefs.getString("curDate", "");
+        String curDateTxtPath = "/storage/emulated/0/SONA/text/" + curDate + ".txt";
         Log.d("writeDiary", "curDateTxtPath : " + curDateTxtPath);
 
         String curDateTxt = readFile(curDateTxtPath);

@@ -100,7 +100,7 @@ public class CheckDiaryFragment extends Fragment {
     private String getTime() {
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 M월 dd일");
         SharedPreferences prefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         String temp = prefs.getString("curDate", dateFormat.format(date));
         return temp;
