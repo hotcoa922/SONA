@@ -76,23 +76,33 @@ public class WriteDiaryFragment extends Fragment {
         SharedPreferences diaryCountPrefs   = getActivity().getSharedPreferences("diaryCounter", Context.MODE_PRIVATE);
         SharedPreferences pathPrefs         = getActivity().getSharedPreferences("curDateTxtPath", Context.MODE_PRIVATE);
 
+        // 일기 파일 존재할 시 EditText에 일기 내용 입력하기
         String curDateTxtPath = pathPrefs.getString("curDateTxtPath", "");
-        Log.d("writeDiary", curDateTxtPath);
+        Log.d("writeDiary", "curDateTxtPath : " + curDateTxtPath);
 
         String curDateTxt = readFile(curDateTxtPath);
-        Log.d("writeDiary", curDateTxt);
+        Log.d("writeDiary", "curDateTxt : " + curDateTxt);
 
+        String decrypted = "";
         try {
             String android_id = idPrefs.getString("android_id", "");
             byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
-            String decrypted = LEA_Crypto.decode(curDateTxt, pbkdf_id);
-
-
-            writetxt.setText(decrypted);
+            decrypted = LEA_Crypto.decode(curDateTxt, pbkdf_id);
         }
         catch(Exception e){
-            Log.d("writeDiary", e.toString());
+            // Navi 바에서 오늘의 일기 작성 메뉴 동작 시 예외 처리
+            try{
+                String today_diary_path = "/storage/emulated/0/SONA/text/" + getTime() + ".txt";
+                curDateTxt = readFile(today_diary_path);
+                String android_id = idPrefs.getString("android_id", "");
+                byte[] pbkdf_id = LEA_Crypto.PBKDF(android_id);
+                decrypted = LEA_Crypto.decode(curDateTxt, pbkdf_id);
+            }
+            catch(Exception f){
+                Log.d("writeDiary", e.toString());
+            }
         }
+        writetxt.setText(decrypted);
 
         savebt.setOnClickListener(view -> {
             try{
@@ -150,9 +160,10 @@ public class WriteDiaryFragment extends Fragment {
     private String getTime() {
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 M월 dd일");
         SharedPreferences prefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         String temp = prefs.getString("curDate", dateFormat.format(date));
+        Log.d("writeDiary", "curDate : " + temp);
         return temp;
     }
 
