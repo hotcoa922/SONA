@@ -280,7 +280,8 @@ public class MainActivity extends AppCompatActivity {
             case CalendarToWrite:
             case HashTagToWrite:
             case CheckToWrite:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write).commit();
+                WriteDiaryFragment newWrite = new WriteDiaryFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, newWrite).commit();
                 break;
             case WriteToCalendar:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, calendar).commit();
