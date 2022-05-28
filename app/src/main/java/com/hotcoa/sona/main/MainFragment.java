@@ -15,22 +15,11 @@ import com.hotcoa.sona.R;
 import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.writediary.WriteDiaryFragment;
 
+import java.util.Stack;
 
-public class MainFragment extends Fragment {
 
-    MainActivity mainActivity;
+public class MainFragment extends BaseFragment {
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mainActivity = null;
-    }
 
     Button diarybt;
     CalendarFragment calendarFragment;
@@ -43,7 +32,7 @@ public class MainFragment extends Fragment {
         calendarFragment = new CalendarFragment();
 
         diarybt.setOnClickListener(view -> {
-            mainActivity.onChangeFragment(MainActivity.Direction.MainToCalendar);    //인자값을 넣어도 된다.
+            mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);    //인자값을 넣어도 된다.
         });
 
 

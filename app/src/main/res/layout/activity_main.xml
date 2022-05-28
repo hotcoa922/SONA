@@ -29,8 +29,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="SONA"
-                android:textSize="20sp"
-                android:textColor="@color/main_text_color"
+                android:fontFamily="@font/font1"
+                android:textStyle="bold"
+                android:textSize="30sp"
                 tools:layout_editor_absoluteX="149dp"
                 tools:layout_editor_absoluteY="16dp" />
 

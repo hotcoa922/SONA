@@ -24,9 +24,10 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 
-public class HashTagFragment extends Fragment {
+public class HashTagFragment extends BaseFragment {
 
     private int dx = 100;//초기 x
     private int dy = 100;//초기 y
@@ -60,18 +61,6 @@ public class HashTagFragment extends Fragment {
 
     SharedPreferences sPf;
 
-    MainActivity mainActivity;
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mainActivity = null;
-    }
 
     int bt1Stat=0;
     int bt2Stat=0;
@@ -440,7 +429,7 @@ public class HashTagFragment extends Fragment {
                     else {
                         int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
                         writeNewCoordinate(hashtagName, dx, dy);
-                        mainActivity.onChangeFragment(MainActivity.Direction.HashTagToWrite);
+                        mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
                     }
                 }
             }

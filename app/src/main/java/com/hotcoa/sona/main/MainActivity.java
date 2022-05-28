@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
@@ -38,11 +40,14 @@ import com.hotcoa.sona.leacrypto.LEA_Crypto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
+    public Stack <Fragment> fragmentStack = new Stack<>();
+
     Toolbar toolbar;
-    AppSettingFragment appset;
+    public AppSettingFragment appset;
     UserGuideFragment guide;
     CalendarFragment calendar;
     WriteDiaryFragment write;
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     ContentsFragment contents;
     ProfileFragment profile;
     ProfileEditFragment profileedit;
+
     NavigationView navi;
     HashTagFragment hash;
 
@@ -58,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     MainFragment mainmain;
+
+
+    public BackpressListener backpressListener = null;
 
     ImageButton move_main_button;
 
@@ -67,11 +76,14 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public enum Direction{
+        /*
         WriteToMain, CalendarToMain, CheckToMain,
         MainToWrite, CalendarToWrite, CheckToWrite, HashTagToWrite,
         ProfileToProfileEdit, ProfileEditToProfile,
         WriteToHashTag,  WriteToCalendar,
          CalendarToCheck, MainToCalendar, CalendarToContents
+         */
+        appsetGo, guideGo,calendarGo,writeGo, checkGo, mindcheckGo,contentsGo, profileGo, profileeditGo, naviGo, hashGo
     };
 
     @Override
@@ -111,27 +123,27 @@ public class MainActivity extends AppCompatActivity {
         //네비창 열면 연 다음 눌렀을 때 처리하는 것
         navi.setNavigationItemSelectedListener(menuItem->{
             if(menuItem.getItemId() == R.id.appsetting_navi){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, appset).commit();
+                onChangeFragment(Direction.appsetGo);
             }
             if(menuItem.getItemId() == R.id.calaendar_navi){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,calendar ).commit();
+                onChangeFragment(Direction.calendarGo);
             }
             if(menuItem.getItemId() == R.id.guide_navi){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,guide ).commit();
+                onChangeFragment(Direction.guideGo);
             }
             if(menuItem.getItemId() == R.id.writediary_navi){
                 set_curDate_Today();
                 pathSave();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,write ).commit();
+                onChangeFragment(Direction.writeGo);
             }
             if(menuItem.getItemId() == R.id.mindcheck_navi){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mindcheck ).commit();
+                onChangeFragment(Direction.checkGo);
             }
             if(menuItem.getItemId() == R.id.contentschuchu_navi){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,contents ).commit();
+                onChangeFragment(Direction.contentsGo);
             }
             if(menuItem.getItemId() == R.id.profile_navi){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profile ).commit();
+                onChangeFragment(Direction.profileGo);
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);  //방향을 지정해 주는 것
@@ -156,6 +168,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         setAndroidID();
+
+
+
+
     }
 
     //ctrl+o 에서 오버라이드할꺼 검색 ㄱㄴ
@@ -270,42 +286,63 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onChangeFragment(Direction d){
+
+        /*
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager
+                .beginTransaction()
+                //.replace(R.id.fragment_container_x, mainmain)
+                .addToBackStack(null)
+                .commit();
+        */
         switch(d){
-            case WriteToMain:
-            case CalendarToMain:
-            case CheckToMain:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,mainmain).commit();    //2번쨰 인자가 목적지
+            //여러분 이동 이벤트 관련해서 해당 케이스들로 전부 수정해주세요
+            case appsetGo:
+                changeFragment(appset);
                 break;
-            case MainToWrite:
-            case CalendarToWrite:
-            case HashTagToWrite:
-            case CheckToWrite:
-                WriteDiaryFragment newWrite = new WriteDiaryFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, newWrite).commit();
+            case guideGo:
+                changeFragment(guide);
                 break;
-            case WriteToCalendar:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, calendar).commit();
+            case calendarGo:
+                changeFragment(calendar);
                 break;
-            case ProfileToProfileEdit:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profileedit).commit();
+            case writeGo:
+                changeFragment(write);
                 break;
-            case ProfileEditToProfile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,profile).commit();
+            case checkGo:
+                changeFragment(check);
                 break;
-            case WriteToHashTag:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, hash).commit();
+            case contentsGo:
+                changeFragment(contents);
                 break;
-            case CalendarToCheck:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, check).commit();
+            case profileGo:
+                changeFragment(profile);
                 break;
-            case CalendarToContents:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, contents).commit();
+            case profileeditGo:
+                changeFragment(profileedit);
                 break;
-            case MainToCalendar:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, calendar).commit();
+            case hashGo:
+                changeFragment(hash);
                 break;
             default:
                 break;
         }
     }
+
+    private void changeFragment(Fragment fragment){
+        Log.d("","제발요"+fragmentStack.size());
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x,fragment).commit();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if(backpressListener!=null){
+            backpressListener.onBackpress();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+
 }

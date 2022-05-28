@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BaseFragment;
 
 
-public class MindCheckFragment extends Fragment {
+public class MindCheckFragment extends BaseFragment {
 
 
     @Override

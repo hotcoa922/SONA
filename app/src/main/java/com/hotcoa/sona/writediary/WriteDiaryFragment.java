@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment;
 
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
+import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 
@@ -39,19 +40,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class WriteDiaryFragment extends Fragment {
-    MainActivity mainActivity;
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-    }
+public class WriteDiaryFragment extends BaseFragment {
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mainActivity = null;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,13 +103,13 @@ public class WriteDiaryFragment extends Fragment {
             }
             catch (Exception e){
             }
-            mainActivity.onChangeFragment(MainActivity.Direction.WriteToCalendar);
+            mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
             writetxt.setText(null);
         });
         hashtag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.onChangeFragment(MainActivity.Direction.WriteToHashTag);
+                mainActivity.onChangeFragment(MainActivity.Direction.hashGo);
             }
         });
 

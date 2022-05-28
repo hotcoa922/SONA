@@ -14,11 +14,12 @@ import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BaseFragment;
 
 import java.util.List;
 
 
-public class UserGuideFragment extends Fragment {
+public class UserGuideFragment extends BaseFragment {
 
     int imageIndex = 0;
 

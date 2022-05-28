@@ -24,6 +24,7 @@ import com.applikeysolutions.cosmocalendar.settings.appearance.ConnectedDayIconP
 import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 
@@ -42,7 +43,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-public class CalendarFragment extends Fragment implements OnDaySelectedListener{
+public class CalendarFragment extends BaseFragment implements OnDaySelectedListener{
 
     private com.applikeysolutions.cosmocalendar.view.CalendarView calendarView;
     private static final long dayMilliSec = 86400000L;
@@ -56,18 +57,6 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
     private final SimpleDateFormat df = new SimpleDateFormat("MM");
     private final Date curDate = new Date();
 
-    MainActivity mainActivity;
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mainActivity = null;
-    }
 
     public CalendarFragment() {
         disabledTimeSetting();
@@ -199,7 +188,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             if(calendarView.getSelectedDates().size() <= 0) {
                 alertDialog();
             }
-            else mainActivity.onChangeFragment(MainActivity.Direction.CalendarToContents);
+            else mainActivity.onChangeFragment(MainActivity.Direction.contentsGo);
         });
     }
 
@@ -211,7 +200,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
             else {
                 daySave();
                 pathSave();
-                mainActivity.onChangeFragment(MainActivity.Direction.CalendarToWrite);
+                mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
             }
         });
     }
@@ -224,7 +213,7 @@ public class CalendarFragment extends Fragment implements OnDaySelectedListener{
                 else {
                     daySave();
                     pathSave();
-                    mainActivity.onChangeFragment(MainActivity.Direction.CalendarToCheck);
+                    mainActivity.onChangeFragment(MainActivity.Direction.checkGo);
                 }
             });
         }

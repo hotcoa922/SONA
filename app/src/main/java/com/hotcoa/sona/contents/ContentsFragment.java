@@ -19,12 +19,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BaseFragment;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class ContentsFragment extends Fragment {
+public class ContentsFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

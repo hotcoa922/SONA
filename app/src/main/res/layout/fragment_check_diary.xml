@@ -31,7 +31,7 @@
         android:background="@drawable/write_paper_background"
         android:font="@font/font1"
         android:gravity="top"
-        android:hint="내용이 표시될 란."
+        android:hint="일기를 작성해 주세요."
         android:padding="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"

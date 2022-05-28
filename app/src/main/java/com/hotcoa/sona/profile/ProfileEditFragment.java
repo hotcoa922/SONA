@@ -21,13 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 
-public class ProfileEditFragment extends Fragment {
+public class ProfileEditFragment extends BaseFragment {
 
     ImageView profileImg;
 
@@ -43,18 +44,7 @@ public class ProfileEditFragment extends Fragment {
 
     SharedPreferences sPf;
 
-    MainActivity mainActivity;
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mainActivity = null;
-    }
 
 
     @Override
@@ -114,7 +104,7 @@ public class ProfileEditFragment extends Fragment {
                 editor.putString("birthDay",birthDay.getText().toString());
                 editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
                 Toast.makeText(getActivity(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
-                mainActivity.onChangeFragment(MainActivity.Direction.ProfileEditToProfile);
+                mainActivity.onChangeFragment(MainActivity.Direction.profileGo);
 
             }
         });

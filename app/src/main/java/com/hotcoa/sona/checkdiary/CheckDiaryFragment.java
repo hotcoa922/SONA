@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.applikeysolutions.cosmocalendar.model.Day;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
+import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 
 import java.io.BufferedReader;
@@ -31,19 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CheckDiaryFragment extends Fragment {
-    MainActivity mainActivity;
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mainActivity = null;
-    }
+public class CheckDiaryFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,7 +71,7 @@ public class CheckDiaryFragment extends Fragment {
     private void onEditClick(Button editButton) {
         editButton.setOnClickListener(view -> {
             pathSave();
-            mainActivity.onChangeFragment(MainActivity.Direction.CheckToWrite);
+            mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
         });
     }
 

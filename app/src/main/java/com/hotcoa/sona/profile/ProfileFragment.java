@@ -17,9 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends BaseFragment {
 
     ImageView profileImg;
 
@@ -33,18 +34,6 @@ public class ProfileFragment extends Fragment {
 
     SharedPreferences sPf;
 
-    MainActivity mainActivity;
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mainActivity = null;
-    }
 
 
     @Override
@@ -67,6 +56,7 @@ public class ProfileFragment extends Fragment {
         String image = sPf.getString("profileImg", "");
         Bitmap bitmap = StringToBitMap(image);
 
+        nickName.setText(sPf.getString("nickName",""));
         diaryName.setText(sPf.getString("diaryName",""));
         birthYear.setText(sPf.getString("birthYear",""));
         birthMonth.setText(sPf.getString("birthMonth",""));
@@ -75,7 +65,7 @@ public class ProfileFragment extends Fragment {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.onChangeFragment(MainActivity.Direction.ProfileToProfileEdit);
+                mainActivity.onChangeFragment(MainActivity.Direction.profileGo);
             }
         });
 

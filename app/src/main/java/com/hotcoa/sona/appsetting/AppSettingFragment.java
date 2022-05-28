@@ -24,8 +24,12 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.main.BackpressListener;
+import com.hotcoa.sona.main.BaseFragment;
+import com.hotcoa.sona.main.MainActivity;
 
-public class AppSettingFragment extends Fragment {
+public class AppSettingFragment extends BaseFragment {
+
 
     private ViewGroup rootView;
     @Override
@@ -74,6 +78,13 @@ public class AppSettingFragment extends Fragment {
                 dialog.show();
             }
         });
+
+
+
+
+
+
+
         return rootView;
     }
     private String getAppVersionName(){

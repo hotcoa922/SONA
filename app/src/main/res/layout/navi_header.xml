@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textSize="40dp"
+        android:fontFamily="@font/font1"
+        android:textStyle="bold"
+        android:textSize="60sp"
         android:text="\nSONA APP\n"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -21,6 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left|center"
-        android:text="ver 0.00.30" />
+        android:text="ver 0.70.50" />
 
 </LinearLayout>
