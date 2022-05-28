@@ -124,7 +124,7 @@ public class HashTagFragment extends Fragment {
             }
             else {
                 //경계 상에 있는 경우
-                ret = 10;
+                ret = 0;
             }
         }
         else if(x > 100 && y > 100) {
@@ -283,7 +283,6 @@ public class HashTagFragment extends Fragment {
             }
         });
 
-
         save = (Button)rootView.findViewById(R.id.hashtag_save_bt) ;
 
         sPf = getActivity().getSharedPreferences("Hashtag_info", Context.MODE_PRIVATE);
@@ -434,7 +433,6 @@ public class HashTagFragment extends Fragment {
                     Toast.makeText(getActivity(), "사용자 정의 해쉬태그는 최대 3개까지 선택 가능합니다!", Toast.LENGTH_SHORT).show();
                 }
                 if(totCustBtStat<3 && totDfBtStat<3){
-                    mainActivity.onChangeFragment(MainActivity.Direction.HashTagToWrite);
                     //Firebase에 좌표값 저장
                     if(newHashtag.getText().toString().length() <= 0) {
                         Toast.makeText(rootView.getContext(), "Hashtag 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show();
@@ -442,6 +440,7 @@ public class HashTagFragment extends Fragment {
                     else {
                         int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
                         writeNewCoordinate(hashtagName, dx, dy);
+                        mainActivity.onChangeFragment(MainActivity.Direction.HashTagToWrite);
                     }
                 }
             }

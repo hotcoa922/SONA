@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         MainToWrite, CalendarToWrite, CheckToWrite, HashTagToWrite,
         ProfileToProfileEdit, ProfileEditToProfile,
         WriteToHashTag,  WriteToCalendar,
-         CalendarToCheck, CalendarToContents
+         CalendarToCheck, MainToCalendar, CalendarToContents
     };
 
     @Override
@@ -301,7 +301,9 @@ public class MainActivity extends AppCompatActivity {
             case CalendarToContents:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, contents).commit();
                 break;
-
+            case MainToCalendar:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_x, calendar).commit();
+                break;
             default:
                 break;
         }
