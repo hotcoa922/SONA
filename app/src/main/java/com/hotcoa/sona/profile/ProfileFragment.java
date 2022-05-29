@@ -65,7 +65,7 @@ public class ProfileFragment extends BaseFragment {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.onChangeFragment(MainActivity.Direction.profileGo);
+                mainActivity.onChangeFragment(MainActivity.Direction.profileeditGo);
             }
         });
 
