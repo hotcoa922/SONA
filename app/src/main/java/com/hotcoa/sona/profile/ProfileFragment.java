@@ -6,8 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +40,7 @@ public class ProfileFragment extends BaseFragment {
 
         profileImg = (ImageView) rootView.findViewById(R.id.profile_img);
 
-        nickName = (TextView) rootView.findViewById(R.id.newHashtagName);
+        nickName = (TextView) rootView.findViewById(R.id.newHashtagName_et);
         diaryName = (TextView) rootView.findViewById(R.id.diaryname_tv);
         birthYear = (TextView) rootView.findViewById(R.id.birth_year_tv);
         birthMonth = (TextView) rootView.findViewById(R.id.birth_month_tv);

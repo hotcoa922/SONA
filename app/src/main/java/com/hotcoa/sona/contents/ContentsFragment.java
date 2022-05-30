@@ -79,7 +79,6 @@ public class ContentsFragment extends BaseFragment {
                 ContentsWebView.loadUrl(url.toString());
                 Toast.makeText(getActivity(), "콘텐츠!", Toast.LENGTH_LONG).show();
                 Log.d(TAG, "----------------------------");
-
             }
         });
         return rootView;
