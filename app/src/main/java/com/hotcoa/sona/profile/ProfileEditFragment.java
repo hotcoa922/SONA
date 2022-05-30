@@ -80,6 +80,12 @@ public class ProfileEditFragment extends BaseFragment {
         birthMonth.setHint(sPf.getString("birthMonth",""));
         birthDay.setHint(sPf.getString("birthDay",""));
 
+
+        nickName.setText(sPf.getString("nickName",""));
+        diaryName.setText(sPf.getString("diaryName",""));
+        birthYear.setText(sPf.getString("birthYear",""));
+        birthMonth.setText(sPf.getString("birthMonth",""));
+        birthDay.setText(sPf.getString("birthDay",""));
         /*
         profileCng.setOnClickListener(new View.OnClickListener() {
             @Override

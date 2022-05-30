@@ -192,12 +192,12 @@
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/newHashtagName"
+        app:layout_constraintEnd_toStartOf="@+id/newHashtagName_et"
         app:layout_constraintStart_toStartOf="@+id/profile_guideline11"
         app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
 
     <EditText
-        android:id="@+id/newHashtagName"
+        android:id="@+id/newHashtagName_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font1"

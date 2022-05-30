@@ -105,7 +105,7 @@
 
 
     <TextView
-        android:id="@+id/newHashtagName"
+        android:id="@+id/newHashtagName_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

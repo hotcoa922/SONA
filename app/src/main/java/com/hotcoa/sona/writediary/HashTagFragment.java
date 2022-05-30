@@ -9,8 +9,6 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,14 +48,19 @@ public class HashTagFragment extends BaseFragment {
     Button bt7;
     Button bt8;
 
-    Button addHashtagNameBtn;
+    Button cstbt1;
+    Button cstbt2;
+    Button cstbt3;
 
+    Button addHashtagNameBtn;
     EditText newHashtag;
 
     SeekBar seekBar1;
     SeekBar seekBar2;
 
     ImageView imgView;
+
+
 
     SharedPreferences sPf;
 
@@ -207,8 +210,12 @@ public class HashTagFragment extends BaseFragment {
         bt7 = (Button) rootView.findViewById(R.id.df_hstag_bt7);
         bt8 = (Button) rootView.findViewById(R.id.df_hstag_bt8);
 
+        cstbt1 = (Button) rootView.findViewById(R.id.cs_hstag_bt1);
+        cstbt2 = (Button) rootView.findViewById(R.id.cs_hstag_bt2);
+        cstbt3 = (Button) rootView.findViewById(R.id.cs_hstag_bt3);
+
         addHashtagNameBtn = (Button) rootView.findViewById(R.id.addHashtagNameButton);
-        newHashtag = (EditText) rootView.findViewById(R.id.newHashtagName);
+        newHashtag = (EditText) rootView.findViewById(R.id.newHashtagName_et);
         seekBar1 = (SeekBar) rootView.findViewById(R.id.seekBar1);
         seekBar2 = (SeekBar) rootView.findViewById(R.id.seekBar2);
 
@@ -257,6 +264,7 @@ public class HashTagFragment extends BaseFragment {
             }
         });
 
+
         //새로운 hashtag 이름(String)입력하고 추가하기 눌렀을 때 event 처리
         addHashtagNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,8 +274,35 @@ public class HashTagFragment extends BaseFragment {
                     Toast.makeText(rootView.getContext(), "Hashtag 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    hashtagName = temp;
-                    Toast.makeText(rootView.getContext(), "Hashtag 이름 설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    hashtagName = temp; //쓰고 있는 코드
+
+                    int cnt = 0;
+                    while(true){
+                        cnt++;
+                        sPf = getActivity().getSharedPreferences("tmp_custom_hashtag", Context.MODE_PRIVATE); //이름 동일하게 해야함
+                        SharedPreferences.Editor editor = sPf.edit();
+
+                        if (cnt == 1){
+                            editor.putString("hashname1",newHashtag.getText().toString());
+                            cstbt1.setText(sPf.getString("hashname1",""));
+                        }
+                        else if(cnt == 2){
+                            editor.putString("hashname2",newHashtag.getText().toString());
+                            cstbt2.setText(sPf.getString("hashname2",""));
+                        }
+                        else if(cnt == 3){
+                            editor.putString("hashname3",newHashtag.getText().toString());
+                            cstbt3.setText(sPf.getString("hashname3",""));
+                        }
+                        else{
+                            Toast.makeText(rootView.getContext(), "안돼 돌아가.", Toast.LENGTH_SHORT).show();
+                        }
+                        Toast.makeText(rootView.getContext(), "새로운 해시태그 추가완료 현재" +cnt+"개!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+
                 }
             }
         });
