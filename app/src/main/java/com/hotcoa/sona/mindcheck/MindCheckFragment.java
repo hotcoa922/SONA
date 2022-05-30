@@ -21,9 +21,6 @@ public class MindCheckFragment extends BaseFragment {
 
 
 
-
-
-
         return rootView;
     }
 }

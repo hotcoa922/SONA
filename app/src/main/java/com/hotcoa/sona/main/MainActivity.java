@@ -76,14 +76,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public enum Direction{
-        /*
-        WriteToMain, CalendarToMain, CheckToMain,
-        MainToWrite, CalendarToWrite, CheckToWrite, HashTagToWrite,
-        ProfileToProfileEdit, ProfileEditToProfile,
-        WriteToHashTag,  WriteToCalendar,
-         CalendarToCheck, MainToCalendar, CalendarToContents
-         */
-        appsetGo, guideGo,calendarGo,writeGo, checkGo, mindcheckGo,contentsGo, profileGo, profileeditGo, naviGo, hashGo
+        appsetGo, guideGo,calendarGo,writeGo, checkGo, mindcheckGo,contentsGo, profileGo, profileeditGo,  hashGo
     };
 
     @Override
@@ -132,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 onChangeFragment(Direction.guideGo);
             }
             if(menuItem.getItemId() == R.id.mindcheck_navi){
-                onChangeFragment(Direction.checkGo);
+                onChangeFragment(Direction.mindcheckGo);
             }
             if(menuItem.getItemId() == R.id.contentschuchu_navi){
                 onChangeFragment(Direction.contentsGo);
