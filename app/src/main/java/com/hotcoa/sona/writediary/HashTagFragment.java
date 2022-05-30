@@ -292,38 +292,34 @@ public class HashTagFragment extends BaseFragment {
                     Toast.makeText(rootView.getContext(), "Hashtag 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    hashtagName = temp; //쓰고 있는 코드
                     /*
                     if(cursor!=null){
                         cursor.setText(newHashtag.getText().toString());
                         editor.putString("hashname"+cnt,newHashtag.getText().toString());
                     }
                     */
+                    int idx = 0;
                     for(Button button:addcsthasgtagbt){
                         if(button.getText().toString().equals("-")){
                             button.setText(newHashtag.getText().toString());
                             button.setBackgroundColor(requireContext().getColor(R.color.button_select));
-                            editor.putString("hashname"+cnt,newHashtag.getText().toString());
+                            editor.putString("hashname"+idx,newHashtag.getText().toString());
                             editor.apply();
                             cnt++;
 
                             Toast.makeText(rootView.getContext(), "새로운 해시태그 추가완료 현재" +cnt+"개!", Toast.LENGTH_SHORT).show();
                             return;
                         }
+                        idx++;
                     }
+
 
                     if(cnt>2){
                         Toast.makeText(rootView.getContext(), "안돼 돌아가.", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    hashtagName = temp; //쓰고 있는 코드
-
-                    /*
-                    addcsthasgtagbt.get(cnt).setText(newHashtag.getText().toString());  //버튼에 입력할 값 선택
-                    editor.putString("hashname"+cnt,newHashtag.getText().toString());   //오 이게되네
-                    cnt++;
-
-                     */
 
 
                 }
