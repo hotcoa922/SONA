@@ -265,10 +265,12 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(guide);
                 break;
             case calendarGo:
-                changeFragment(calendar);
+                CalendarFragment new_calendarFragment = new CalendarFragment();
+                changeFragment(new_calendarFragment);
                 break;
             case writeGo:
-                changeFragment(write);
+                WriteDiaryFragment new_writeDiaryFragment = new WriteDiaryFragment();
+                changeFragment(new_writeDiaryFragment);
                 break;
             case checkGo:
                 changeFragment(check);

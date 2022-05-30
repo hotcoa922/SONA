@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.applikeysolutions.cosmocalendar.view.CalendarView;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.BaseFragment;
@@ -74,7 +75,6 @@ public class WriteDiaryFragment extends BaseFragment {
         catch(Exception e){
         }
         datetv.setText(getTime());
-        writetxt.setText(null);
         String finalDecrypted = decrypted;
         writetxt.setText(finalDecrypted);
         Log.d("writeDiary","curDate_diarytxt : " + decrypted);
@@ -102,13 +102,16 @@ public class WriteDiaryFragment extends BaseFragment {
                 Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
             }
             catch (Exception e){
+
             }
             mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
             writetxt.setText(null);
+            onDestroy();
         });
-        hashtag.setOnClickListener(view ->
-            mainActivity.onChangeFragment(MainActivity.Direction.hashGo)
-        );
+        hashtag.setOnClickListener(view -> {
+            mainActivity.onChangeFragment(MainActivity.Direction.hashGo);
+            onDestroy();
+        });
 
         return rootView;
     }
