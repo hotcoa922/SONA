@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applikeysolutions.cosmocalendar.model.Day;
+import com.applikeysolutions.cosmocalendar.view.CalendarView;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.BaseFragment;
@@ -74,6 +75,7 @@ public class CheckDiaryFragment extends BaseFragment {
         editButton.setOnClickListener(view -> {
             pathSave();
             mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
+            onDestroy();
         });
     }
 
@@ -91,6 +93,7 @@ public class CheckDiaryFragment extends BaseFragment {
             }
             Toast.makeText(view.getContext(), "일기가 삭제되었습니다!", Toast.LENGTH_SHORT).show();
             mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
+            onDestroy();
         });
     }
 
