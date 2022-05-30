@@ -25,6 +25,9 @@ import com.hotcoa.sona.R;
 import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 
+import java.util.ArrayList;
+import java.util.Queue;
+
 public class HashTagFragment extends BaseFragment {
 
     private int dx = 100;//초기 x
@@ -73,6 +76,12 @@ public class HashTagFragment extends BaseFragment {
     int bt6Stat=0;
     int bt7Stat=0;
     int bt8Stat=0;    //버튼의 상태용(일부로 int형 처리)
+
+    int cnt = 0;    //새로 추가된 해시테그 갯수
+
+    //Button cursor;
+
+    ArrayList<Button> addcsthasgtagbt = new ArrayList<>();
 
     private void drawImgView(Bitmap bitmap, Paint myPaint) {
         canvas = new Canvas(bitmap);
@@ -214,6 +223,11 @@ public class HashTagFragment extends BaseFragment {
         cstbt2 = (Button) rootView.findViewById(R.id.cs_hstag_bt2);
         cstbt3 = (Button) rootView.findViewById(R.id.cs_hstag_bt3);
 
+        //ArrayList에 추가
+        addcsthasgtagbt.add(cstbt1);
+        addcsthasgtagbt.add(cstbt2);
+        addcsthasgtagbt.add(cstbt3);
+
         addHashtagNameBtn = (Button) rootView.findViewById(R.id.addHashtagNameButton);
         newHashtag = (EditText) rootView.findViewById(R.id.newHashtagName_et);
         seekBar1 = (SeekBar) rootView.findViewById(R.id.seekBar1);
@@ -264,50 +278,94 @@ public class HashTagFragment extends BaseFragment {
             }
         });
 
+        sPf = getActivity().getSharedPreferences("tmp_custom_hashtag", Context.MODE_PRIVATE); //이름 동일하게 해야함
+        SharedPreferences.Editor editor = sPf.edit();
 
         //새로운 hashtag 이름(String)입력하고 추가하기 눌렀을 때 event 처리
         addHashtagNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 String temp = newHashtag.getText().toString();
                 if(temp.length() <= 0) {
                     Toast.makeText(rootView.getContext(), "Hashtag 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    hashtagName = temp; //쓰고 있는 코드
+                    /*
+                    if(cursor!=null){
+                        cursor.setText(newHashtag.getText().toString());
+                        editor.putString("hashname"+cnt,newHashtag.getText().toString());
+                    }
+                    */
+                    for(Button button:addcsthasgtagbt){
+                        if(button.getText().toString().equals("-")){
+                            button.setText(newHashtag.getText().toString());
+                            button.setBackgroundColor(requireContext().getColor(R.color.button_select));
+                            editor.putString("hashname"+cnt,newHashtag.getText().toString());
+                            editor.apply();
+                            cnt++;
 
-                    int cnt = 0;
-                    while(true){
-                        cnt++;
-                        sPf = getActivity().getSharedPreferences("tmp_custom_hashtag", Context.MODE_PRIVATE); //이름 동일하게 해야함
-                        SharedPreferences.Editor editor = sPf.edit();
-
-                        if (cnt == 1){
-                            editor.putString("hashname1",newHashtag.getText().toString());
-                            cstbt1.setText(sPf.getString("hashname1",""));
+                            Toast.makeText(rootView.getContext(), "새로운 해시태그 추가완료 현재" +cnt+"개!", Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                        else if(cnt == 2){
-                            editor.putString("hashname2",newHashtag.getText().toString());
-                            cstbt2.setText(sPf.getString("hashname2",""));
-                        }
-                        else if(cnt == 3){
-                            editor.putString("hashname3",newHashtag.getText().toString());
-                            cstbt3.setText(sPf.getString("hashname3",""));
-                        }
-                        else{
-                            Toast.makeText(rootView.getContext(), "안돼 돌아가.", Toast.LENGTH_SHORT).show();
-                        }
-                        Toast.makeText(rootView.getContext(), "새로운 해시태그 추가완료 현재" +cnt+"개!", Toast.LENGTH_SHORT).show();
-
                     }
 
+                    if(cnt>2){
+                        Toast.makeText(rootView.getContext(), "안돼 돌아가.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    hashtagName = temp; //쓰고 있는 코드
+
+                    /*
+                    addcsthasgtagbt.get(cnt).setText(newHashtag.getText().toString());  //버튼에 입력할 값 선택
+                    editor.putString("hashname"+cnt,newHashtag.getText().toString());   //오 이게되네
+                    cnt++;
+
+                     */
 
 
                 }
             }
         });
 
-        save = (Button)rootView.findViewById(R.id.hashtag_save_bt) ;
+
+        cstbt1.setOnClickListener((View.OnClickListener) view -> {
+            if(((Button)view).getText().toString().equals("-")){        //(Button)view는 누른 애 인자
+                return;
+            }
+            cstbt1.setBackgroundColor(requireContext().getColor(R.color.black));
+            addcsthasgtagbt.get(0).setText("-");
+            editor.putString("hashname0", "");
+            cnt--;
+            //cursor = (Button)view;
+        });
+
+        cstbt2.setOnClickListener((View.OnClickListener) view -> {
+            if(((Button)view).getText().toString().equals("-")){        //(Button)view는 누른 애 인자
+                return;
+            }
+            cstbt1.setBackgroundColor(requireContext().getColor(R.color.black));
+            addcsthasgtagbt.get(1).setText("-");
+            editor.putString("hashname1", "");
+            cnt--;
+            //cursor = (Button)view;
+        });
+
+        cstbt3.setOnClickListener((View.OnClickListener) view -> {
+            if(((Button)view).getText().toString().equals("-")){        //(Button)view는 누른 애 인자
+                return;
+            }
+            cstbt1.setBackgroundColor(requireContext().getColor(R.color.black));
+            addcsthasgtagbt.get(2).setText("-");
+            editor.putString("hashname2", "");
+            cnt--;
+            //cursor = (Button)view;
+        });
+
+
+        save = (Button) rootView.findViewById(R.id.hashtag_save_bt);
 
         sPf = getActivity().getSharedPreferences("Hashtag_info", Context.MODE_PRIVATE);
 
@@ -467,6 +525,14 @@ public class HashTagFragment extends BaseFragment {
                         mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
                     }
                 }
+
+                //저장하고 나가면 기억하지 못하게 하기
+                for(int i= 0; i<3; i++){
+                    editor.putString("hashname"+i, "");
+                    addcsthasgtagbt.get(i).setText("-");
+                }
+                editor.apply();
+
             }
         });
         return rootView;
