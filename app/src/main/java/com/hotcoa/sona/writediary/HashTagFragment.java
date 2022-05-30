@@ -210,6 +210,10 @@ public class HashTagFragment extends BaseFragment {
         bt7 = (Button) rootView.findViewById(R.id.df_hstag_bt7);
         bt8 = (Button) rootView.findViewById(R.id.df_hstag_bt8);
 
+        cstbt1 = (Button) rootView.findViewById(R.id.cs_hstag_bt1);
+        cstbt2 = (Button) rootView.findViewById(R.id.cs_hstag_bt2);
+        cstbt3 = (Button) rootView.findViewById(R.id.cs_hstag_bt3);
+
         addHashtagNameBtn = (Button) rootView.findViewById(R.id.addHashtagNameButton);
         newHashtag = (EditText) rootView.findViewById(R.id.newHashtagName_et);
         seekBar1 = (SeekBar) rootView.findViewById(R.id.seekBar1);
@@ -287,7 +291,7 @@ public class HashTagFragment extends BaseFragment {
                             cstbt2.setText(sPf.getString("hashname2",""));
                         }
                         else if(cnt == 3){
-                            editor.putString("hashname2",newHashtag.getText().toString());
+                            editor.putString("hashname3",newHashtag.getText().toString());
                             cstbt3.setText(sPf.getString("hashname3",""));
                         }
                         else{
