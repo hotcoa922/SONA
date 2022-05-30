@@ -58,6 +58,7 @@
         android:fontFamily="@font/font1"
         android:textStyle="bold"
         android:textSize="30sp"
+        android:textColor="@color/button_light_intext_color"
         android:text="이름"
         app:layout_constraintBottom_toTopOf="@+id/birth_tx"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
@@ -71,6 +72,7 @@
         android:fontFamily="@font/font1"
         android:textStyle="bold"
         android:textSize="30sp"
+        android:textColor="@color/button_light_intext_color"
         android:text="생년월일"
         app:layout_constraintBottom_toTopOf="@+id/diaryname_tx"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
@@ -84,6 +86,7 @@
         android:fontFamily="@font/font1"
         android:textStyle="bold"
         android:textSize="30sp"
+        android:textColor="@color/button_light_intext_color"
         android:text="다이어리\n  이름"
         app:layout_constraintBottom_toTopOf="@+id/diaryfont_tx"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
@@ -95,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font1"
+        android:textColor="@color/button_light_intext_color"
         android:text="푸시알림"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -112,6 +116,7 @@
         android:fontFamily="@font/font1"
         android:textStyle="bold"
         android:textSize="30sp"
+        android:textColor="@color/button_light_intext_color"
         android:hint="김소나"
         app:layout_constraintBottom_toBottomOf="@+id/username_tx"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,6 +131,7 @@
         android:fontFamily="@font/font1"
         android:textStyle="bold"
         android:textSize="30sp"
+        android:textColor="@color/button_light_intext_color"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/diaryname_tx"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,6 +183,7 @@
             android:fontFamily="@font/font1"
             android:textStyle="bold"
             android:textSize="30sp"
+            android:textColor="@color/button_light_intext_color"
             android:hint="2022" />
 
         <TextView
@@ -186,6 +193,7 @@
             android:fontFamily="@font/font1"
             android:textStyle="bold"
             android:textSize="30sp"
+            android:textColor="@color/button_light_intext_color"
             android:text="년" />
     </LinearLayout>
 
@@ -206,6 +214,7 @@
             android:fontFamily="@font/font1"
             android:textStyle="bold"
             android:textSize="30sp"
+            android:textColor="@color/button_light_intext_color"
             android:hint="12" />
 
         <TextView
@@ -213,9 +222,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font1"
-            android:textStyle="bold"
+            android:text="월"
             android:textSize="30sp"
-            android:text="월" />
+            android:textStyle="bold"
+            android:textColor="@color/button_light_intext_color"/>
     </LinearLayout>
 
     <LinearLayout
@@ -236,6 +246,7 @@
             android:fontFamily="@font/font1"
             android:textStyle="bold"
             android:textSize="30sp"
+            android:textColor="@color/button_light_intext_color"
             android:hint="31" />
 
         <TextView

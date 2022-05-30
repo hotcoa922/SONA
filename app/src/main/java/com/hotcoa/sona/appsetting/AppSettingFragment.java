@@ -79,12 +79,6 @@ public class AppSettingFragment extends BaseFragment {
             }
         });
 
-
-
-
-
-
-
         return rootView;
     }
     private String getAppVersionName(){

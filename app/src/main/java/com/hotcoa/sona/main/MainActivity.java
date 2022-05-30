@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public Stack <Fragment> fragmentStack = new Stack<>();
 
     Toolbar toolbar;
-    public AppSettingFragment appset;
+    AppSettingFragment appset;
     UserGuideFragment guide;
     CalendarFragment calendar;
     WriteDiaryFragment write;
@@ -131,11 +131,6 @@ public class MainActivity extends AppCompatActivity {
             if(menuItem.getItemId() == R.id.guide_navi){
                 onChangeFragment(Direction.guideGo);
             }
-            if(menuItem.getItemId() == R.id.writediary_navi){
-                set_curDate_Today();
-                pathSave();
-                onChangeFragment(Direction.writeGo);
-            }
             if(menuItem.getItemId() == R.id.mindcheck_navi){
                 onChangeFragment(Direction.checkGo);
             }
@@ -179,18 +174,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        /*
-        if(item.getItemId()==R.id.home_bt){
-            Toast.makeText(this, "홈아이콘 클릭", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-            return true;
-        }
-        */
         return super.onOptionsItemSelected(item);
     }
 
@@ -280,15 +263,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onChangeFragment(Direction d){
-
-        /*
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                //.replace(R.id.fragment_container_x, mainmain)
-                .addToBackStack(null)
-                .commit();
-        */
         switch(d){
             //여러분 이동 이벤트 관련해서 해당 케이스들로 전부 수정해주세요
             case appsetGo:

@@ -68,6 +68,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fontFamily="@font/font1"
+        android:fitsSystemWindows="true"
+        app:itemTextAppearance="@style/MenuFont"
+        app:itemTextColor="@color/main_text_color"
         app:headerLayout="@layout/navi_header"
         app:menu="@menu/navi_menu" />
     <!-- 사이드 메뉴 헤더(app:headerLayout) 추가 -->
