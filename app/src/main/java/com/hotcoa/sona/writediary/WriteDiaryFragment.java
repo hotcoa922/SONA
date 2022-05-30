@@ -106,12 +106,9 @@ public class WriteDiaryFragment extends BaseFragment {
             mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
             writetxt.setText(null);
         });
-        hashtag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainActivity.onChangeFragment(MainActivity.Direction.hashGo);
-            }
-        });
+        hashtag.setOnClickListener(view ->
+            mainActivity.onChangeFragment(MainActivity.Direction.hashGo)
+        );
 
         return rootView;
     }
@@ -193,7 +190,7 @@ public class WriteDiaryFragment extends BaseFragment {
         try {
             BufferedReader buf = new BufferedReader(new FileReader(absoluteUrl));
             while((line=buf.readLine())!=null){
-                return String.valueOf(line);
+                return line;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

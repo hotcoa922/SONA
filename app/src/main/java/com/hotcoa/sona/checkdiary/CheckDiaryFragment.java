@@ -1,5 +1,6 @@
 package com.hotcoa.sona.checkdiary;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -22,6 +23,7 @@ import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
+import com.hotcoa.sona.utility.SharedPrefs;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -64,7 +66,7 @@ public class CheckDiaryFragment extends BaseFragment {
             Log.d("checkDiary", e.toString());
         }
         onEditClick(editbt);
-        onDeleteClick(deletebt);
+        onDeleteClick(deletebt, getTime());
         return rootView;
     }
 
@@ -75,10 +77,20 @@ public class CheckDiaryFragment extends BaseFragment {
         });
     }
 
-    private void onDeleteClick(Button deleteButton) {
+    private void onDeleteClick(Button deleteButton, String fileName) {
         deleteButton.setOnClickListener(view -> {
             // 파일 삭제
+            String deleteCheck = SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName);
+            if(deleteCheck != null && deleteCheck.length() > 0) {
+                try {
+                    ContentResolver contentResolver = getActivity().getContentResolver();
+                    contentResolver.delete(Uri.parse(SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName)), null, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             Toast.makeText(view.getContext(), "일기가 삭제되었습니다!", Toast.LENGTH_SHORT).show();
+            mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
         });
     }
 

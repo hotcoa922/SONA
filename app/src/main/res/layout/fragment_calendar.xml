@@ -88,8 +88,11 @@
         android:layout_marginStart="16dp"
         android:text="일기 조회"
         app:layout_constraintBottom_toTopOf="@+id/button_write"
+        app:layout_constraintEnd_toStartOf="@+id/button_contents"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/profile_guideline1" />
+        app:layout_constraintTop_toTopOf="@+id/profile_guideline1"
+        app:layout_constraintVertical_bias="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

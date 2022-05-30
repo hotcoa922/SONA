@@ -54,24 +54,24 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
     private final static HashMap<String, String> mName = new HashMap<>();
     private static Set<String> sDate = new HashSet<>();;
     @SuppressLint("SimpleDateFormat")
-    private final SimpleDateFormat df = new SimpleDateFormat("MM");
+    private final SimpleDateFormat df = new SimpleDateFormat("M");
     private final Date curDate = new Date();
 
 
     public CalendarFragment() {
         disabledTimeSetting();
-        mName.put("January", "01");
-        mName.put("February", "02");
-        mName.put("March", "03");
-        mName.put("April", "04");
-        mName.put("May", "05");
-        mName.put("June", "06");
-        mName.put("July", "07");
-        mName.put("August", "08");
-        mName.put("September", "09");
-        mName.put("October", "10");
-        mName.put("November", "11");
-        mName.put("December", "12");
+        mName.put("January",    "1");
+        mName.put("February",   "2");
+        mName.put("March",      "3");
+        mName.put("April",      "4");
+        mName.put("May",        "5");
+        mName.put("June",       "6");
+        mName.put("July",       "7");
+        mName.put("August",     "8");
+        mName.put("September",  "9");
+        mName.put("October",    "10");
+        mName.put("November",   "11");
+        mName.put("December",   "12");
     }
 
     private void disabledTimeSetting() {
@@ -123,7 +123,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         onMonthChange(curMonth);
 
         Set<Long> days = new TreeSet<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 M월 dd일");
         try {
             Iterator<String> it = sDate.iterator();
             while(it.hasNext()) {

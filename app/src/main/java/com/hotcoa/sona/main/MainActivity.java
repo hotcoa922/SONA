@@ -165,13 +165,7 @@ public class MainActivity extends AppCompatActivity {
                startActivity(intent);
             }
         });
-
-
         setAndroidID();
-
-
-
-
     }
 
     //ctrl+o 에서 오버라이드할꺼 검색 ㄱㄴ
