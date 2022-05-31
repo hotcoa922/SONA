@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textColor="@color/button_light_intext_color"
                 android:text="SONA"
                 android:fontFamily="@font/font1"
                 android:textStyle="bold"
@@ -40,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:textColor="@color/button_light_intext_color"
                 app:srcCompat="@drawable/ic_home_24"
                 app:showAsAction="always" />
 
@@ -70,8 +72,10 @@
         android:layout_gravity="start"
         android:fontFamily="@font/font1"
         android:fitsSystemWindows="true"
+        android:background="@color/sub_background_color"
         app:itemTextAppearance="@style/MenuFont"
-        app:itemTextColor="@color/main_text_color"
+        app:itemTextColor="@color/button_dark_intext_color"
+        app:itemIconTint="@color/button_dark_intext_color"
         app:headerLayout="@layout/navi_header"
         app:menu="@menu/navi_menu" />
     <!-- 사이드 메뉴 헤더(app:headerLayout) 추가 -->

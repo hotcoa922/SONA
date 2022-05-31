@@ -15,7 +15,8 @@
     </style>
 
     <style name="MenuFont" parent="android:Widget.TextView">
-        <item name="android:fontFamily" >@font/font1</item>
+        <item name="android:fontFamily" >@font/font2</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/button_dark_intext_color</item>
     </style>
 </resources>
