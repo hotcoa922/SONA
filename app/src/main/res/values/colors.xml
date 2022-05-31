@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="toolbar_color">#F5F5DC	</color>
+    <color name="toolbar_color">#D7D5D5	</color>
     <color name="main_background_color">#F6F6F6	</color>
     <color name="main_text_color">#2E0C0C</color>
-    <color name="sub_background_color">#9494E6	</color>
+    <color name="sub_background_color">#8F8D8D	</color>
     <color name="icon_color">#3D3B07</color>
     <color name="write_paper_color">#EEEFF0</color>
     <color name="button_dark_color">#000000</color>

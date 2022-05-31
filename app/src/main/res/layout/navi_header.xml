@@ -20,13 +20,13 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font1"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/font2"
+        android:gravity="center"
+        android:text="ver 0.70.50"
         android:textColor="@color/button_light_intext_color"
-        android:gravity="left|center"
-        android:text="ver 0.70.50" />
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
