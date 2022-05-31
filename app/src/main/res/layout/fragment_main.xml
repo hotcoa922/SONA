@@ -13,18 +13,22 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아마 명언..."
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:text="@string/main_ment"
+        android:textSize="30sp"
+        android:fontFamily="@font/font3"
+        app:layout_constraintBottom_toTopOf="@+id/main_diary_name_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/main_diary_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="30sp"
+        android:fontFamily="@font/font3"
         android:text="SONA"
         app:layout_constraintBottom_toTopOf="@+id/diary_bt"
         app:layout_constraintEnd_toEndOf="parent"
