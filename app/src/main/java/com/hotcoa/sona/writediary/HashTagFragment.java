@@ -326,7 +326,7 @@ public class HashTagFragment extends BaseFragment {
             }
         });
 
-
+        //처리
         cstbt1.setOnClickListener((View.OnClickListener) view -> {
             if(((Button)view).getText().toString().equals("-")){        //(Button)view는 누른 애 인자
                 return;
