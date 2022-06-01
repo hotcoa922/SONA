@@ -146,12 +146,10 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
 
         Button button_writeDiary = rootView.findViewById(R.id.button_write);
         Button button_contents = rootView.findViewById(R.id.button_contents);
-        Button button_share = rootView.findViewById(R.id.button_share);
         Button button_checkDairy = rootView.findViewById(R.id.button_check);
 
         onWriteClick(button_writeDiary);
         onContentsClick(button_contents);
-        onShareClick(button_share);
         onCheckClick(button_checkDairy);
         return rootView;
     }
