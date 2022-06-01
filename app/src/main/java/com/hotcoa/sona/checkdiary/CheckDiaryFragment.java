@@ -139,6 +139,13 @@ public class CheckDiaryFragment extends BaseFragment {
                 try {
                     ContentResolver contentResolver = getActivity().getContentResolver();
                     Log.d("delete_check", "=========================");
+                    Log.d("delete_check", deleteCheck);
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            deleteButton.setEnabled(true);
+                        }
+                    }, 100);
                     contentResolver.delete(Uri.parse(SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName)), null, null);
                 } catch (Exception e) {
                     e.printStackTrace();

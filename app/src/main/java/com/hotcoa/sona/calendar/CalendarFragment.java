@@ -105,6 +105,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
 
         SharedPreferences saveDatePrefs = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
         SharedPreferences saveDaysPrefs = getActivity().getSharedPreferences("saveDays", Context.MODE_PRIVATE);
+        SharedPreferences curDatePrefs  = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         SharedPreferences.Editor saveDaysEditor = saveDaysPrefs.edit();
 
         if(!saveDaysPrefs.getStringSet("saveDays", new HashSet<>()).isEmpty()) {
@@ -126,7 +127,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
 
         Set<Long> days = null;
         try {
-            days = inFileExist("SONA/text");
+            days = dayInFileExist("SONA/text");
             Log.d("find_diary", "============ found diary =============");
         } catch (ParseException parseException) {
             parseException.printStackTrace();
@@ -147,7 +148,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         onCheckClick(button_checkDairy);
         return rootView;
     }
-    private Set<Long> inFileExist(String folderName) throws ParseException {
+    private Set<Long> dayInFileExist(String folderName) throws ParseException {
         Set<Long> days = new TreeSet<>();
         DateFormat sdFormat = new SimpleDateFormat("yyyy년 M월 dd일");
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + folderName;
@@ -165,7 +166,18 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         }
         return days;
     }
-
+    private boolean inFileExist(String folderName, String fileName) {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + folderName;
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        boolean exist = false;
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].getName().equals(fileName + ".txt")) {
+                exist = true;
+            }
+        }
+        return exist;
+    }
     private void screenshot(View view) throws Exception {
         view.setDrawingCacheEnabled(true);
         Bitmap screenshot = view.getDrawingCache();
@@ -222,14 +234,25 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
 
         private void onCheckClick(Button checkButton) {
             checkButton.setOnClickListener(view -> {
+                daySave();
+                pathSave();
+
+                SharedPreferences curDatePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+                String curDate = curDatePrefs.getString("curDate", "");
+                Log.d("check_check", "curDate : " + curDate);
+
                 if(calendarView.getSelectedDates().size() <= 0) {
                     alertDialog();
                 }
+                else if(!inFileExist("SONA/text", curDate)){
+                    // 작성된 일기 없는 날짜의 일기 조회 시
+                    // 일단 alertDialog 사용했습니다
+                    alertDialog();
+                }
                 else {
-                    daySave();
-                    pathSave();
                     mainActivity.onChangeFragment(MainActivity.Direction.checkGo);
                 }
+
             });
         }
     private void daySave() {
