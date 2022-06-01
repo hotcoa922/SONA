@@ -37,15 +37,23 @@ import java.util.List;
 
 public class CheckDiaryFragment extends BaseFragment {
 
+    TextView datetv;
+    TextView showtv;
+    Button editbt;
+    Button deletebt;
+    Button sharebt;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_check_diary, container, false);
 
-        TextView datetv = rootView.findViewById(R.id.today_tv);
-        TextView showtv = rootView.findViewById(R.id.showit_tv);
-        Button editbt = rootView.findViewById(R.id.button_edit);
-        Button deletebt = rootView.findViewById(R.id.button_delete);
-        Button sharebt = rootView.findViewById(R.id.button_share);
+        datetv = rootView.findViewById(R.id.today_tv);
+        showtv = rootView.findViewById(R.id.showit_tv);
+        editbt = rootView.findViewById(R.id.button_edit);
+        deletebt = rootView.findViewById(R.id.button_delete);
+        sharebt = rootView.findViewById(R.id.button_share);
+
+
 
         datetv.setText(getTime());
         String diary_path = "/storage/emulated/0/SONA/text/" + getTime() + ".txt";

@@ -314,7 +314,6 @@ public class HashTagFragment extends BaseFragment {
                         idx++;
                     }
 
-
                     if(cnt>2){
                         Toast.makeText(rootView.getContext(), "안돼 돌아가.", Toast.LENGTH_SHORT).show();
                         return;
