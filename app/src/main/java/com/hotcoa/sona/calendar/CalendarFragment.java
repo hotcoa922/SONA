@@ -51,8 +51,6 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
     private static final long dayMilliSec = 86400000L;
     private static final long curTime = System.currentTimeMillis();
     private static Set<Long> disabledDaysSet;
-    private static Set<Long> connectedDaysSet;
-    static ConnectedDays connectedDays;
     private final Calendar calendar = Calendar.getInstance();
     private int resId;
     private final static HashMap<String, String> mName = new HashMap<>();
@@ -76,10 +74,6 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         mName.put("October",    "10");
         mName.put("November",   "11");
         mName.put("December",   "12");
-    }
-
-    public static void setConnectedDays(ConnectedDays connectedDays) {
-        CalendarFragment.connectedDays = connectedDays;
     }
 
     private void disabledTimeSetting() {
@@ -107,7 +101,6 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("calendar", "calendar start!");
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         SharedPreferences saveDatePrefs = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
@@ -131,19 +124,20 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         setDisabledDays(calendarView);
         onMonthChange(curMonth);
 
-        // diary 별표
+        Set<Long> days = null;
         try {
-            connectedDaysSet = inFileExist("SONA/text");
+            days = inFileExist("SONA/text");
+            Log.d("find_diary", "============ found diary =============");
         } catch (ParseException parseException) {
             parseException.printStackTrace();
         }
-        setConnectedDays(new ConnectedDays(connectedDaysSet, R.color.red, R.color.teal_200, R.color.purple_500));
+        ConnectedDays connectedDays = new ConnectedDays(days, R.color.red, R.color.teal_200, R.color.purple_500);
         calendarView.addConnectedDays(connectedDays);
-        Log.d("find_diary","added");
         calendarView.setConnectedDayIconRes(R.drawable.ic_baseline_stars_24);   // Drawable
         calendarView.setConnectedDayIconPosition(ConnectedDayIconPosition.TOP);// TOP & BOTTOM
         calendarView.update();
-
+        calendarView.invalidate();
+        calendarView.postInvalidate();
         Button button_writeDiary = rootView.findViewById(R.id.button_write);
         Button button_contents = rootView.findViewById(R.id.button_contents);
         Button button_checkDairy = rootView.findViewById(R.id.button_check);
@@ -161,6 +155,8 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         File[] files = directory.listFiles();
         for (int i = 0; i < files.length; i++) {
             try{
+                Log.d("find_diary", files[i].getName());
+                Log.d("find_diary", "time :" + sdFormat.parse(files[i].getName()));
                 days.add(sdFormat.parse(files[i].getName()).getTime());
             }
             catch (ParseException parseException){
@@ -169,6 +165,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         }
         return days;
     }
+
     private void screenshot(View view) throws Exception {
         view.setDrawingCacheEnabled(true);
         Bitmap screenshot = view.getDrawingCache();
@@ -206,10 +203,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
             if(calendarView.getSelectedDates().size() <= 0) {
                 alertDialog();
             }
-            else {
-                onDestroy();
-                mainActivity.onChangeFragment(MainActivity.Direction.contentsGo);
-            }
+            else mainActivity.onChangeFragment(MainActivity.Direction.contentsGo);
         });
     }
 
@@ -221,25 +215,23 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
             else {
                 daySave();
                 pathSave();
-                onDestroy();
                 mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
             }
         });
     }
 
-    private void onCheckClick(Button checkButton) {
-        checkButton.setOnClickListener(view -> {
-            if(calendarView.getSelectedDates().size() <= 0) {
-                alertDialog();
-            }
-            else {
-                daySave();
-                pathSave();
-                onDestroy();
-                mainActivity.onChangeFragment(MainActivity.Direction.checkGo);
-            }
-        });
-    }
+        private void onCheckClick(Button checkButton) {
+            checkButton.setOnClickListener(view -> {
+                if(calendarView.getSelectedDates().size() <= 0) {
+                    alertDialog();
+                }
+                else {
+                    daySave();
+                    pathSave();
+                    mainActivity.onChangeFragment(MainActivity.Direction.checkGo);
+                }
+            });
+        }
     private void daySave() {
         List<Day> day = calendarView.getSelectedDays();
         String date = day.get(0).getCalendar().get(Calendar.YEAR) + "년 " + (day.get(0).getCalendar().get(Calendar.MONTH) + 1) + "월 " + day.get(0).getDayNumber() + "일";
