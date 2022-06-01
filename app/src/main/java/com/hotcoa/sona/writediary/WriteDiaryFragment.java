@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -42,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WriteDiaryFragment extends BaseFragment {
+
 
 
     @Override
@@ -100,6 +102,7 @@ public class WriteDiaryFragment extends BaseFragment {
                 countEditor.apply();
 
                 Toast.makeText(getActivity(), "일기 저장 완료!", Toast.LENGTH_LONG).show();
+
             }
             catch (Exception e){
 
@@ -107,6 +110,9 @@ public class WriteDiaryFragment extends BaseFragment {
             mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
             writetxt.setText(null);
             onDestroy();
+
+            //저장하고 나가면 기억하지 못하게 하기
+
         });
         hashtag.setOnClickListener(view -> {
             mainActivity.onChangeFragment(MainActivity.Direction.hashGo);
