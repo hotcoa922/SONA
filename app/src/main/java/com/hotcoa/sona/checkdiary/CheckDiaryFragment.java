@@ -2,11 +2,14 @@ package com.hotcoa.sona.checkdiary;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -27,7 +30,9 @@ import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -76,7 +81,51 @@ public class CheckDiaryFragment extends BaseFragment {
         }
         onEditClick(editbt);
         onDeleteClick(deletebt, getTime());
+
+
+        sharebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScreenShot();
+
+            }
+        });
+
         return rootView;
+    }
+
+
+
+    public void ScreenShot(){
+
+        View view = getActivity().getWindow().getDecorView().getRootView();
+        view.setDrawingCacheEnabled(true);  //화면에 뿌릴때 캐시를 사용하게 한다
+
+        //캐시를 비트맵으로 변환
+        Bitmap screenBitmap = Bitmap.createBitmap(view.getDrawingCache());
+
+        try {
+
+            File cachePath = new File(getActivity().getApplicationContext().getCacheDir(), "images");
+            cachePath.mkdirs(); // don't forget to make the directory
+            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
+            screenBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            stream.close();
+
+
+
+            File newFile = new File(cachePath, "image.png");
+            Uri contentUri = FileProvider.getUriForFile(getActivity().getApplicationContext(),
+                    "com.hotcoa.sona.fileprovider", newFile);
+
+            Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
+            Sharing_intent.setType("image/png");
+            Sharing_intent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            startActivity(Intent.createChooser(Sharing_intent, "Share image"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onEditClick(Button editButton) {
