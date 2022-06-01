@@ -43,7 +43,7 @@ public class LoadingActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
-        }, 1000);
+        }, 2000);
     }
 
     //권한 확인
