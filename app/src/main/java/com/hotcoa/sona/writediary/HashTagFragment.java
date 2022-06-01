@@ -181,24 +181,19 @@ public class HashTagFragment extends BaseFragment {
     }
 
     //FireBase에 좌표 저장을 위한 Function
-    private void writeNewCoordinate(String curDate, String[] htn, int x, int y) {//일기 저장 개수, x좌표, y좌표
+    private void writeNewCoordinate(String name, int x, int y) {//일기 저장 개수, x좌표, y좌표
         //일기 저장 개수를 이용하여 데이터 베이스 저장시 새로운 범주를 형성하기 위함 - 자세한 동작은 직접 FireBase 참조 바람
         HashtagInfo hashtagInfo = new HashtagInfo(calcCategory(x, y), x, y); //Category (0 ~ 7), x, y는 원점 좌표 (100, 100)을 기준으로 한 값
-        for(String h : htn) {
-            if (h == "") continue;
-            else {
-                database.child("HashtagInfo").child(curDate).child(h).setValue(hashtagInfo)
-                        .addOnSuccessListener(unused -> {
-                            //Success Case
-                            Log.d("firebase_log", "Success");
-                        })
-                        .addOnFailureListener(e -> {
-                            //Failure Case
-                            Log.d("firebase_log", "Fail");
-                            Log.d("firebase_log", e.getMessage());
-                        });
-            }
-        }
+        database.child("HashtagInfo").child(name).setValue(hashtagInfo)
+                .addOnSuccessListener(unused -> {
+                    //Success Case
+                    Log.d("firebase_log", "Success");
+                })
+                .addOnFailureListener(e -> {
+                    //Failure Case
+                    Log.d("firebase_log", "Fail");
+                    Log.d("firebase_log", e.getMessage());
+                });
     }
 
     @Override
@@ -309,7 +304,7 @@ public class HashTagFragment extends BaseFragment {
                         if(button.getText().toString().equals("-")){
                             button.setText(newHashtag.getText().toString());
                             button.setBackgroundColor(requireContext().getColor(R.color.button_select));
-                            editor.putString("hashname"+idx, newHashtag.getText().toString());
+                            editor.putString("hashname"+idx,newHashtag.getText().toString());
                             editor.apply();
                             cnt++;
 
@@ -521,26 +516,18 @@ public class HashTagFragment extends BaseFragment {
                         Toast.makeText(rootView.getContext(), "Hashtag 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        SharedPreferences prefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
-                        sPf = getActivity().getSharedPreferences("tmp_custom_hashtag", Context.MODE_PRIVATE);
-                        String curDate = prefs.getString("curDate", "");
-                        String[] htn = new String[3];
-                        for (int i = 0; i < 3; ++i) {
-                            htn[i] = sPf.getString("hashname"+i, "");
-                            Log.d("firebase_log", htn[i]);
-                        }
                         int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
-                        writeNewCoordinate(curDate, htn, dx, dy);
+                        writeNewCoordinate(hashtagName, dx, dy);
                         mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
                     }
                 }
 
                 //저장하고 나가면 기억하지 못하게 하기
-                /*for(int i= 0; i<3; i++){
+                for(int i= 0; i<3; i++){
                     editor.putString("hashname"+i, "");
                     addcsthasgtagbt.get(i).setText("-");
                 }
-                editor.apply();*/
+                editor.apply();
 
             }
         });

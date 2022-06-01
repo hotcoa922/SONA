@@ -2,13 +2,13 @@ package com.hotcoa.sona.checkdiary;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,8 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applikeysolutions.cosmocalendar.model.Day;
-import com.applikeysolutions.cosmocalendar.view.CalendarView;
+import androidx.core.content.FileProvider;
+
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.BaseFragment;
@@ -27,25 +27,33 @@ import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class CheckDiaryFragment extends BaseFragment {
+
+    TextView datetv;
+    TextView showtv;
+    Button editbt;
+    Button deletebt;
+    Button sharebt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_check_diary, container, false);
 
-        TextView datetv = rootView.findViewById(R.id.today_tv);
-        TextView showtv = rootView.findViewById(R.id.showit_tv);
-        Button editbt = rootView.findViewById(R.id.button_edit);
-        Button deletebt = rootView.findViewById(R.id.button_delete);
-        Button sharebt = rootView.findViewById(R.id.button_share);
+        datetv = rootView.findViewById(R.id.today_tv);
+        showtv = rootView.findViewById(R.id.showit_tv);
+        editbt = rootView.findViewById(R.id.button_edit);
+        deletebt = rootView.findViewById(R.id.button_delete);
+        sharebt = rootView.findViewById(R.id.button_share);
+
+
 
         datetv.setText(getTime());
         String diary_path = "/storage/emulated/0/SONA/text/" + getTime() + ".txt";
@@ -68,7 +76,51 @@ public class CheckDiaryFragment extends BaseFragment {
         }
         onEditClick(editbt);
         onDeleteClick(deletebt, getTime());
+
+
+        sharebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScreenShot();
+
+            }
+        });
+
         return rootView;
+    }
+
+
+
+    public void ScreenShot(){
+
+        View view = getActivity().getWindow().getDecorView().getRootView();
+        view.setDrawingCacheEnabled(true);  //화면에 뿌릴때 캐시를 사용하게 한다
+
+        //캐시를 비트맵으로 변환
+        Bitmap screenBitmap = Bitmap.createBitmap(view.getDrawingCache());
+
+        try {
+
+            File cachePath = new File(getActivity().getApplicationContext().getCacheDir(), "images");
+            cachePath.mkdirs(); // don't forget to make the directory
+            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
+            screenBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            stream.close();
+
+
+
+            File newFile = new File(cachePath, "image.png");
+            Uri contentUri = FileProvider.getUriForFile(getActivity().getApplicationContext(),
+                    "com.hotcoa.sona.fileprovider", newFile);
+
+            Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
+            Sharing_intent.setType("image/png");
+            Sharing_intent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            startActivity(Intent.createChooser(Sharing_intent, "Share image"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onEditClick(Button editButton) {
@@ -83,18 +135,34 @@ public class CheckDiaryFragment extends BaseFragment {
         deleteButton.setOnClickListener(view -> {
             // 파일 삭제
             String deleteCheck = SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName);
-            if(deleteCheck != null && deleteCheck.length() > 0) {
+            if(inFileExist("SONA/text", fileName)) {
                 try {
                     ContentResolver contentResolver = getActivity().getContentResolver();
+                    Log.d("delete_check", "=========================");
                     contentResolver.delete(Uri.parse(SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName)), null, null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Toast.makeText(view.getContext(), "일기가 삭제되었습니다!", Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(view.getContext(), "일기가 삭제되었습니다!", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(view.getContext(), "삭제할 일기가 없습니다!", Toast.LENGTH_SHORT).show();
+            }
             mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
             onDestroy();
         });
+    }
+    private boolean inFileExist(String folderName, String fileName) {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + folderName;
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        boolean exist = false;
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].getName().equals(fileName + ".txt")) {
+                exist = true;
+            }
+        }
+        return exist;
     }
 
     private void onShareClick(Button shareButton) {
