@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -535,12 +536,17 @@ public class HashTagFragment extends BaseFragment {
                     }
                 }
 
-                //저장하고 나가면 기억하지 못하게 하기
-                for(int i= 0; i<3; i++){
-                    editor.putString("hashname"+i, "");
-                    addcsthasgtagbt.get(i).setText("-");
-                }
-                editor.apply();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //저장하고 나가면 기억하지 못하게 하기
+                        for(int i= 0; i<3; i++){
+                            editor.putString("hashname"+i, "");
+                            addcsthasgtagbt.get(i).setText("-");
+                        }
+                        editor.apply();
+                    }
+                },200);
 
             }
         });

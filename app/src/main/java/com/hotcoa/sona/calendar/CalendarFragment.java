@@ -95,7 +95,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
     }
 
     private void setDisabledDays(com.applikeysolutions.cosmocalendar.view.CalendarView calendarView) {
-        calendarView.setDisabledDays(disabledDaysSet);
+        //calendarView.setDisabledDays(disabledDaysSet);
         Log.d("calendar_log", "Disabled complete");
     }
 
