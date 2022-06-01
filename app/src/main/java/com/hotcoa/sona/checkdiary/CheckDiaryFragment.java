@@ -8,10 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applikeysolutions.cosmocalendar.model.Day;
-import com.applikeysolutions.cosmocalendar.view.CalendarView;
+import androidx.core.content.FileProvider;
+
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.BaseFragment;
@@ -36,9 +33,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class CheckDiaryFragment extends BaseFragment {
 
@@ -137,18 +132,34 @@ public class CheckDiaryFragment extends BaseFragment {
         deleteButton.setOnClickListener(view -> {
             // 파일 삭제
             String deleteCheck = SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName);
-            if(deleteCheck != null && deleteCheck.length() > 0) {
+            if(inFileExist("SONA/text", fileName)) {
                 try {
                     ContentResolver contentResolver = getActivity().getContentResolver();
+                    Log.d("delete_check", "=========================");
                     contentResolver.delete(Uri.parse(SharedPrefs.getString(getActivity(), "ScopeContent_" + fileName)), null, null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Toast.makeText(view.getContext(), "일기가 삭제되었습니다!", Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(view.getContext(), "일기가 삭제되었습니다!", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(view.getContext(), "삭제할 일기가 없습니다!", Toast.LENGTH_SHORT).show();
+            }
             mainActivity.onChangeFragment(MainActivity.Direction.calendarGo);
             onDestroy();
         });
+    }
+    private boolean inFileExist(String folderName, String fileName) {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + folderName;
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        boolean exist = false;
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].getName().equals(fileName + ".txt")) {
+                exist = true;
+            }
+        }
+        return exist;
     }
 
     private void onShareClick(Button shareButton) {
