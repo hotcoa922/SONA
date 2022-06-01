@@ -50,6 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/button_dark_color"
+        android:visibility="invisible"
+
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -58,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/button_dark_color"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
