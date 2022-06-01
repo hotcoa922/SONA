@@ -105,14 +105,11 @@ public class CheckDiaryFragment extends BaseFragment {
         Bitmap screenBitmap = Bitmap.createBitmap(view.getDrawingCache());
 
         try {
-
             File cachePath = new File(getActivity().getApplicationContext().getCacheDir(), "images");
             cachePath.mkdirs(); // don't forget to make the directory
             FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
             screenBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             stream.close();
-
-
 
             File newFile = new File(cachePath, "image.png");
             Uri contentUri = FileProvider.getUriForFile(getActivity().getApplicationContext(),
