@@ -1,5 +1,7 @@
 package com.hotcoa.sona.contents;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -38,7 +40,8 @@ public class ContentsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_contents, container, false);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Button showbt = (Button) rootView.findViewById(R.id.ShowButton);
+        Button showBt = (Button) rootView.findViewById(R.id.ShowButton);
+        Button centerBt = (Button) rootView.findViewById(R.id.CenterButton);
         WebView web = (WebView) rootView.findViewById(R.id.ContentsWebView);
         String TAG = "Contents_db";
 
@@ -81,7 +84,7 @@ public class ContentsFragment extends BaseFragment {
                     }
                 });
 
-        showbt.setOnClickListener(new View.OnClickListener() {
+        showBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "url : " + url);
@@ -109,7 +112,19 @@ public class ContentsFragment extends BaseFragment {
         if (Build.VERSION.SDK_INT >= 21) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        web.loadUrl("www.naver.com");
+
+
+        centerBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //log.d(TAG, "url : " + url);
+                //web.loadUrl("https://www.gangnam.go.kr/office/smilegn/main.do");
+                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gangnam.go.kr/office/smilegn/main.do"));
+                Toast.makeText(getActivity(), "심리상담센터!", Toast.LENGTH_LONG).show();
+                startActivity(myIntent);
+                //Log.d(TAG, "----------------------------");
+            }
+        });
         return rootView;
     }
 }
