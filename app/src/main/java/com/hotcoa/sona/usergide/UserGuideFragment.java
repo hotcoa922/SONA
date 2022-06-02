@@ -3,20 +3,20 @@ package com.hotcoa.sona.usergide;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+//import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewManager;
+//import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
+//import android.widget.SimpleAdapter;
 
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.main.BaseFragment;
 
-import java.util.List;
+//import java.util.List;
 
 
 public class UserGuideFragment extends BaseFragment {

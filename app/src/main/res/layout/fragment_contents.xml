@@ -7,139 +7,95 @@
     tools:context=".contents.ContentsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
-    <View
-        android:id="@+id/view1"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/button_dark_color"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/button_dark_color"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/button_dark_color"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
-
-
-    <Button
-        android:id="@+id/ShowButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Show"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <WebView
-        android:id="@+id/ContentsWebView"
-        android:layout_width="53dp"
-        android:layout_height="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ShowButton"
-        app:layout_constraintEnd_toEndOf="@+id/ShowButton"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="@+id/ShowButton"
-        app:layout_constraintTop_toTopOf="@+id/ShowButton"
-        app:layout_constraintVertical_bias="0.607" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/ment1_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="[오늘의 추천명언]"
-        app:layout_constraintBottom_toTopOf="@+id/contents_wisesaying_tx"
-        app:layout_constraintEnd_toStartOf="@+id/profile_guideline5"
-        app:layout_constraintStart_toStartOf="@+id/profile_guideline4"
-        app:layout_constraintTop_toTopOf="@+id/profile_guideline1" />
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="227dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="선택된 날짜의 일기 감정 분석을 토대로 보여드리는\n\n컨텐츠 추천 화면입니다.\n\n힐링 컨텐츠로 기분 좋은 하루를 마무리해보세요 :)" />
 
-    <TextView
-        android:id="@+id/ment2_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="[오늘의 노래추천]"
-        app:layout_constraintBottom_toTopOf="@+id/contents_sing_tx"
-        app:layout_constraintEnd_toStartOf="@+id/profile_guideline5"
-        app:layout_constraintStart_toStartOf="@+id/profile_guideline4"
-        app:layout_constraintTop_toTopOf="@+id/profile_guideline2" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:gravity="center"
+                android:text="___________________________________________"
+                android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/contents_wisesaying_tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로딩중입니다"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
-        app:layout_constraintEnd_toEndOf="@+id/ment1_tv"
-        app:layout_constraintStart_toStartOf="@+id/ment1_tv"
-        app:layout_constraintTop_toBottomOf="@+id/ment1_tv" />
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:text="오늘의 추천 명언" />
 
-    <TextView
-        android:id="@+id/contents_sing_tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로딩중입니다"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/ment2_tv"
-        app:layout_constraintStart_toStartOf="@+id/ment2_tv"
-        app:layout_constraintTop_toBottomOf="@+id/ment2_tv" />
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:gravity="center"
+                android:text="___________________________________________"
+                android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/contents_announce_ment_tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
-        app:layout_constraintEnd_toStartOf="@+id/profile_guideline5"
-        app:layout_constraintStart_toStartOf="@+id/profile_guideline4"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:text="# # 음악을 추천해요" />
+
+            <WebView
+                android:id="@+id/ContentsWebView"
+                android:layout_width="match_parent"
+                android:layout_height="218dp">
+
+            </WebView>
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:gravity="center"
+                android:text="___________________________________________"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="136dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="힘든 하루를 보내고 계신가요?\n\n때로는 @@님의 이야기를 털어놓고 이야기하는 것이\n\n도움이 될 때도 있답니다" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="89dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ShowButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Show" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

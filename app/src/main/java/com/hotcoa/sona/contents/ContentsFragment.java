@@ -1,15 +1,20 @@
 package com.hotcoa.sona.contents;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -27,13 +32,16 @@ import java.util.Map;
 
 public class ContentsFragment extends BaseFragment {
 
+    private WebView web;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_contents, container, false);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Button showbt = (Button) rootView.findViewById(R.id.ShowButton);
-        WebView ContentsWebView = (WebView) rootView.findViewById(R.id.ContentsWebView);
+        WebView web = (WebView) rootView.findViewById(R.id.ContentsWebView);
         String TAG = "Contents_db";
+
 
         // String으로 선언하면 변경이 안돼서 StringBuilder 메소드 사용
         StringBuilder url = new StringBuilder();
@@ -47,21 +55,21 @@ public class ContentsFragment extends BaseFragment {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             // hashtagFeel과 일치하는 document 탐색
-                            if(document.getId().equals(Integer.toString(hashtagFeel))){
+                            if (document.getId().equals(Integer.toString(hashtagFeel))) {
                                 // document 정보 불러오기
                                 int docSize = document.getData().size();
 
                                 // 0 ~ docsize의 난수 생성
                                 double rand = Math.random();
-                                int randField = (int)(rand * docSize);
+                                int randField = (int) (rand * docSize);
                                 Log.d(TAG, String.valueOf(randField));
 
                                 // 난수에 해당되는 url 불러오기
                                 int count = 0;
-                                for(Map.Entry<String, Object> e : document.getData().entrySet()){
-                                    if(count == randField){
-                                        Log.d(TAG,"Key : " + e.getKey() + ", Value : " + e.getValue());
-                                        Log.d(TAG,e.getValue().toString());
+                                for (Map.Entry<String, Object> e : document.getData().entrySet()) {
+                                    if (count == randField) {
+                                        Log.d(TAG, "Key : " + e.getKey() + ", Value : " + e.getValue());
+                                        Log.d(TAG, e.getValue().toString());
                                         url.append(e.getValue().toString());
                                     }
                                     count++;
@@ -72,15 +80,37 @@ public class ContentsFragment extends BaseFragment {
                         Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
+
         showbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "url : " + url);
-                ContentsWebView.loadUrl(url.toString());
+                web.loadUrl(url.toString());
                 Toast.makeText(getActivity(), "콘텐츠!", Toast.LENGTH_LONG).show();
                 Log.d(TAG, "----------------------------");
             }
         });
+
+        /* 웹 세팅 작업하기 */
+        WebSettings webSettings = web.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setSupportMultipleWindows(false);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setSaveFormData(true);
+
+        web.setWebViewClient(new WebViewClient());
+        web.setWebChromeClient(new WebChromeClient());
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        web.loadUrl("www.naver.com");
         return rootView;
     }
 }
+
