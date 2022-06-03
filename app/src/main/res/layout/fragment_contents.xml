@@ -40,8 +40,20 @@
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
-                android:layout_height="146dp"
+                android:layout_height="32dp"
                 android:text="오늘의 추천 명언" />
+
+            <TextView
+                android:id="@+id/praseWords"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/personWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|right" />
 
             <TextView
                 android:id="@+id/textView15"

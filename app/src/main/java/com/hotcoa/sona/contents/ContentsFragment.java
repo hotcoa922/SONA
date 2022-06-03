@@ -18,6 +18,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,13 +44,18 @@ public class ContentsFragment extends BaseFragment {
         Button showBt = (Button) rootView.findViewById(R.id.ShowButton);
         Button centerBt = (Button) rootView.findViewById(R.id.CenterButton);
         WebView web = (WebView) rootView.findViewById(R.id.ContentsWebView);
+        TextView praseWords = (TextView)rootView.findViewById(R.id.praseWords);
+        TextView personWords = (TextView)rootView.findViewById(R.id.personWords);
         String TAG = "Contents_db";
+        String DOC = "prase";
 
 
         // String으로 선언하면 변경이 안돼서 StringBuilder 메소드 사용
         StringBuilder url = new StringBuilder();
+        StringBuilder prs = new StringBuilder();
+        StringBuilder person = new StringBuilder();
 
-        // hashtag로부터 추출한 감정 (0~7)
+        // hashtag로부터 추출한 감정 (0~7) *****
         int hashtagFeel = 0;
 
         db.collection("music")
@@ -89,12 +95,12 @@ public class ContentsFragment extends BaseFragment {
             public void onClick(View view) {
                 Log.d(TAG, "url : " + url);
                 web.loadUrl(url.toString());
-                Toast.makeText(getActivity(), "콘텐츠!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "오늘의 추천 음악입니다 :)", Toast.LENGTH_LONG).show();
                 Log.d(TAG, "----------------------------");
             }
         });
 
-        /* 웹 세팅 작업하기 */
+        // 웹 세팅 작업하기
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
@@ -117,14 +123,50 @@ public class ContentsFragment extends BaseFragment {
         centerBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //log.d(TAG, "url : " + url);
-                //web.loadUrl("https://www.gangnam.go.kr/office/smilegn/main.do");
                 Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gangnam.go.kr/office/smilegn/main.do"));
-                Toast.makeText(getActivity(), "심리상담센터!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "심리상담센터 사이트로 연결합니다 :)", Toast.LENGTH_LONG).show();
                 startActivity(myIntent);
-                //Log.d(TAG, "----------------------------");
             }
         });
+
+        //랜덤 명언 추출하기
+        db.collection("phrase")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // hashtagFeel과 일치하는 document 탐색
+                            if (document.getId().equals(DOC)) {
+                                // document 정보 불러오기
+                                int docSize = document.getData().size();
+
+                                // 0 ~ docsize의 난수 생성
+                                double rand = Math.random();
+                                int randField = (int) (rand * docSize);
+                                Log.d(TAG, String.valueOf(randField));
+
+                                // 난수에 해당되는 명언 불러오기
+                                int count = 0;
+                                for (Map.Entry<String, Object> e : document.getData().entrySet()) {
+                                    if (count == randField) {
+                                        Log.d(TAG, "Key : " + e.getKey() + ", Value : " + e.getValue());
+                                        Log.d(TAG, e.getValue().toString());
+                                        Log.d(TAG, e.getKey().toString());
+                                        prs.append(e.getValue().toString());
+                                        person.append(e.getKey().toString());
+                                    }
+                                    count++;
+                                }
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+        praseWords.setText(prs.toString());
+        personWords.setText(person.toString());
+
         return rootView;
     }
 }
