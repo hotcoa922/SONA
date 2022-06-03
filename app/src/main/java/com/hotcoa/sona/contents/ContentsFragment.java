@@ -44,10 +44,10 @@ public class ContentsFragment extends BaseFragment {
         Button showBt = (Button) rootView.findViewById(R.id.ShowButton);
         Button centerBt = (Button) rootView.findViewById(R.id.CenterButton);
         WebView web = (WebView) rootView.findViewById(R.id.ContentsWebView);
-        TextView praseWords = (TextView)rootView.findViewById(R.id.praseWords);
+        TextView phraseWords = (TextView)rootView.findViewById(R.id.phraseWords);
         TextView personWords = (TextView)rootView.findViewById(R.id.personWords);
         String TAG = "Contents_db";
-        String DOC = "prase";
+        String DOC = "phrase";
 
 
         // String으로 선언하면 변경이 안돼서 StringBuilder 메소드 사용
@@ -164,7 +164,7 @@ public class ContentsFragment extends BaseFragment {
                     }
                 });
 
-        praseWords.setText(prs.toString());
+        phraseWords.setText(prs.toString());
         personWords.setText(person.toString());
 
         return rootView;
