@@ -24,7 +24,7 @@
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
-                android:layout_height="227dp"
+                android:layout_height="200dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:text="선택된 날짜의 일기 감정 분석을 토대로 보여드리는\n\n컨텐츠 추천 화면입니다.\n\n힐링 컨텐츠로 기분 좋은 하루를 마무리해보세요 :)" />
@@ -32,15 +32,15 @@
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="___________________________________________"
-                android:layout_marginBottom="16dp"/>
+                android:text="___________________________________________" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="40dp"
                 android:text="오늘의 추천 명언" />
 
             <TextView
@@ -58,10 +58,10 @@
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="___________________________________________"
-                android:layout_marginBottom="16dp"/>
+                android:text="___________________________________________" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -71,8 +71,10 @@
                     android:id="@+id/textView17"
                     android:layout_width="192dp"
                     android:layout_height="33dp"
-                    android:text="# # 음악을 추천해요"
+                    android:layout_marginEnd="66dp"
+                    android:text="# 음악을 추천해요"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ShowButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.533" />
@@ -81,11 +83,11 @@
                     android:id="@+id/ShowButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="36dp"
                     android:gravity="center"
                     android:text="Show"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView17"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
@@ -94,17 +96,17 @@
             <WebView
                 android:id="@+id/ContentsWebView"
                 android:layout_width="match_parent"
-                android:layout_height="218dp">
+                android:layout_height="wrap_content">
 
             </WebView>
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="___________________________________________"
-                android:layout_marginBottom="16dp"/>
+                android:text="___________________________________________" />
 
             <TextView
                 android:id="@+id/textView5"
