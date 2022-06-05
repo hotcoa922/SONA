@@ -233,11 +233,8 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
     }
         private void onCheckClick(Button checkButton) {
             checkButton.setOnClickListener(view -> {
-                if(calendarView.getSelectedDays().size() == 0) {
-                    // 날짜 선택하지 않았을 시 alertDialog
-                    alertDialog();
-                    return;
-                }
+                if(calendarView.getSelectedDays().size() == 0)
+                    Log.d("gsd_check", "error day = " + calendarView.getSelectedDays().toString());
                 daySave();
                 pathSave();
 
@@ -245,7 +242,10 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
                 String curDate = curDatePrefs.getString("curDate", "");
                 Log.d("check_check", "curDate : " + curDate);
 
-                if(calendarView.getSelectedDates().size() <= 0 || calendarView.getSelectedDates() != null) {
+                Log.d("gsd_Check", calendarView.getSelectedDays().toString());
+
+
+                if(calendarView.getSelectedDates().size() <= 0) {
                     alertDialog();
                 }
                 else if(!inFileExist("SONA/text", curDate)){
