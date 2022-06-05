@@ -18,6 +18,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,16 +41,17 @@ public class ContentsFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_contents, container, false);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Button showBt = (Button) rootView.findViewById(R.id.ShowButton);
-        Button centerBt = (Button) rootView.findViewById(R.id.CenterButton);
-        WebView web = (WebView) rootView.findViewById(R.id.ContentsWebView);
-        TextView phraseWords = (TextView)rootView.findViewById(R.id.phraseWords);
-        TextView personWords = (TextView)rootView.findViewById(R.id.personWords);
+        View rootView           = inflater.inflate(R.layout.fragment_contents, container, false);
+        FirebaseFirestore db    = FirebaseFirestore.getInstance();
+        Button showBt           =  rootView.findViewById(R.id.ShowButton);
+        Button centerBt         = rootView.findViewById(R.id.CenterButton);
+        RatingBar ratingBar     = rootView.findViewById(R.id.ratingBar);
+        WebView web             = rootView.findViewById(R.id.ContentsWebView);
+        TextView phraseWords    = rootView.findViewById(R.id.phraseWords);
+        TextView personWords    = rootView.findViewById(R.id.personWords);
+
         String TAG = "Contents_db";
         String DOC = "phrase";
-
 
         // String으로 선언하면 변경이 안돼서 StringBuilder 메소드 사용
         StringBuilder url = new StringBuilder();
@@ -120,6 +122,12 @@ public class ContentsFragment extends BaseFragment {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
+                Log.d("Rating", rating + "");
+            }
+        });
 
         centerBt.setOnClickListener(new View.OnClickListener() {
             @Override
