@@ -36,7 +36,6 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text="___________________________________________" />
@@ -56,6 +55,10 @@
                 android:id="@+id/phraseWords"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font1"
+                android:textStyle="bold"
+                android:textSize="60sp"
+                android:textAlignment="center"
                 android:gravity="center" />
 
             <TextView
@@ -68,7 +71,7 @@
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:textStyle="bold"
                 android:gravity="center"
                 android:text="___________________________________________" />
 
@@ -123,6 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="___________________________________________" />
 
             <TextView
@@ -130,6 +134,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
                 android:gravity="center"
+                android:fontFamily="@font/font1"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textAlignment="center"
                 android:text="힘든 하루를 보내고 계신가요?\n\n때로는 @@님의 이야기를 털어놓고 이야기하는 것이\n\n도움이 될 때도 있답니다" />
 
             <LinearLayout
