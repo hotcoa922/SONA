@@ -1,6 +1,8 @@
 package com.hotcoa.sona.contents;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -122,12 +124,29 @@ public class ContentsFragment extends BaseFragment {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
-                Log.d("Rating", rating + "");
-            }
+        // 오늘의 별점 평가
+        // SharedPrference에 id:"(날짜)_rating", key:(rating) 형식으로 저장
+        SharedPreferences curDatePrefs          = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+        String curDate = curDatePrefs.getString("curDate","");
+        Log.d("Rating", "curDate        : " + curDate);
+
+        String ratingKey = curDate + "_rating";
+
+        SharedPreferences curDateRatingPrefs    = getActivity().getSharedPreferences(ratingKey, Context.MODE_PRIVATE);
+        Float curRating = curDateRatingPrefs.getFloat(ratingKey, 0);
+        Log.d("Rating", "curDateRating  : " + curRating);
+
+        SharedPreferences.Editor curDateRatingEditor = curDateRatingPrefs.edit();
+        curDateRatingEditor.putFloat(ratingKey, curRating);
+        curDateRatingEditor.commit();
+        ratingBar.setRating(curRating);
+
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, b) -> {
+            Log.d("Rating", "rating         : " + rating);
+            curDateRatingEditor.putFloat(ratingKey, rating);
+            curDateRatingEditor.commit();
         });
+        ratingBar.setRating(curRating);
 
         centerBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +156,7 @@ public class ContentsFragment extends BaseFragment {
                 startActivity(myIntent);
             }
         });
+
 
         //랜덤 명언 추출하기
         db.collection("phrase")
@@ -176,8 +196,6 @@ public class ContentsFragment extends BaseFragment {
                     phraseWords.setText(prs.toString());
                     personWords.setText(person.toString());
                 });
-
-
         return rootView;
     }
 }

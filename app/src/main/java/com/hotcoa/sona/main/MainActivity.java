@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 onChangeFragment(Direction.mindcheckGo);
             }
             if(menuItem.getItemId() == R.id.contentschuchu_navi){
+                set_curDate_Today();
                 onChangeFragment(Direction.contentsGo);
             }
             if(menuItem.getItemId() == R.id.profile_navi){
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setAndroidID();
+        set_curDate_Today();
     }
 
     //ctrl+o 에서 오버라이드할꺼 검색 ㄱㄴ

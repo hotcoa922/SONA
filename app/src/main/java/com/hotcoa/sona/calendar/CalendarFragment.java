@@ -24,6 +24,7 @@ import com.applikeysolutions.cosmocalendar.settings.appearance.ConnectedDayIconP
 import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.ConnectedDays;
 
 import com.hotcoa.sona.R;
+import com.hotcoa.sona.contents.ContentsFragment;
 import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.main.MainActivity;
 import com.hotcoa.sona.utility.SharedPrefs;
@@ -222,7 +223,10 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
             if(!inFileExist("SONA/text", date)) {
                 alertDialog("먼저 일기를 작성해주세요!");
             }
-            else mainActivity.onChangeFragment(MainActivity.Direction.contentsGo);
+            else{
+                daySave();
+                mainActivity.onChangeFragment(MainActivity.Direction.contentsGo);
+            }
         });
     }
 
