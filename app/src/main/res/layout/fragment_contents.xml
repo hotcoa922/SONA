@@ -10,7 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="2000dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,31 +26,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:fontFamily="@font/font1"
-                android:gravity="center"
-                android:text="선택된 날짜의 일기 감정 분석을 토대로 보여드리는\n\n컨텐츠 추천 화면입니다.\n\n힐링 컨텐츠로 기분 좋은 하루를 마무리해보세요 :)"
-                android:textAlignment="center"
+                android:textStyle="bold"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textAlignment="center"
+                android:gravity="center"
+                android:text="선택된 날짜의 일기 감정 분석을 토대로 보여드리는\n\n컨텐츠 추천 화면입니다.\n\n힐링 컨텐츠로 기분 좋은 하루를 마무리해보세요 :)" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:textStyle="bold"
                 android:gravity="center"
-                android:text="___________________________________________"
-                android:textStyle="bold" />
+                android:text="___________________________________________" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font1"
-                android:text="오늘의 추천 명언"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:textAlignment="center"
                 android:textColor="@color/button_light_intext_color"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:text="오늘의 추천 명언" />
 
             <TextView
                 android:id="@+id/phraseWords"
@@ -81,11 +81,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/font1"
-                    android:text="음악 추천"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     android:textColor="@color/button_light_intext_color"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:text="음악 추천"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ShowButton"
                     app:layout_constraintStart_toStartOf="parent"
@@ -96,13 +96,13 @@
                     android:id="@+id/ShowButton"
                     android:layout_width="70dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/common_rect_button_dark"
-                    android:fontFamily="@font/font1"
                     android:gravity="center"
-                    android:text="Show"
+                    android:fontFamily="@font/font1"
                     android:textColor="@color/button_dark_intext_color"
+                    android:background="@drawable/common_rect_button_dark"
                     android:textSize="17sp"
                     android:textStyle="bold"
+                    android:text="Show"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView17"
@@ -142,13 +142,13 @@
                     android:id="@+id/CenterButton"
                     android:layout_width="150dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/common_rect_button_dark"
-                    android:fontFamily="@font/font1"
                     android:gravity="center"
-                    android:text="심리상담센터 연결하기"
+                    android:fontFamily="@font/font1"
                     android:textColor="@color/button_dark_intext_color"
+                    android:background="@drawable/common_rect_button_dark"
                     android:textSize="17sp"
                     android:textStyle="bold"
+                    android:text="심리상담센터 연결하기"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </LinearLayout>
