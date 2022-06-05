@@ -11,6 +11,7 @@
     <!--일기 저장 위한 권한 추가 , 36번째 행 포함-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 

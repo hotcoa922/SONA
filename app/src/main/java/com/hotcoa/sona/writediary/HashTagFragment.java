@@ -337,7 +337,7 @@ public class HashTagFragment extends BaseFragment {
             if(((Button)view).getText().toString().equals("-")){        //(Button)view는 누른 애 인자
                 return;
             }
-            cstbt1.setBackgroundColor(requireContext().getColor(R.color.black));
+            cstbt1.setBackgroundColor(requireContext().getColor(R.color.button_dark_color));
             addcsthasgtagbt.get(0).setText("-");
             editor.putString("hashname0", "");
             cnt--;
@@ -348,7 +348,7 @@ public class HashTagFragment extends BaseFragment {
             if(((Button)view).getText().toString().equals("-")){        //(Button)view는 누른 애 인자
                 return;
             }
-            cstbt2.setBackgroundColor(requireContext().getColor(R.color.black));
+            cstbt2.setBackgroundColor(requireContext().getColor(R.color.button_dark_color));
             addcsthasgtagbt.get(1).setText("-");
             editor.putString("hashname1", "");
             cnt--;
@@ -359,7 +359,7 @@ public class HashTagFragment extends BaseFragment {
             if(((Button)view).getText().toString().equals("-")){        //(Button)view는 누른 애 인자
                 return;
             }
-            cstbt3.setBackgroundColor(requireContext().getColor(R.color.black));
+            cstbt3.setBackgroundColor(requireContext().getColor(R.color.button_dark_color));
             addcsthasgtagbt.get(2).setText("-");
             editor.putString("hashname2", "");
             cnt--;
