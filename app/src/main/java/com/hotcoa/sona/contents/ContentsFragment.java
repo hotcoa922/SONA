@@ -171,10 +171,12 @@ public class ContentsFragment extends BaseFragment {
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
                     }
+                    Log.d("Contents_db", "hi: "+prs);
+                    Log.d("Contents_db", "hi: "+person);
+                    phraseWords.setText(prs.toString());
+                    personWords.setText(person.toString());
                 });
 
-        phraseWords.setText(prs.toString());
-        personWords.setText(person.toString());
 
         return rootView;
     }

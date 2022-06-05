@@ -58,7 +58,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat df = new SimpleDateFormat("M");
     private final Date curDate = new Date();
-
+    SharedPreferences curDatePrefs;
 
     public CalendarFragment() {
         disabledTimeSetting();
@@ -105,7 +105,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
 
         SharedPreferences saveDatePrefs = getActivity().getSharedPreferences("saveDate", Context.MODE_PRIVATE);
         SharedPreferences saveDaysPrefs = getActivity().getSharedPreferences("saveDays", Context.MODE_PRIVATE);
-        SharedPreferences curDatePrefs  = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+        curDatePrefs  = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
         SharedPreferences.Editor saveDaysEditor = saveDaysPrefs.edit();
 
         if(!saveDaysPrefs.getStringSet("saveDays", new HashSet<>()).isEmpty()) {
@@ -212,8 +212,15 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
 
     private void onContentsClick(Button contentsButton) {
         contentsButton.setOnClickListener(view -> {
-            if(calendarView.getSelectedDates().size() <= 0) {
-                alertDialog();
+            if(calendarView.getSelectedDays().size() == 0) {
+                // 날짜 선택하지 않았을 시 alertDialog
+                alertDialog("캘린더에서 날짜를 먼저 선택해주세요!");
+                return;
+            }
+            List<Day> day = calendarView.getSelectedDays();
+            String date = day.get(0).getCalendar().get(Calendar.YEAR) + "년 " + (day.get(0).getCalendar().get(Calendar.MONTH) + 1) + "월 " + day.get(0).getDayNumber() + "일";
+            if(!inFileExist("SONA/text", date)) {
+                alertDialog("먼저 일기를 작성해주세요!");
             }
             else mainActivity.onChangeFragment(MainActivity.Direction.contentsGo);
         });
@@ -222,7 +229,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
     private void onWriteClick(Button writeButton) {
         writeButton.setOnClickListener(view -> {
             if(calendarView.getSelectedDates().size() <= 0) {
-                alertDialog();
+                alertDialog("캘린더에서 날짜를 먼저 선택해주세요!");
             }
             else {
                 daySave();
@@ -233,25 +240,21 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
     }
         private void onCheckClick(Button checkButton) {
             checkButton.setOnClickListener(view -> {
-                if(calendarView.getSelectedDays().size() == 0)
-                    Log.d("gsd_check", "error day = " + calendarView.getSelectedDays().toString());
+                if(calendarView.getSelectedDays().size() == 0) {
+                    // 날짜 선택하지 않았을 시 alertDialog
+                    alertDialog("캘린더에서 날짜를 먼저 선택해주세요!");
+                    return;
+                }
                 daySave();
                 pathSave();
 
-                SharedPreferences curDatePrefs = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
                 String curDate = curDatePrefs.getString("curDate", "");
                 Log.d("check_check", "curDate : " + curDate);
 
-                Log.d("gsd_Check", calendarView.getSelectedDays().toString());
-
-
-                if(calendarView.getSelectedDates().size() <= 0) {
-                    alertDialog();
-                }
-                else if(!inFileExist("SONA/text", curDate)){
+                if(!inFileExist("SONA/text", curDate)){
                     // 작성된 일기 없는 날짜의 일기 조회 시
                     // 일단 alertDialog 사용했습니다
-                    alertDialog();
+                    alertDialog("먼저 일기를 작성해주세요!");
                 }
                 else {
                     mainActivity.onChangeFragment(MainActivity.Direction.checkGo);
@@ -312,9 +315,9 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
         Log.d("calendar_log", "Selected Days : " + calendarView.getSelectedDays());
     }
 
-    private void alertDialog() {
+    private void alertDialog(String text) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("달력에서 날짜를 먼저 선택해주세요!").setTitle("Calendar");
+        builder.setMessage(text).setTitle("Calendar");
         builder.setPositiveButton("확인", (dialogInterface, i) -> {});
         builder.setIcon(R.drawable.ic_circle_info_solid);
         AlertDialog dialog = builder.create();
