@@ -231,9 +231,13 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
             }
         });
     }
-
         private void onCheckClick(Button checkButton) {
             checkButton.setOnClickListener(view -> {
+                if(calendarView.getSelectedDays().size() == 0) {
+                    // 날짜 선택하지 않았을 시 alertDialog
+                    alertDialog();
+                    return;
+                }
                 daySave();
                 pathSave();
 
@@ -241,7 +245,7 @@ public class CalendarFragment extends BaseFragment implements OnDaySelectedListe
                 String curDate = curDatePrefs.getString("curDate", "");
                 Log.d("check_check", "curDate : " + curDate);
 
-                if(calendarView.getSelectedDates().size() <= 0) {
+                if(calendarView.getSelectedDates().size() <= 0 || calendarView.getSelectedDates() != null) {
                     alertDialog();
                 }
                 else if(!inFileExist("SONA/text", curDate)){
