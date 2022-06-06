@@ -182,13 +182,15 @@ public class HashTagFragment extends BaseFragment {
     }
 
     //FireBase에 좌표 저장을 위한 Function
-    private void writeNewCoordinate(String curDate, String[] htn, int x, int y) {//일기 저장 개수, x좌표, y좌표
+    private void writeNewCoordinate(String curDate, String[] htn, int x, int y, View rootView) {//일기 저장 개수, x좌표, y좌표
         //일기 저장 개수를 이용하여 데이터 베이스 저장시 새로운 범주를 형성하기 위함 - 자세한 동작은 직접 FireBase 참조 바람
         HashtagInfo hashtagInfo = new HashtagInfo(calcCategory(x, y), x, y); //Category (0 ~ 7), x, y는 원점 좌표 (100, 100)을 기준으로 한 값
+        SharedPreferences prefs = rootView.getContext().getSharedPreferences("android_id", Context.MODE_PRIVATE);
+        String user = prefs.getString("android_id", "");
         for(String h : htn) {
             if (h == "") continue;
             else {
-                database.child("HashtagInfo").child(curDate).child(h).setValue(hashtagInfo)
+                database.child("HashtagInfo").child(user).child(curDate).child(h).setValue(hashtagInfo)
                         .addOnSuccessListener(unused -> {
                             //Success Case
                             Log.d("firebase_log", "Success");
@@ -531,8 +533,9 @@ public class HashTagFragment extends BaseFragment {
                             Log.d("firebase_log", htn[i]);
                         }
                         int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
-                        writeNewCoordinate(curDate, htn, dx, dy);
+                        writeNewCoordinate(curDate, htn, dx, dy, rootView);
                         onBackpress();
+                        onDestroy();
                     }
                 }
 
