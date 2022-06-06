@@ -31,8 +31,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.main.BaseFragment;
-import com.hotcoa.sona.main.MainFragment;
+import com.hotcoa.sona.writediary.HashTagFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +53,10 @@ public class ContentsFragment extends BaseFragment {
         TextView phraseWords    = rootView.findViewById(R.id.phraseWords);
         TextView personWords    = rootView.findViewById(R.id.personWords);
 
+        SharedPreferences datePrefs         = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
+        String curDate = datePrefs.getString("curDate", "");
+
+
         String TAG = "Contents_db";
         String DOC = "phrase";
 
@@ -61,7 +66,28 @@ public class ContentsFragment extends BaseFragment {
         StringBuilder person = new StringBuilder();
 
         // hashtag로부터 추출한 감정 (0~7) *****
-        int hashtagFeel = 0;
+        //int hashtagFeel = 0;
+        StringBuilder hashtagFeel = new StringBuilder();
+
+
+        db.collection("HashtagInfo")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                           if (document.getId().equals(curDate)) {
+                                    for (Map.Entry<String, Object> e : document.getData().entrySet()) {
+                                        Log.d(TAG, "Key : " + e.getKey() + ", Value : " + e.getValue());
+                                        Log.d(TAG, e.getValue().toString());
+                                        hashtagFeel.append(e.getValue().toString());
+                                    }
+                           }
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
 
         db.collection("music")
                 .get()
@@ -69,7 +95,7 @@ public class ContentsFragment extends BaseFragment {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             // hashtagFeel과 일치하는 document 탐색
-                            if (document.getId().equals(Integer.toString(hashtagFeel))) {
+                            if (document.getId().equals(hashtagFeel)) {
                                 // document 정보 불러오기
                                 int docSize = document.getData().size();
 
@@ -127,7 +153,7 @@ public class ContentsFragment extends BaseFragment {
         // 오늘의 별점 평가
         // SharedPrference에 id:"(날짜)_rating", key:(rating) 형식으로 저장
         SharedPreferences curDatePrefs          = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
-        String curDate = curDatePrefs.getString("curDate","");
+        //String curDate = curDatePrefs.getString("curDate","");
         Log.d("Rating", "curDate        : " + curDate);
 
         String ratingKey = curDate + "_rating";
@@ -183,6 +209,8 @@ public class ContentsFragment extends BaseFragment {
                                         Log.d(TAG, e.getKey().toString());
                                         prs.append(e.getValue().toString());
                                         person.append(e.getKey().toString());
+                                        phraseWords.setText(prs.toString());
+                                        personWords.setText(person.toString());
                                     }
                                     count++;
                                 }

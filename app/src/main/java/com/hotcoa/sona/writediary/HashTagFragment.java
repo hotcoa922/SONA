@@ -96,7 +96,7 @@ public class HashTagFragment extends BaseFragment {
     }
 
     //FireBase - Class
-    public class HashtagInfo {
+    public static class HashtagInfo {
         public int category;
         public int x;
         public int y;
