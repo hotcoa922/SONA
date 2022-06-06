@@ -533,6 +533,7 @@ public class HashTagFragment extends BaseFragment {
                         int cnt = diaryCountPrefs.getInt("diaryCounter", 0);
                         writeNewCoordinate(curDate, htn, dx, dy);
                         onBackpress();
+                        onDestroy();
                     }
                 }
 

@@ -287,7 +287,8 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(profileedit);
                 break;
             case hashGo:
-                changeFragment(hash);
+                HashTagFragment new_hashtagFragment = new HashTagFragment();
+                changeFragment(new_hashtagFragment);
                 break;
             default:
                 break;
