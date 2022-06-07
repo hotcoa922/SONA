@@ -37,6 +37,7 @@
         android:textSize="30sp"
         android:hint="일기를 작성해 주세요."
         android:padding="20dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

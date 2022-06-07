@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +50,10 @@ public class CheckDiaryFragment extends BaseFragment {
 
         datetv = rootView.findViewById(R.id.today_tv);
         showtv = rootView.findViewById(R.id.showit_tv);
+        showtv.setMovementMethod(new ScrollingMovementMethod());
         editbt = rootView.findViewById(R.id.button_edit);
         deletebt = rootView.findViewById(R.id.button_delete);
         sharebt = rootView.findViewById(R.id.button_share);
-
-
 
         datetv.setText(getTime());
         String diary_path = "/storage/emulated/0/SONA/text/" + getTime() + ".txt";
