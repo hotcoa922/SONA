@@ -536,6 +536,7 @@ public class HashTagFragment extends BaseFragment {
                         writeNewCoordinate(curDate, htn, dx, dy, rootView);
                         onBackpress();
                         onDestroy();
+                        mainActivity.onChangeFragment(MainActivity.Direction.writeGo);
                     }
                 }
 
