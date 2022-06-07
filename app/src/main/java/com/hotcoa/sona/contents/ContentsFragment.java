@@ -34,6 +34,7 @@ import com.hotcoa.sona.main.BaseFragment;
 import com.hotcoa.sona.writediary.HashTagFragment;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,11 +55,19 @@ public class ContentsFragment extends BaseFragment {
         TextView personWords    = rootView.findViewById(R.id.personWords);
 
         SharedPreferences datePrefs         = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
-        String curDate = datePrefs.getString("curDate", "");
+        //String curDate = datePrefs.getString("curDate", "");
+        /*
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 M월 dd일");
+        String curDate = datePrefs.getString("curDate", dateFormat.format(date));
 
+
+         */
 
         String TAG = "Contents_db";
         String DOC = "phrase";
+        String curDate = "2022년 6월 4일";
 
         // String으로 선언하면 변경이 안돼서 StringBuilder 메소드 사용
         StringBuilder url = new StringBuilder();

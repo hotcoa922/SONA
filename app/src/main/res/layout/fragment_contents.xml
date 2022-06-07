@@ -38,33 +38,33 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:text="___________________________________________" />
+                android:text="____________________________________________________" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 android:fontFamily="@font/font1"
-                android:textStyle="bold"
-                android:textSize="20sp"
+                android:text="오늘의 추천 명언"
                 android:textAlignment="center"
                 android:textColor="@color/button_light_intext_color"
-                android:text="오늘의 추천 명언" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/phraseWords"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="85dp"
                 android:fontFamily="@font/font1"
-                android:textStyle="bold"
-                android:textSize="60sp"
+                android:gravity="center"
                 android:textAlignment="center"
-                android:gravity="center" />
+                android:textSize="34sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/personWords"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 android:gravity="center" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:text="___________________________________________" />
+                android:text="____________________________________________________" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:text="___________________________________________" />
+                android:text="____________________________________________________" />
 
             <TextView
                 android:id="@+id/textView5"

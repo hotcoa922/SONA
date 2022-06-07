@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
@@ -30,7 +29,6 @@ import com.hotcoa.sona.appsetting.AppSettingFragment;
 import com.hotcoa.sona.calendar.CalendarFragment;
 import com.hotcoa.sona.checkdiary.CheckDiaryFragment;
 import com.hotcoa.sona.contents.ContentsFragment;
-import com.hotcoa.sona.mindcheck.MindCheckFragment;
 import com.hotcoa.sona.profile.ProfileEditFragment;
 import com.hotcoa.sona.profile.ProfileFragment;
 import com.hotcoa.sona.usergide.UserGuideFragment;
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     CalendarFragment calendar;
     WriteDiaryFragment write;
     CheckDiaryFragment check;
-    MindCheckFragment mindcheck;
     ContentsFragment contents;
     ProfileFragment profile;
     ProfileEditFragment profileedit;
@@ -104,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         calendar = new CalendarFragment();
         write = new WriteDiaryFragment();
         check = new CheckDiaryFragment();
-        mindcheck = new MindCheckFragment();
         contents = new ContentsFragment();
         profile = new ProfileFragment();
         profileedit = new ProfileEditFragment();
