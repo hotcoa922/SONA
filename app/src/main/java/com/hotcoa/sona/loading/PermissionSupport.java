@@ -32,7 +32,6 @@ public class PermissionSupport {
             Manifest.permission.VIBRATE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_MEDIA_LOCATION,
-            Manifest.permission.READ_PHONE_STATE
     };
     private List<String> permissionList;
 
