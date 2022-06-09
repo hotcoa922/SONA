@@ -6,14 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".writediary.WriteDiaryFragment">
 
+    <com.greenfrvr.hashtagview.HashtagView
+        android:id="@+id/hashtag_1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="1.0"
+        app:tagBackground="@color/button_light_color"
+        app:tagEllipsize="middle" />
+
     <TextView
         android:id="@+id/today_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/font1"
-        android:textColor="@color/button_light_intext_color"
         android:text="오늘 날짜 출력 예정"
+        android:textColor="@color/button_light_intext_color"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/writeit_et"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +43,11 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/write_paper_background"
-        android:textStyle="bold"
-        android:textSize="30sp"
         android:fontFamily="@font/font1"
         android:hint="내용을 입력하세요."
         android:padding="20dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +62,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2">
+        app:layout_constraintTop_toBottomOf="@id/hashtag_1">
 
         <Button
             android:id="@+id/hashtag_bt"
@@ -122,8 +136,6 @@
     </LinearLayout>
 
 
-
-
     <Button
         android:id="@+id/save_bt"
         android:layout_width="wrap_content"
@@ -145,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

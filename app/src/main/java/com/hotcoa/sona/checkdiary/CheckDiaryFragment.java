@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
+import com.greenfrvr.hashtagview.HashtagView;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.BaseFragment;
@@ -34,7 +35,9 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class CheckDiaryFragment extends BaseFragment {
 
@@ -54,6 +57,10 @@ public class CheckDiaryFragment extends BaseFragment {
         editbt = rootView.findViewById(R.id.button_edit);
         deletebt = rootView.findViewById(R.id.button_delete);
         sharebt = rootView.findViewById(R.id.button_share);
+        HashtagView hashtagView = rootView.findViewById(R.id.hashtag_1);
+
+        List<String> tag = Arrays.asList("#tag1", "#tag2");
+        hashtagView.setData(tag);
 
         datetv.setText(getTime());
         String diary_path = "/storage/emulated/0/SONA/text/" + getTime() + ".txt";
