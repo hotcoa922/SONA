@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/sub_background_color"
+    android:background="#DDCACACA"
     android:gravity="bottom"
     android:orientation="vertical">
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="158dp"
+        android:fontFamily="@font/mainfont"
         android:gravity="center"
-        android:fontFamily="@font/font1"
-        android:textStyle="bold"
+        android:text="\nSONA\n"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="60sp"
-        android:text="\nSONA APP\n"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textStyle="normal" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font2"
+        android:fontFamily="@font/sandolsentl"
         android:gravity="center"
-        android:text="ver 0.70.50"
+        android:text="\n ver 0.70.50 \n"
         android:textColor="@color/button_light_intext_color"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textSize="16sp"
+        android:textStyle="normal" />
 
 </LinearLayout>

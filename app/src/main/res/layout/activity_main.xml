@@ -14,12 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_x"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/toolbar_color"
+            android:layout_height="65dp"
+            android:background="@color/main_background_color"
+            app:guidelineUseRtl="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -28,11 +31,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/button_light_intext_color"
+                android:fontFamily="@font/mainfont"
                 android:text="SONA"
-                android:fontFamily="@font/font1"
-                android:textStyle="bold"
+                android:textColor="#252525"
                 android:textSize="30sp"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="149dp"
                 tools:layout_editor_absoluteY="16dp" />
 
@@ -42,14 +45,10 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:textColor="@color/button_light_intext_color"
-                app:srcCompat="@drawable/ic_home_24"
-                app:showAsAction="always" />
+                app:showAsAction="always"
+                app:srcCompat="@drawable/ic_home_24" />
 
         </androidx.appcompat.widget.Toolbar>
-
-
-
-
 
         <FrameLayout
             android:id="@+id/fragment_container_x"
@@ -58,8 +57,10 @@
             android:background="@color/main_background_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_x">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_x"
+            app:layout_constraintVertical_bias="0.0">
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

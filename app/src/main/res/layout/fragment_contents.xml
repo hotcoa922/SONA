@@ -19,50 +19,55 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:fontFamily="@font/font1"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textAlignment="center"
+                android:fontFamily="@font/sandolsentl"
                 android:gravity="center"
-                android:text="선택된 날짜의 일기 감정 분석을 토대로 보여드리는\n\n컨텐츠 추천 화면입니다.\n\n힐링 컨텐츠로 기분 좋은 하루를 마무리해보세요 :)" />
+                android:text="선택된 날짜의 일기 감정 분석을 토대로 보여드리는\n\n컨텐츠 추천 화면입니다.\n\n힐링 컨텐츠로 기분 좋은 하루를 마무리해보세요 :)"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:gravity="center"
-                android:text="____________________________________________________" />
+                android:text="____________________________________________________\n"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
-                android:layout_height="31dp"
-                android:fontFamily="@font/font1"
+                android:layout_height="26dp"
+                android:fontFamily="@font/sandolsentm"
+                android:gravity="center"
                 android:text="오늘의 추천 명언"
                 android:textAlignment="center"
                 android:textColor="@color/button_light_intext_color"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/phraseWords"
-                android:layout_width="match_parent"
+                android:layout_width="371dp"
                 android:layout_height="85dp"
-                android:fontFamily="@font/font1"
+                android:fontFamily="@font/hope"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textSize="34sp"
-                android:textStyle="bold" />
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/personWords"
+                android:fontFamily="@font/hope"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
                 android:gravity="center" />
@@ -71,24 +76,24 @@
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:gravity="center"
-                android:text="____________________________________________________" />
+                android:text="____________________________________________________\n"
+                android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/font1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:fontFamily="@font/sandolsentm"
+                    android:text="음악 추천"
                     android:textAlignment="center"
                     android:textColor="@color/button_light_intext_color"
-                    android:text="음악 추천"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ShowButton"
                     app:layout_constraintStart_toStartOf="parent"
@@ -99,13 +104,12 @@
                     android:id="@+id/ShowButton"
                     android:layout_width="70dp"
                     android:layout_height="30dp"
-                    android:gravity="center"
-                    android:fontFamily="@font/font1"
-                    android:textColor="@color/button_dark_intext_color"
                     android:background="@drawable/common_rect_button_dark"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/sandolsentl"
+                    android:gravity="center"
                     android:text="Show"
+                    android:textColor="@color/button_dark_intext_color"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView17"
@@ -122,13 +126,14 @@
                 android:contentDescription="@string/app_name"
                 android:numStars="5"
                 android:rating="2.5"
-                android:stepSize="0.5"
-                />
+                android:stepSize="0.5" />
 
             <WebView
                 android:id="@+id/ContentsWebView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="388dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
             </WebView>
 
@@ -137,23 +142,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:text="____________________________________________________" />
+                android:text="____________________________________________________"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
+                android:fontFamily="@font/sandolsentl"
                 android:gravity="center"
-                android:fontFamily="@font/font1"
-                android:textStyle="bold"
-                android:textSize="20sp"
+                android:text="힘든 하루를 보내고 계신가요?\n\n때로는 @@님의 이야기를 털어놓고 이야기하는 것이\n\n도움이 될 때도 있답니다"
                 android:textAlignment="center"
-                android:text="힘든 하루를 보내고 계신가요?\n\n때로는 @@님의 이야기를 털어놓고 이야기하는 것이\n\n도움이 될 때도 있답니다" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="89dp"
+                android:layout_height="100dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -161,13 +166,13 @@
                     android:id="@+id/CenterButton"
                     android:layout_width="150dp"
                     android:layout_height="60dp"
-                    android:gravity="center"
-                    android:fontFamily="@font/font1"
-                    android:textColor="@color/button_dark_intext_color"
                     android:background="@drawable/common_rect_button_dark"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/sandolsentl"
+                    android:gravity="center"
                     android:text="심리상담센터 연결하기"
+                    android:textColor="@color/button_dark_intext_color"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </LinearLayout>

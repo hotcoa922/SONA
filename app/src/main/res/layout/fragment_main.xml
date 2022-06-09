@@ -13,23 +13,23 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/sandolsentl"
         android:text="@string/main_ment"
-        android:textSize="30sp"
-        android:fontFamily="@font/font3"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/main_diary_name_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496" />
 
     <TextView
         android:id="@+id/main_diary_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/pencil"
         android:gravity="center"
-        android:textSize="30sp"
-        android:fontFamily="@font/font3"
         android:text="SONA"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/diary_bt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -41,10 +41,11 @@
         android:background="@drawable/diary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.542"
         tools:ignore="SpeakableTextPresentCheck" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,34 +12,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.63" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.65" />
 
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="48dp"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/vibrate_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/sandolsentl"
         android:text="진동"
-        android:fontFamily="@font/font1"
-        android:textSize="40sp"
-        android:textStyle="bold"
         android:textColor="@color/button_light_intext_color"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
+        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/profile_guideline1" />
 
@@ -58,12 +67,11 @@
         android:id="@+id/info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font1"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="조회"
         android:background="@drawable/common_rect_button_dark"
+        android:fontFamily="@font/sandolsentl"
+        android:text="정보보기"
         android:textColor="@color/button_dark_intext_color"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/profile_guideline3"
@@ -73,12 +81,12 @@
         android:id="@+id/report_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font1"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="문의하기"
         android:background="@drawable/common_rect_button_dark"
+        android:fontFamily="@font/sandolsentl"
+        android:text="문의하기"
         android:textColor="@color/button_dark_intext_color"
+        android:textSize="16sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/profile_guideline3"
@@ -88,13 +96,14 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/sandolsentl"
         android:text="애플리케이션 정보"
-        android:fontFamily="@font/font1"
-        android:textSize="40sp"
-        android:textStyle="bold"
         android:textColor="@color/button_light_intext_color"
+        android:textSize="22sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vibrate_textview" />
 
@@ -102,13 +111,14 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/sandolsentl"
         android:text="문의 및 신고"
-        android:fontFamily="@font/font1"
-        android:textSize="40sp"
-        android:textStyle="bold"
         android:textColor="@color/button_light_intext_color"
+        android:textSize="22sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
+        app:layout_constraintHorizontal_bias="0.358"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
