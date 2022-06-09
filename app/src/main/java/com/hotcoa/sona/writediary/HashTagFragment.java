@@ -554,6 +554,8 @@ public class HashTagFragment extends BaseFragment {
 
             }
         });
+
+
         return rootView;
     }
 }

@@ -120,9 +120,7 @@ public class MainActivity extends AppCompatActivity {
             if(menuItem.getItemId() == R.id.guide_navi){
                 onChangeFragment(Direction.guideGo);
             }
-            if(menuItem.getItemId() == R.id.mindcheck_navi){
-                onChangeFragment(Direction.mindcheckGo);
-            }
+
             if(menuItem.getItemId() == R.id.contentschuchu_navi){
                 set_curDate_Today();
                 onChangeFragment(Direction.contentsGo);
