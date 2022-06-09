@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".writediary.WriteDiaryFragment">
 
+    <com.greenfrvr.hashtagview.HashtagView
+        android:id="@+id/hashtag_1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="1.0"
+        app:tagBackground="@color/button_light_color"
+        app:tagEllipsize="middle" />
+
     <TextView
         android:id="@+id/today_tv"
         android:layout_width="wrap_content"
@@ -14,7 +28,7 @@
         android:fontFamily="@font/font1"
         android:text="오늘 날짜 출력 예정"
         android:textColor="@color/button_light_intext_color"
-        android:textSize="30dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/writeit_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +43,11 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/write_paper_background"
-        android:fontFamily="@font/pencil"
-        android:gravity="top"
+        android:fontFamily="@font/font1"
         android:hint="내용을 입력하세요."
         android:padding="20dp"
-        android:textSize="20sp"
-        android:textStyle="normal"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +62,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2">
+        app:layout_constraintTop_toBottomOf="@id/hashtag_1">
 
         <Button
             android:id="@+id/hashtag_bt"
@@ -70,10 +83,10 @@
             android:id="@+id/hashtag_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sandolsentl"
+            android:fontFamily="@font/font1"
             android:text=" 태그 추가하기"
             android:textColor="@color/button_light_intext_color"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/hashtag_bt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.151"
@@ -111,10 +124,10 @@
             android:id="@+id/imageplus_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sandolsentl"
+            android:fontFamily="@font/font1"
             android:text=" 사진 추가하기"
             android:textColor="@color/button_light_intext_color"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/plus_bt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/plus_bt"
@@ -128,11 +141,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/common_rect_button_dark"
-        android:fontFamily="@font/sandolsentl"
+        android:fontFamily="@font/font1"
         android:text="저장하기"
         android:textColor="@color/button_dark_intext_color"
-        android:textSize="18sp"
-        android:textStyle="normal"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -144,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

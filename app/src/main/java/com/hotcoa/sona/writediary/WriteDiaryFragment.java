@@ -1,6 +1,5 @@
 package com.hotcoa.sona.writediary;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,11 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
-import com.applikeysolutions.cosmocalendar.view.CalendarView;
+import com.greenfrvr.hashtagview.HashtagView;
 import com.hotcoa.sona.R;
 import com.hotcoa.sona.leacrypto.LEA_Crypto;
 import com.hotcoa.sona.main.BaseFragment;
@@ -40,12 +34,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class WriteDiaryFragment extends BaseFragment {
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_write_diary, container, false);
@@ -54,6 +47,10 @@ public class WriteDiaryFragment extends BaseFragment {
         Button savebt      = rootView.findViewById(R.id.save_bt);
         EditText writetxt    = rootView.findViewById(R.id.writeit_et);
         Button hashtag     = rootView.findViewById(R.id.hashtag_bt);
+        HashtagView hashtagView = rootView.findViewById(R.id.hashtag_1);
+
+        List<String> tag = Arrays.asList("#tag1", "#tag2");
+        hashtagView.setData(tag);
 
         SharedPreferences idPrefs           = getActivity().getSharedPreferences("android_id", Context.MODE_PRIVATE);
         SharedPreferences datePrefs         = getActivity().getSharedPreferences("curDate", Context.MODE_PRIVATE);
