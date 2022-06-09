@@ -58,29 +58,15 @@
         android:id="@+id/cng_diaryname_tx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="다이어리\n  이름"
         android:fontFamily="@font/font1"
-        android:textStyle="bold"
-        android:textSize="30sp"
+        android:text="다이어리\n  이름"
         android:textColor="@color/button_light_intext_color"
-        app:layout_constraintBottom_toTopOf="@+id/cng_diaryfont_tx"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toStartOf="@+id/profile_guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cng_birth_tx" />
-
-    <TextView
-        android:id="@+id/cng_diaryfont_tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="푸시알림"
-        android:fontFamily="@font/font1"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="@color/button_light_intext_color"
-        app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cng_diaryname_tx" />
 
     <ImageView
         android:id="@+id/cng_profile_img"
