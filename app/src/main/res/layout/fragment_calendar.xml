@@ -27,9 +27,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/profile_guideline2"
         app:orientation="horizontal"
-        app:selectedDayBackgroundColor="#A18CFF"
-        app:selectedDayBackgroundEndColor="#A18CFF"
-        app:selectedDayBackgroundStartColor="#A18CFF"
+        app:selectedDayBackgroundColor="#EDB9A9FF"
+        app:selectedDayBackgroundEndColor="#EDB9A9FF"
+        app:selectedDayBackgroundStartColor="#EDB9A9FF"
         app:selectionType="single"
         app:weekendDayTextColor="@color/red" />
 

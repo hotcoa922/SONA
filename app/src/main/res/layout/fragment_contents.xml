@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="____________________________________________________\n"
+                android:textColor="#80595959"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,7 +56,7 @@
 
             <TextView
                 android:id="@+id/phraseWords"
-                android:layout_width="371dp"
+                android:layout_width="296dp"
                 android:layout_height="85dp"
                 android:fontFamily="@font/hope"
                 android:gravity="center"
@@ -66,11 +67,11 @@
 
             <TextView
                 android:id="@+id/personWords"
-                android:fontFamily="@font/hope"
-                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
-                android:gravity="center" />
+                android:fontFamily="@font/hope"
+                android:gravity="center"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -78,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="____________________________________________________\n"
+                android:textColor="#B38A8A8A"
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -122,7 +124,7 @@
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
                 android:numStars="5"
                 android:rating="2.5"
@@ -142,24 +144,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="#B3595959"
                 android:text="____________________________________________________"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
-                android:layout_height="136dp"
+                android:layout_height="200dp"
                 android:fontFamily="@font/sandolsentl"
                 android:gravity="center"
                 android:text="힘든 하루를 보내고 계신가요?\n\n때로는 @@님의 이야기를 털어놓고 이야기하는 것이\n\n도움이 될 때도 있답니다"
                 android:textAlignment="center"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:orientation="vertical">
 
                 <Button

@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#DDCACACA"
+    android:background="#FAFAFA"
     android:gravity="bottom"
     android:orientation="vertical">
 
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="158dp"
+        android:layout_height="122dp"
         android:fontFamily="@font/mainfont"
         android:gravity="center"
         android:text="\nSONA\n"
@@ -19,9 +19,20 @@
         android:textStyle="normal" />
 
     <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:fontFamily="@font/sandolsentl"
+        android:gravity="center"
+        android:text="DIARY"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
+        android:textStyle="normal" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="71dp"
         android:fontFamily="@font/sandolsentl"
         android:gravity="center"
         android:text="\n ver 0.70.50 \n"

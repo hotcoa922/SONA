@@ -124,32 +124,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="invisible"
-        app:layout_constraintGuide_percent="0.3"
-        tools:visibility="invisible" />
+        app:layout_constraintGuide_percent="0.3" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/button_dark_color"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="invisible"
-        app:layout_constraintGuide_percent="0.85"
-        tools:visibility="invisible" />
+        app:layout_constraintGuide_percent="0.85" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/button_dark_color"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/profile_guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
     <Button
         android:id="@+id/profilesave_bt"

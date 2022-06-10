@@ -42,13 +42,12 @@ import java.util.Map;
 public class ContentsFragment extends BaseFragment {
 
     private WebView web;
-    Button showBt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView           = inflater.inflate(R.layout.fragment_contents, container, false);
         FirebaseFirestore db    = FirebaseFirestore.getInstance();
-        Button showBt           = rootView.findViewById(R.id.ShowButton);
+        Button showBt           =  rootView.findViewById(R.id.ShowButton);
         Button centerBt         = rootView.findViewById(R.id.CenterButton);
         RatingBar ratingBar     = rootView.findViewById(R.id.ratingBar);
         WebView web             = rootView.findViewById(R.id.ContentsWebView);
@@ -64,8 +63,7 @@ public class ContentsFragment extends BaseFragment {
         String curDate = datePrefs.getString("curDate", dateFormat.format(date));
 
 
-        */
-
+         */
 
         String TAG = "Contents_db";
         String DOC = "phrase";
@@ -157,7 +155,7 @@ public class ContentsFragment extends BaseFragment {
         web.setWebViewClient(new WebViewClient());
         web.setWebChromeClient(new WebChromeClient());
 
-        if (Build.VERSION.SDK_INT >= 30) {
+        if (Build.VERSION.SDK_INT >= 21) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
